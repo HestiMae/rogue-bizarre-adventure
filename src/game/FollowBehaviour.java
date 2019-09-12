@@ -3,7 +3,7 @@ package game;
 import edu.monash.fit2099.engine.*;
 
 /**
- * A class that figures out a MoveAction that will move the actor one step 
+ * A class that figures out a MoveAction that will move the actor one step
  * closer to a target Actor.
  */
 public class FollowBehaviour implements Behaviour {
@@ -12,7 +12,7 @@ public class FollowBehaviour implements Behaviour {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param subject the Actor to follow
 	 */
 	public FollowBehaviour(Actor subject) {
@@ -23,7 +23,7 @@ public class FollowBehaviour implements Behaviour {
 	public Action getAction(Actor actor, GameMap map) {
 		if(!map.contains(target) || !map.contains(actor))
 			return null;
-		
+
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 
@@ -43,7 +43,7 @@ public class FollowBehaviour implements Behaviour {
 
 	/**
 	 * Compute the Manhattan distance between two locations.
-	 * 
+	 *
 	 * @param a the first location
 	 * @param b the first location
 	 * @return the number of steps between a and b if you only move in the four cardinal directions.
