@@ -1,0 +1,60 @@
+Brian --------------------------------------------------------------
+Implementing:
+- tag action
+- Shop
+- grass
+- dianosaur tag
+- herbivore food 
+- corpse
+- beed action
+- eat action
+
+Testing/reviewing:
+- Edible interface
+- sellable interface
+- behaviour
+    - eat behaviour
+    - breed behaviour
+    - hunt behaviour
+- actions
+    - buy action
+    - sell action
+- egg
+- carnivore food
+- dinosaur class
+- velociraptor and protoceratops
+
+
+Kaitlyn --------------------------------------------------------------
+Implementing:
+- Edible interface
+- sellable interface
+- behaviour
+    - eat behaviour
+    - breed behaviour
+    - hunt behaviour
+- actions
+    - buy action
+    - sell action
+- egg
+- carnivore food
+- dinosaur class
+- velociraptor and protoceratops
+    
+Testing/reviewing:
+- tag action
+- Shop
+- grass
+- dianosaur tag
+- herbivore food 
+- corpse
+- beed action
+- eat action
+    
+Deadlines:
+- Interfaces and concrete classes (e.g. protoceratops, grass, etc) done by 19/9
+- Behaviours done by 26/9
+- Actions done by 1/10
+-Any extra QA/T to be done between 1/10 and 4/10
+
+I accept this WBA
