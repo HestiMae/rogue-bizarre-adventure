@@ -1,26 +1,17 @@
 package game;
 
-
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.DoNothingAction;
-import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A herbivorous dinosaur.
- */
-public class Protoceratops extends Dinosaur
+public class Velociraptor extends Dinosaur
 {
-    private static final int HIT_POINTS = 100;
-    private static final char DISPLAY_CHAR = 'd';
+    private static final int HIT_POINTS = 75;
+    private static final char DISPLAY_CHAR = 'r';
     private List<Behaviour> behaviours;
 
-    public Protoceratops(String name)
+    public Velociraptor(String name)
     {
         super(name, DISPLAY_CHAR, HIT_POINTS);
         List<Behaviour> behaviours = new ArrayList<>();
@@ -31,7 +22,7 @@ public class Protoceratops extends Dinosaur
     /**
      * Figure out what to do next.
      * <p>
-     * FIXME: Protoceratops wanders around at random, or if no suitable MoveActions are available, it
+     * FIXME: Velociraptor wanders around at random, or if no suitable MoveActions are available, it
      * just stands there.  That's boring.
      *
      * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
@@ -45,5 +36,4 @@ public class Protoceratops extends Dinosaur
 
         return new DoNothingAction();
     }
-
 }
