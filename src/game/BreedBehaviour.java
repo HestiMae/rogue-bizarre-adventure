@@ -20,7 +20,7 @@ public class BreedBehaviour extends Action implements Behaviour
     public Action getAction(Actor actor, GameMap map)
     {
         Random rand = new Random();
-        if (map.contains(actor) && rand.nextFloat() < 0.05f
+        if (map.contains(actor) && rand.nextFloat() < 0.1f
                 && parent.canBreed())
         {
             return this;

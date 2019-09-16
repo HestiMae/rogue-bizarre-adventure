@@ -26,26 +26,30 @@ public class EatBehaviour extends Action implements Behaviour
         Set<Location> locationsToVisit = new HashSet<>();
         locationsToVisit.add(startPoint);
 
-        if (hasEdible(startPoint))
+        if (!dino.isFull())
         {
-            return this;
-        }
-
-        while (!visitedLocations.containsAll(locationsToVisit))
-        {
-            for (Location location : new HashSet<>(locationsToVisit))
+            if (hasEdible(startPoint))
             {
-                for (Exit exit : location.getExits())
-                {
-                    locationsToVisit.add(exit.getDestination());
-                }
-                if (hasEdible(location))
-                {
-                    return new MoveActorAction(location, "towards " + location.x() + ", " + location.y());
-                }
-                visitedLocations.add(location);
+                return this;
             }
-            locationsToVisit.removeAll(visitedLocations);
+
+
+            while (!visitedLocations.containsAll(locationsToVisit))
+            {
+                for (Location location : new HashSet<>(locationsToVisit))
+                {
+                    for (Exit exit : location.getExits())
+                    {
+                        locationsToVisit.add(exit.getDestination());
+                    }
+                    if (hasEdible(location))
+                    {
+                        return new MoveActorAction(location, "towards " + location.x() + ", " + location.y());
+                    }
+                    visitedLocations.add(location);
+                }
+                locationsToVisit.removeAll(visitedLocations);
+            }
         }
         return null;
     }
