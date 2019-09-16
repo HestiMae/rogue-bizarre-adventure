@@ -18,31 +18,37 @@ public class Protoceratops extends Dinosaur
 {
     private static final int HIT_POINTS = 100;
     private static final char DISPLAY_CHAR = 'd';
-    private List<Behaviour> behaviours;
+    private static final int ADULT_AGE = 20;
+    private static final int MAX_HUNGER = 50;
+    private static final int HATCH_TIME = 10;
+    private static final int BREED_HUNGER = 50;
+
 
     public Protoceratops(String name)
     {
         super(name, DISPLAY_CHAR, HIT_POINTS);
-        List<Behaviour> behaviours = new ArrayList<>();
+        diet.add(FoodType.PLANT);
+        this.hungerLevel = MAX_HUNGER;
+        behaviours.add(new EatBehaviour(this, diet));
         behaviours.add(new WanderBehaviour());
-        this.behaviours = behaviours;
     }
 
     /**
-     * Figure out what to do next.
-     * <p>
-     * FIXME: Protoceratops wanders around at random, or if no suitable MoveActions are available, it
-     * just stands there.  That's boring.
-     *
      * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
     {
-        Action wander = behaviours.get(0).getAction(this, map);
-        if (wander != null)
-            return wander;
-
+        age(ADULT_AGE);
+        hungry(1);
+        for (Behaviour b : behaviours)
+        {
+            Action outAction = b.getAction(this, map);
+            if (outAction != null)
+            {
+                return outAction;
+            }
+        }
         return new DoNothingAction();
     }
 
@@ -50,5 +56,29 @@ public class Protoceratops extends Dinosaur
     public String dinoType()
     {
         return "Protoceratops";
+    }
+
+    @Override
+    public int getMaxHunger()
+    {
+        return MAX_HUNGER;
+    }
+
+    @Override
+    public int getHatchTime()
+    {
+        return HATCH_TIME;
+    }
+
+    @Override
+    public boolean canBreed()
+    {
+        return this.hungerLevel > BREED_HUNGER && this.stage == DinoAge.ADULT;
+    }
+
+    @Override
+    public boolean isFull()
+    {
+        return this.hungerLevel >= MAX_HUNGER - 10;
     }
 }

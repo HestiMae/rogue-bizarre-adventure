@@ -9,14 +9,18 @@ public class Velociraptor extends Dinosaur
 {
     private static final int HIT_POINTS = 75;
     private static final char DISPLAY_CHAR = 'r';
-    private List<Behaviour> behaviours;
+    private static final int MAX_HUNGER = 100;
+    private static final int HATCH_TIME = 15;
+    private static final int BREED_HUNGER = 50;
+
+
 
     public Velociraptor(String name)
     {
         super(name, DISPLAY_CHAR, HIT_POINTS);
-        List<Behaviour> behaviours = new ArrayList<>();
+        diet.add(FoodType.MEAT);
         behaviours.add(new WanderBehaviour());
-        this.behaviours = behaviours;
+        behaviours.add(new EatBehaviour(this, diet));
     }
 
     /**
@@ -41,5 +45,29 @@ public class Velociraptor extends Dinosaur
     public String dinoType()
     {
         return "Velociraptor";
+    }
+
+    @Override
+    public int getMaxHunger()
+    {
+        return MAX_HUNGER;
+    }
+
+    @Override
+    public int getHatchTime()
+    {
+        return HATCH_TIME;
+    }
+
+    @Override
+    public boolean canBreed()
+    {
+        return this.hungerLevel > BREED_HUNGER && this.stage == DinoAge.ADULT;
+    }
+
+    @Override
+    public boolean isFull()
+    {
+        return this.hungerLevel == MAX_HUNGER - 20;
     }
 }

@@ -25,11 +25,11 @@ public class Egg extends Item implements Edible, Sellable
         this.hatchTime = hatchTime;
         this.age = 0;
     }
-    public Egg(Dinosaur type, int hatchTime)
+    public Egg(Dinosaur type)
     {
         super(type.dinoType() + " Egg", DISPLAY_CHAR, PORTABLE);
         this.type = type;
-        this.hatchTime = hatchTime;
+        this.hatchTime = type.getHatchTime();
         this.age = 0;
     }
 

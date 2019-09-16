@@ -3,7 +3,7 @@ package game;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 
-public class Tree extends Ground {
+public class Tree extends Ground implements Edible{
 	private int age = 0;
 
 	public Tree() {
@@ -19,5 +19,17 @@ public class Tree extends Ground {
 			displayChar = 't';
 		if (age == 20)
 			displayChar = 'T';
+	}
+
+	@Override
+	public int getFoodValue()
+	{
+		return 10;
+	}
+
+	@Override
+	public FoodType getFoodType()
+	{
+		return null;
 	}
 }
