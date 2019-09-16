@@ -20,7 +20,14 @@ public class Egg extends Item implements Edible, Sellable
      */
     public Egg(String name, Dinosaur type, int hatchTime)
     {
-        super(name, DISPLAY_CHAR, PORTABLE);
+        super("egg", DISPLAY_CHAR, PORTABLE);
+        this.type = type;
+        this.hatchTime = hatchTime;
+        this.age = 0;
+    }
+    public Egg(Dinosaur type, int hatchTime)
+    {
+        super(type.dinoType() + " Egg", DISPLAY_CHAR, PORTABLE);
         this.type = type;
         this.hatchTime = hatchTime;
         this.age = 0;
@@ -37,7 +44,8 @@ public class Egg extends Item implements Edible, Sellable
         }
         else if (age == hatchTime)
         {
-            hatch();
+            currentLocation.addActor(hatch());
+            currentLocation.removeItem(this);
         }
     }
 

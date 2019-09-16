@@ -19,4 +19,6 @@ public abstract class Dinosaur extends Actor
     {
         return new Actions(new AttackAction(this));
     }
+
+    public abstract String dinoType();
 }

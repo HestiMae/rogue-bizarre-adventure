@@ -27,8 +27,8 @@ Testing/reviewing:
 
 Kaitlyn --------------------------------------------------------------
 Implementing:
-- Edible interface
-- Sellable interface
+- Edible interface x
+- Sellable interface x
 - behaviour
     - eat behaviour
     - breed behaviour
@@ -36,10 +36,10 @@ Implementing:
 - actions
     - buy action
     - sell action
-- egg
-- carnivore food
-- dinosaur class
-- velociraptor and protoceratops
+- egg x
+- carnivore food x
+- dinosaur class .5
+- velociraptor and protoceratops  .5
     
 Testing/reviewing:
 - tag action

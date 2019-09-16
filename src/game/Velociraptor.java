@@ -36,4 +36,10 @@ public class Velociraptor extends Dinosaur
 
         return new DoNothingAction();
     }
+
+    @Override
+    public String dinoType()
+    {
+        return "Velociraptor";
+    }
 }

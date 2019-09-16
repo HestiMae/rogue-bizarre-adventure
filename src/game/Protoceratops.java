@@ -46,4 +46,9 @@ public class Protoceratops extends Dinosaur
         return new DoNothingAction();
     }
 
+    @Override
+    public String dinoType()
+    {
+        return "Protoceratops";
+    }
 }
