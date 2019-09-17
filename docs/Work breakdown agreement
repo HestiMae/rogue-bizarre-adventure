@@ -31,16 +31,16 @@ Implementing:
 - Edible interface x
 - Sellable interface x
 - behaviour
-    - eat behaviour
+    - eat behaviour x
     - breed behaviour x
     - hunt behaviour
 - actions
-    - buy action
-    - sell action
+    - buy action x
+    - sell action x
 - egg x
 - carnivore food x
-- dinosaur class .5
-- velociraptor and protoceratops  .5
+- dinosaur class .75
+- velociraptor and protoceratops  .75
     
 Testing/reviewing:
 - tag action
