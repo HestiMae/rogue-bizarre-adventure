@@ -8,46 +8,77 @@ import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A herbivorous dinosaur.
- *
  */
-public class Protoceratops extends Actor {
-	// Will need to change this to a collection if Protoceratops gets additional Behaviours.
-	private Behaviour behaviour;
+public class Protoceratops extends Dinosaur
+{
+    private static final int HIT_POINTS = 100;
+    private static final char DISPLAY_CHAR = 'd';
+    private static final int ADULT_AGE = 20;
+    private static final int MAX_HUNGER = 50;
+    private static final int HATCH_TIME = 10;
+    private static final int BREED_HUNGER = 50;
 
-	/** 
-	 * Constructor.
-	 * All Protoceratops are represented by a 'd' and have 100 hit points.
-	 * 
-	 * @param name the name of this Protoceratops
-	 */
-	public Protoceratops(String name) {
-		super(name, 'd', 100);
-		
-		behaviour = new WanderBehaviour();
-	}
 
-	@Override
-	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-		return new Actions(new AttackAction(this));
-	}
+    public Protoceratops(String name)
+    {
+        super(name, DISPLAY_CHAR, HIT_POINTS);
+        diet.add(FoodType.PLANT);
+        this.hungerLevel = MAX_HUNGER;
+        behaviours.add(new EatBehaviour(this, diet));
+        behaviours.add(new WanderBehaviour());
+    }
 
-	/**
-	 * Figure out what to do next.
-	 * 
-	 * FIXME: Protoceratops wanders around at random, or if no suitable MoveActions are available, it
-	 * just stands there.  That's boring.
-	 * 
-	 * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
-	 */
-	@Override
-	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		Action wander = behaviour.getAction(this, map);
-		if (wander != null)
-			return wander;
-		
-		return new DoNothingAction();
-	}
+    /**
+     * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
+     */
+    @Override
+    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
+    {
+        age(ADULT_AGE);
+        hungry(1);
+        for (Behaviour b : behaviours)
+        {
+            Action outAction = b.getAction(this, map);
+            if (outAction != null)
+            {
+                return outAction;
+            }
+        }
+        return new DoNothingAction();
+    }
 
+    @Override
+    public String dinoType()
+    {
+        return "Protoceratops";
+    }
+
+    @Override
+    public int getMaxHunger()
+    {
+        return MAX_HUNGER;
+    }
+
+    @Override
+    public int getHatchTime()
+    {
+        return HATCH_TIME;
+    }
+
+    @Override
+    public boolean canBreed()
+    {
+        return this.hungerLevel > BREED_HUNGER && this.stage == DinoAge.ADULT;
+    }
+
+    @Override
+    public boolean isFull()
+    {
+        return this.hungerLevel >= MAX_HUNGER - 10;
+    }
 }
