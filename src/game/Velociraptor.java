@@ -70,4 +70,10 @@ public class Velociraptor extends Dinosaur
     {
         return this.hungerLevel == MAX_HUNGER - 20;
     }
+
+    @Override
+    public int getValue()
+    {
+        return 2000;
+    }
 }

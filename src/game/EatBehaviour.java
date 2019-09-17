@@ -44,7 +44,7 @@ public class EatBehaviour extends Action implements Behaviour
                     }
                     if (hasEdible(location))
                     {
-                        return new MoveActorAction(location, "towards " + location.x() + ", " + location.y());
+                        return moveLogic(startPoint, location);
                     }
                     visitedLocations.add(location);
                 }
@@ -92,6 +92,12 @@ public class EatBehaviour extends Action implements Behaviour
         {
             return false;
         }
+    }
+
+    private Action moveLogic(Location here, Location edibleLocation)
+    {
+
+        return Util.moveLogic(here, edibleLocation, dino);
     }
 
     @Override

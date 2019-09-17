@@ -27,18 +27,7 @@ public class FollowBehaviour implements Behaviour {
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 
-		int currentDistance = distance(here, there);
-		for (Exit exit : here.getExits()) {
-			Location destination = exit.getDestination();
-			if (destination.canActorEnter(actor)) {
-				int newDistance = distance(destination, there);
-				if (newDistance < currentDistance) {
-					return new MoveActorAction(destination, exit.getName());
-				}
-			}
-		}
-
-		return null;
+		return Util.moveLogic(here, there, actor);
 	}
 
 	/**

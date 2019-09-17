@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Dinosaur extends Actor
+public abstract class Dinosaur extends Actor implements Sellable
 {
     protected int age;
     protected List<Behaviour> behaviours;
