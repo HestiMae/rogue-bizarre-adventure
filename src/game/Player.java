@@ -13,6 +13,7 @@ import edu.monash.fit2099.engine.Menu;
 public class Player extends Actor {
 
 	private Menu menu = new Menu();
+	private int wallet = 0;
 
 	/**
 	 * Constructor.
@@ -31,5 +32,21 @@ public class Player extends Actor {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 		return menu.showMenu(this, actions, display);
+	}
+
+	public void addMoney(int value)
+	{
+		this.wallet += value;
+	}
+
+	public String removeMoney(int value)
+	{
+		if (value < this.wallet)
+		{
+			return "Not enough money to complete purchase";
+		}
+
+		this.wallet -= value;
+		return null;
 	}
 }
