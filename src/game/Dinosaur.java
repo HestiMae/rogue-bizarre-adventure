@@ -27,7 +27,10 @@ public abstract class Dinosaur extends Actor implements Sellable
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map)
     {
-        return new Actions(new AttackAction(this));
+        Actions actions = new Actions();
+        actions.add(new AttackAction(this));
+        actions.add(new TagAction(this));
+        return actions;
     }
 
     public abstract String dinoType();
