@@ -22,7 +22,7 @@ public class TagAction extends Action
      * @param actor the actor whose inventory is checked
      * @return true if a dinosaur tag is found, false otherwise
      */
-    public Boolean getTag(Actor actor)
+    private Boolean getTag(Actor actor)
     {
         List<Item> items = actor.getInventory();
         for (Item item: items)
@@ -49,7 +49,6 @@ public class TagAction extends Action
 
         if (getTag(actor))
         {
-            //value = target.getValue(); NEEDS TO BE FIXED
             map.removeActor(target);
             ((Player) actor).addMoney(target.getValue());
             return target + " was sold for " + target.getValue();
@@ -61,6 +60,6 @@ public class TagAction extends Action
     @Override
     public String menuDescription(Actor actor)
     {
-        return actor + " tries to tag " + target;
+        return actor + " tags " + target;
     }
 }
