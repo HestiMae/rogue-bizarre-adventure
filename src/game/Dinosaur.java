@@ -59,6 +59,17 @@ public abstract class Dinosaur extends Actor implements Sellable
             this.hungerLevel = getMaxHunger();
         }
     }
+
+    @Override
+    public Boolean isHealthy()
+    {
+        if (this.hitPoints < this.maxHitPoints)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public abstract int getMaxHunger();
 
     public abstract int getHatchTime();
