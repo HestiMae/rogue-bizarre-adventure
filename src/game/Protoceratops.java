@@ -84,4 +84,16 @@ public class Protoceratops extends Dinosaur
     {
         return 100;
     }
+
+    @Override
+    public int getFoodValue()
+    {
+        return 30;
+    }
+
+    @Override
+    public FoodType getFoodType()
+    {
+        return FoodType.MEAT;
+    }
 }
