@@ -2,9 +2,6 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Velociraptor extends Dinosaur
 {
     private static final int HIT_POINTS = 75;
@@ -23,6 +20,7 @@ public class Velociraptor extends Dinosaur
         diet.add(FoodType.MEAT);
         this.hungerLevel = START_HUNGER_LEVEL;
         behaviours.add(new EatBehaviour(this, diet));
+        behaviours.add(new HuntBehaviour(this));
         behaviours.add(new WanderBehaviour());
     }
 
@@ -90,5 +88,17 @@ public class Velociraptor extends Dinosaur
     public int getValue()
     {
         return 2000;
+    }
+
+    @Override
+    public int getFoodValue()
+    {
+        return 10;
+    }
+
+    @Override
+    public FoodType getFoodType()
+    {
+        return FoodType.MEAT;
     }
 }
