@@ -18,7 +18,7 @@ public class Protoceratops extends Dinosaur
     private static final int MAX_HUNGER = 50;
     private static final int HATCH_TIME = 10;
     private static final int BREED_HUNGER = 50;
-    public static final int START_HUNGER_LEVEL = 30;
+    private static final int START_HUNGER_LEVEL = 30;
 
 
     public Protoceratops(String name)
@@ -37,14 +37,23 @@ public class Protoceratops extends Dinosaur
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
     {
         age(ADULT_AGE);
-        hungry(1);
-        for (Behaviour b : behaviours)
+        hungry(2);
+        needFood();
+        if (isConscious())
         {
-            Action outAction = b.getAction(this, map);
-            if (outAction != null)
+            for (Behaviour b : behaviours)
             {
-                return outAction;
+                Action outAction = b.getAction(this, map);
+                if (outAction != null)
+                {
+                    return outAction;
+                }
             }
+        }
+        else
+        {
+            map.locationOf(this).addItem(new Corpse("corpse", this));
+            map.removeActor(this);
         }
         return new DoNothingAction();
     }
@@ -77,6 +86,18 @@ public class Protoceratops extends Dinosaur
     public boolean isFull()
     {
         return this.hungerLevel >= MAX_HUNGER - 10;
+    }
+
+    @Override
+    public void needFood()
+    {
+        if (this.hungerLevel == 0)
+        {
+            if (this.hitPoints > 0)
+            {
+                hurt(10);
+            }
+        }
     }
 
     @Override

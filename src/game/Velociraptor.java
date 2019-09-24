@@ -12,6 +12,8 @@ public class Velociraptor extends Dinosaur
     private static final int MAX_HUNGER = 100;
     private static final int HATCH_TIME = 15;
     private static final int BREED_HUNGER = 50;
+    private static final int ADULT_AGE = 20;
+    private static final int START_HUNGER_LEVEL = 30;
 
 
 
@@ -19,8 +21,9 @@ public class Velociraptor extends Dinosaur
     {
         super(name, DISPLAY_CHAR, HIT_POINTS);
         diet.add(FoodType.MEAT);
-        behaviours.add(new WanderBehaviour());
+        this.hungerLevel = START_HUNGER_LEVEL;
         behaviours.add(new EatBehaviour(this, diet));
+        behaviours.add(new WanderBehaviour());
     }
 
     /**
@@ -34,10 +37,16 @@ public class Velociraptor extends Dinosaur
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
     {
-        Action wander = behaviours.get(0).getAction(this, map);
-        if (wander != null)
-            return wander;
-
+        age(ADULT_AGE);
+        hungry(1);
+        for (Behaviour b : behaviours)
+        {
+            Action outAction = b.getAction(this, map);
+            if (outAction != null)
+            {
+                return outAction;
+            }
+        }
         return new DoNothingAction();
     }
 
@@ -69,6 +78,12 @@ public class Velociraptor extends Dinosaur
     public boolean isFull()
     {
         return this.hungerLevel == MAX_HUNGER - 20;
+    }
+
+    @Override
+    public void needFood()
+    {
+
     }
 
     @Override

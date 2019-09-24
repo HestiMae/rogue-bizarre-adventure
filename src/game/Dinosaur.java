@@ -43,9 +43,13 @@ public abstract class Dinosaur extends Actor implements Sellable
             stage = DinoAge.ADULT;
         }
     }
+
     protected void hungry(int hungerLoss)
     {
-        this.hungerLevel -= hungerLoss;
+        if (this.hungerLevel > 0)
+        {
+            this.hungerLevel -= hungerLoss;
+        }
     }
 
     public void eat(Edible food)
@@ -70,6 +74,7 @@ public abstract class Dinosaur extends Actor implements Sellable
         return true;
     }
 
+
     public abstract int getMaxHunger();
 
     public abstract int getHatchTime();
@@ -77,6 +82,8 @@ public abstract class Dinosaur extends Actor implements Sellable
     public abstract boolean canBreed();
 
     public abstract boolean isFull();
+
+    public abstract void needFood();
 
     public DinoAge dinoStage()
     {

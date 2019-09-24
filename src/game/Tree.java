@@ -29,14 +29,12 @@ public class Tree extends Ground implements Edible{
 
 		List<Exit> exits = location.getExits();
 		double growthChance = 0.005;
-		char dirtDisplay = '.';
-		char grassDisplay = 'v';
 
 		for (Exit exit: exits)
 		{
 			Ground groundType = exit.getDestination().getGround();
 			// Rule: trees can only grow on adjacent grass or dirt ground types
-			if (groundType.getDisplayChar() == dirtDisplay || groundType.getDisplayChar() == grassDisplay)
+			if (groundType instanceof Dirt || groundType instanceof Grass)
 			{
 				double rand = Math.random();
 				if (rand < growthChance)

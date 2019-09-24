@@ -34,6 +34,12 @@ public class Player extends Actor {
 		return menu.showMenu(this, actions, display);
 	}
 
+	@Override
+	public Boolean isHealthy()
+	{
+		return null;
+	}
+
 	private class SleepAction extends Action {
 
 		private int sleepTime = 200;

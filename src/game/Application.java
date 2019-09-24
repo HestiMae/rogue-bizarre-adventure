@@ -56,6 +56,7 @@ public class Application {
 		
 		// Place a pair of protoceratops in the middle of the map
 		gameMap.at(20, 12).addActor(new Protoceratops("Protoceratops"));
+		gameMap.at(1, 1).addActor(new Velociraptor("Velociraptor"));
 
 
 		world.run();
