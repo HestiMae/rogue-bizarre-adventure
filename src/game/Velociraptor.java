@@ -2,6 +2,9 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Velociraptor extends Dinosaur
 {
     private static final int HIT_POINTS = 75;
@@ -9,6 +12,8 @@ public class Velociraptor extends Dinosaur
     private static final int MAX_HUNGER = 100;
     private static final int HATCH_TIME = 15;
     private static final int BREED_HUNGER = 50;
+    private static final int ADULT_AGE = 20;
+    private static final int START_HUNGER_LEVEL = 30;
 
 
 
@@ -16,9 +21,9 @@ public class Velociraptor extends Dinosaur
     {
         super(name, DISPLAY_CHAR, HIT_POINTS);
         diet.add(FoodType.MEAT);
-        behaviours.add(new WanderBehaviour());
+        this.hungerLevel = START_HUNGER_LEVEL;
         behaviours.add(new EatBehaviour(this, diet));
-        behaviours.add(new HuntBehaviour(this));
+        behaviours.add(new WanderBehaviour());
     }
 
     /**
@@ -32,10 +37,16 @@ public class Velociraptor extends Dinosaur
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
     {
-        Action wander = behaviours.get(0).getAction(this, map);
-        if (wander != null)
-            return wander;
-
+        age(ADULT_AGE);
+        hungry(1);
+        for (Behaviour b : behaviours)
+        {
+            Action outAction = b.getAction(this, map);
+            if (outAction != null)
+            {
+                return outAction;
+            }
+        }
         return new DoNothingAction();
     }
 
@@ -70,20 +81,14 @@ public class Velociraptor extends Dinosaur
     }
 
     @Override
+    public void needFood()
+    {
+
+    }
+
+    @Override
     public int getValue()
     {
         return 2000;
-    }
-
-    @Override
-    public int getFoodValue()
-    {
-        return 10;
-    }
-
-    @Override
-    public FoodType getFoodType()
-    {
-        return FoodType.MEAT;
     }
 }
