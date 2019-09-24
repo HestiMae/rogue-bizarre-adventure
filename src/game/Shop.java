@@ -19,8 +19,17 @@ public class Shop extends Ground
         items.add(new DinosaurTag());
         items.add(new Egg(new Protoceratops("SHOP")));
         items.add(new CarnivoreFood());
+        items.add(new HerbivoreFood());
         items.add(new Egg(new Velociraptor("SHOP")));
         // NEED TO ADD MORE ITEMS LATER
+    }
+
+    @Override
+    /**
+     * Actors cannot enter shop
+     */
+    public boolean canActorEnter(Actor actor) {
+        return false;
     }
 
     /**

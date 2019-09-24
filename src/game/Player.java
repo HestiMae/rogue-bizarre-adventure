@@ -44,8 +44,8 @@ public class Player extends Actor
 
 	public String removeMoney(int value)
 	{
-		if (value < this.wallet) {
-			return "Not enough money to complete purchase";
+		if (value > this.wallet) {
+			return "Not enough money to remove";
 		}
 
 		this.wallet -= value;
