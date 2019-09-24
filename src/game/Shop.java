@@ -1,9 +1,6 @@
 package game;
 
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Ground;
-import edu.monash.fit2099.engine.Item;
+import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
 
@@ -32,7 +29,8 @@ public class Shop extends Ground
      * @param actor Actor interacting with the shop
      * @return collection of allowable actions the actor can perform on the shop
      */
-    public Actions allowableActions(Actor actor)
+    @Override
+    public Actions allowableActions(Actor actor, Location location, String Direction)
     {
         Actions actions = new Actions();
 

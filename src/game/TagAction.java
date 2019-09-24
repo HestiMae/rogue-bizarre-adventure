@@ -46,7 +46,6 @@ public class TagAction extends Action
     @Override
     public String execute(Actor actor, GameMap map)
     {
-
         if (getTag(actor) && target.isHealthy() && target.isFull())
         {
             map.removeActor(target);

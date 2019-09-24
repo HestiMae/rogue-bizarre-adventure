@@ -52,6 +52,8 @@ public class Player extends Actor
 		return null;
 	}
 
+	public int getWallet() {return this.wallet;}
+
 	@Override
 	public Boolean isHealthy()
 	{

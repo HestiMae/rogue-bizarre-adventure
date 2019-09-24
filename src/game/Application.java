@@ -48,6 +48,8 @@ public class Application {
 		"................................................................................");
 		GameMap gameMap = new GameMap(groundFactory, map );
 		world.addGameMap(gameMap);
+
+		gameMap.at(0,0).setGround(new Shop());
 		
 		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, gameMap.at(9, 4));

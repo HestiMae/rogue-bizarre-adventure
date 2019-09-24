@@ -17,9 +17,13 @@ public class BuyAction extends Action
     @Override
     public String execute(Actor actor, GameMap map)
     {
-        actor.addItemToInventory(purchase);
-        ((Player) actor).removeMoney(((Sellable) purchase).getValue());
-        return purchase.toString() + " bought by player for " + ((Sellable) purchase).getValue();
+        if (((Player) actor).getWallet() >= ((Sellable) purchase).getValue())
+        {
+            actor.addItemToInventory(purchase);
+            ((Player) actor).removeMoney(((Sellable) purchase).getValue());
+            return purchase.toString() + " bought by player for " + ((Sellable) purchase).getValue();
+        }
+        return actor + " does not have enough money";
     }
 
     @Override
