@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.Location;
 public class Dirt extends Ground {
 
 	/**
-	 * Constructor.
+	 * Constructor for dirt.
 	 */
 	public Dirt() {
 		super('.');
@@ -25,7 +25,7 @@ public class Dirt extends Ground {
 	public void tick(Location location) {
 		super.tick(location);
 
-		double growthChance = 0.005;
+		double growthChance = 0.003;
 		double rand = Math.random();
 
 		if (rand < growthChance)

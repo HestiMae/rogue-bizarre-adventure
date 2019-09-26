@@ -8,7 +8,6 @@ public class DinosaurTag extends Item implements Sellable
 
     /**
      * Constructor for dinosaur tag used to sell dinosaurs
-     *
      */
     public DinosaurTag()
     {
@@ -24,6 +23,10 @@ public class DinosaurTag extends Item implements Sellable
         this.allowableActions.add(action);
     }
 
+    /**
+     * Gets the monetary value of the dinosaur tag when buying and selling
+     * @return monetary value of dinosaur tag
+     */
     @Override
     public int getValue()
     {

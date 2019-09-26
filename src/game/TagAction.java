@@ -4,6 +4,9 @@ import edu.monash.fit2099.engine.*;
 
 import java.util.List;
 
+/**
+ * Class for the action to tag dinosaurs
+ */
 public class TagAction extends Action
 {
     protected Dinosaur target;
@@ -62,6 +65,11 @@ public class TagAction extends Action
         }
     }
 
+    /**
+     * The string to be displayed on the menu when the action is available
+     * @param actor The actor performing the action.
+     * @return string representing thr action on the menu
+     */
     @Override
     public String menuDescription(Actor actor)
     {

@@ -28,6 +28,15 @@ public class Player extends Actor
 		super(name, displayChar, hitPoints);
 	}
 
+	/**
+	 * Returns a collection of the Actions that the otherActor can do to the current Actor.
+	 *
+	 * @param actions    collection of possible Actions for this Actor
+	 * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 * @param map        the map containing the Actor
+	 * @param display    the I/O object to which messages may be written
+	 * @return List of available actions for the turn
+	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
 	{
@@ -37,23 +46,40 @@ public class Player extends Actor
 		return menu.showMenu(this, actions, display);
 	}
 
+	/**
+	 * Adds an amount of money to the player's wallet
+	 * @param value amount of money to be added
+	 */
 	public void addMoney(int value)
 	{
 		this.wallet += value;
 	}
 
-	public String removeMoney(int value)
+	/**
+	 * Removes an amount of money from the player's wallet
+	 * @param value amount of money to be removed
+	 * @return true if success, false if player does not have enough money to remove
+	 */
+	public Boolean removeMoney(int value)
 	{
 		if (value > this.wallet) {
-			return "Not enough money to remove";
+			return false;
 		}
 
 		this.wallet -= value;
-		return null;
+		return true;
 	}
 
+	/**
+	 * Gets the amount of money the player currently has
+	 * @return current wallet value
+	 */
 	public int getWallet() {return this.wallet;}
 
+	/**
+	 * Checks whether or not the player is at full health
+	 * @return true if full health, false if not
+	 */
 	@Override
 	public Boolean isHealthy()
 	{

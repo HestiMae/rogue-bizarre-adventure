@@ -4,6 +4,9 @@ import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
 
+/**
+ * Class for a shop for buying and selling items
+ */
 public class Shop extends Ground
 {
 
@@ -21,7 +24,6 @@ public class Shop extends Ground
         items.add(new CarnivoreFood());
         items.add(new HerbivoreFood());
         items.add(new Egg(new Velociraptor("SHOP")));
-        // NEED TO ADD MORE ITEMS LATER
     }
 
     @Override

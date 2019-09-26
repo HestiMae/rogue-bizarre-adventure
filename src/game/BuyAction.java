@@ -21,7 +21,7 @@ public class BuyAction extends Action
         {
             actor.addItemToInventory(purchase);
             ((Player) actor).removeMoney(((Sellable) purchase).getValue());
-            return purchase.toString() + " bought by player for " + ((Sellable) purchase).getValue();
+            return purchase.toString() + " bought by " + actor + " for " + ((Sellable) purchase).getValue();
         }
         return actor + " does not have enough money";
     }

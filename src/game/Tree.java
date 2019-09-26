@@ -7,12 +7,14 @@ import edu.monash.fit2099.engine.Exit;
 import java.util.List;
 import java.lang.Math;
 
-
+/**
+ * This class represents trees
+ */
 public class Tree extends Ground implements Edible{
 	private int age = 0;
 
 	/**
-	 * Constructor.
+	 * Constructor for tree .
 	 */
 	public Tree() {
 		super('+');
@@ -51,12 +53,20 @@ public class Tree extends Ground implements Edible{
 			displayChar = 'T';
 	}
 
+	/**
+	 * Gets the number of hunger points restored when eaten
+	 * @return hunger points restored when eaten
+	 */
 	@Override
 	public int getFoodValue()
 	{
 		return 10;
 	}
 
+	/**
+	 * Gets the type of food that tree is
+	 * @return enum food type of tree
+	 */
 	@Override
 	public FoodType getFoodType()
 	{
