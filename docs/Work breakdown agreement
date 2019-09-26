@@ -7,8 +7,9 @@ Implementing:
 - dinosaur tag
 - herbivore food 
 - corpse
-- breed action
-- eat action
+- breed action (included in breed behaviour)
+- eat action (included in breed behaviour)
+- feed action
 
 Testing/reviewing:
 - Edible interface
