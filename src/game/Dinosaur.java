@@ -30,6 +30,16 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
         Actions actions = new Actions();
         actions.add(new AttackAction(this));
         actions.add(new TagAction(this));
+        List<Item> items = otherActor.getInventory();
+        for (Item item: items)
+        {
+            // Only Edible food types which are in the dinosaurs diet can be fed to them
+            if ((item instanceof Edible) && (this.diet.contains(((Edible) item).getFoodType())))
+            {
+                actions.add(new FeedAction(this, (Edible) item));
+            }
+        }
+
         return actions;
     }
 
