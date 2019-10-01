@@ -40,7 +40,7 @@ public abstract class Actor implements ActorInterface, Skilled, Printable {
 
 	/**
 	 * Add an item to this Actor's inventory.
-	 * @param item The Item to add.
+	 * @param item The copyItem to add.
 	 */
 	public void addItemToInventory(Item item) {
 		inventory.add(item);
@@ -48,7 +48,7 @@ public abstract class Actor implements ActorInterface, Skilled, Printable {
 
 	/**
 	 * Remove an item from this Actor's inventory.
-	 * @param item The Item to remove.
+	 * @param item The copyItem to remove.
 	 */
 	public void removeItemFromInventory(Item item) {
 		inventory.remove(item);

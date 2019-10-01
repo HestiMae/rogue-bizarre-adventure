@@ -3,7 +3,7 @@ package edu.monash.fit2099.engine;
 /**
  * Interface for weapon items.
  *
- * As well as providing methods needed by weapons, this interface is used in Item to
+ * As well as providing methods needed by weapons, this interface is used in copyItem to
  * determine whether an item can be used as a weapon.
  */
 public interface Weapon {

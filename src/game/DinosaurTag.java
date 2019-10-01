@@ -32,4 +32,10 @@ public class DinosaurTag extends Item implements Sellable
     {
         return 0;
     }
+
+    @Override
+    public Item copyItem()
+    {
+        return new DinosaurTag();
+    }
 }

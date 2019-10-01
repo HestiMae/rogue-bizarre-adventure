@@ -1,7 +1,9 @@
 package game;
 
+import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
+import edu.monash.fit2099.engine.Location;
 
 public class Wall extends Ground {
 
@@ -17,5 +19,19 @@ public class Wall extends Ground {
 	@Override
 	public boolean blocksThrownObjects() {
 		return true;
+	}
+
+	@Override
+	public Actions allowableActions(Actor actor, Location location, String direction)
+	{
+		Actions actions = new Actions();
+		actions.add(new BuildAction(location, direction, new Dirt()));
+		return actions;
+	}
+
+	@Override
+	public String getName()
+	{
+		return "Wall";
 	}
 }

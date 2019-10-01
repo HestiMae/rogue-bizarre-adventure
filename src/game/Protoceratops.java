@@ -4,7 +4,6 @@ package game;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 
 /**
@@ -19,6 +18,9 @@ public class Protoceratops extends Dinosaur
     private static final int HATCH_TIME = 10;
     private static final int BREED_HUNGER = 50;
     private static final int START_HUNGER_LEVEL = 30;
+    private static final int HUNGER_THRESHOLD = 20;
+    public static final int HUNGER_LOSS = 2;
+    public static final int HUNGER_DAMAGE = 10;
 
 
     public Protoceratops(String name)
@@ -37,25 +39,16 @@ public class Protoceratops extends Dinosaur
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
     {
         age(ADULT_AGE);
-        hungry(2);
-        needFood();
-        if (isConscious())
-        {
-            for (Behaviour b : behaviours)
-            {
-                Action outAction = b.getAction(this, map);
-                if (outAction != null)
-                {
-                    return outAction;
-                }
-            }
-        }
-        else
-        {
-            map.locationOf(this).addItem(new Corpse("corpse", this));
-            map.removeActor(this);
-        }
-        return new DoNothingAction();
+        hunger(HUNGER_LOSS);
+        needFood(HUNGER_DAMAGE);
+        display.println(isHungry(HUNGER_THRESHOLD));
+        return super.playTurn(actions, lastAction, map, display);
+    }
+
+    @Override
+    Dinosaur copyDinosaur()
+    {
+        return new Protoceratops(this.name);
     }
 
     @Override
@@ -88,17 +81,6 @@ public class Protoceratops extends Dinosaur
         return this.hungerLevel >= MAX_HUNGER - 10;
     }
 
-    @Override
-    public void needFood()
-    {
-        if (this.hungerLevel == 0)
-        {
-            if (this.hitPoints > 0)
-            {
-                hurt(10);
-            }
-        }
-    }
 
     @Override
     public int getValue()

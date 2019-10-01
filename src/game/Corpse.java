@@ -49,4 +49,10 @@ public class Corpse extends Item implements Sellable, Edible
     {
         return 50;
     }
+
+    @Override
+    public Item copyItem()
+    {
+        return new Corpse(this.name, this.type);
+    }
 }

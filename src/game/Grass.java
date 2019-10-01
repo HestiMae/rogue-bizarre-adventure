@@ -35,4 +35,10 @@ public class Grass extends Ground implements Edible
     {
         return FoodType.PLANT;
     }
+
+    @Override
+    public String getName()
+    {
+        return "Grass";
+    }
 }

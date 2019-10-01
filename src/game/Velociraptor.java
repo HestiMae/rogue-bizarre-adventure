@@ -11,7 +11,9 @@ public class Velociraptor extends Dinosaur
     private static final int BREED_HUNGER = 50;
     private static final int ADULT_AGE = 20;
     private static final int START_HUNGER_LEVEL = 30;
-
+    private static final int HUNGER_THRESHOLD = 20;
+    public static final int HUNGER_LOSS = 1;
+    public static final int HUNGER_DAMAGE = 10;
 
 
     public Velociraptor(String name)
@@ -24,28 +26,20 @@ public class Velociraptor extends Dinosaur
         behaviours.add(new WanderBehaviour());
     }
 
-    /**
-     * Figure out what to do next.
-     * <p>
-     * FIXME: Velociraptor wanders around at random, or if no suitable MoveActions are available, it
-     * just stands there.  That's boring.
-     *
-     * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
-     */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
     {
         age(ADULT_AGE);
-        hungry(1);
-        for (Behaviour b : behaviours)
-        {
-            Action outAction = b.getAction(this, map);
-            if (outAction != null)
-            {
-                return outAction;
-            }
-        }
-        return new DoNothingAction();
+        hunger(HUNGER_LOSS);
+        needFood(HUNGER_DAMAGE);
+        display.println(isHungry(HUNGER_THRESHOLD));
+        return super.playTurn(actions, lastAction, map, display);
+    }
+
+    @Override
+    Dinosaur copyDinosaur()
+    {
+        return new Velociraptor(this.name);
     }
 
     @Override
@@ -70,18 +64,12 @@ public class Velociraptor extends Dinosaur
     public boolean canBreed()
     {
         return this.hungerLevel > BREED_HUNGER && this.stage == DinoAge.ADULT;
-    }
+    } //TODO: Put all the implementations for this stuff thats the same in the superclass.
 
     @Override
     public boolean isFull()
     {
         return this.hungerLevel == MAX_HUNGER - 20;
-    }
-
-    @Override
-    public void needFood()
-    {
-
     }
 
     @Override

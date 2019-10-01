@@ -14,4 +14,10 @@ public class Crater extends Ground {
 	public boolean canActorEnter(Actor a) {
 		return a.hasSkill(DemoSkills.SPACETRAVELLER);
 	}
+
+	@Override
+	public String getName()
+	{
+		return null;
+	}
 }

@@ -11,4 +11,9 @@ public class Floor extends Ground {
 		super('_');
 	}
 
+	@Override
+	public String getName()
+	{
+		return "Floor";
+	}
 }

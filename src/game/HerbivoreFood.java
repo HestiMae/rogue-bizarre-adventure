@@ -41,4 +41,10 @@ public class HerbivoreFood extends Item implements Sellable, Edible
     {
         return 20;
     }
+
+    @Override
+    public Item copyItem()
+    {
+        return new HerbivoreFood();
+    }
 }

@@ -12,4 +12,10 @@ public class MartianItem extends Item{
 	public void addAction(Action action) {
 		this.allowableActions.add(action);
 	}
+
+	@Override
+	public Item copyItem()
+	{
+		return null;
+	}
 }

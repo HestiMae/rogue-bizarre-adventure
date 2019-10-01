@@ -59,9 +59,10 @@ public class EatBehaviour extends Action implements Behaviour
         Location here = map.locationOf(dino);
         if (here.getGround() instanceof Edible)
         {
+            Ground ground = here.getGround();
             dino.eat(((Edible) here.getGround()));
             here.setGround(new Dirt());
-            return dino.dinoType() + " eats ground at (" + here.x() + ", " + here.y() + ")"
+            return dino.dinoType() + " eats " + ground.getName() + " at (" + here.x() + ", " + here.y() + ")"
                     + " Dino hunger: " + dino.hungerLevel;
         } else if (here.getItems().stream().anyMatch(x -> x instanceof Edible))
         {
@@ -82,7 +83,7 @@ public class EatBehaviour extends Action implements Behaviour
 
     private boolean hasEdible(Location location)
     {
-        if (location.getGround() instanceof Edible ||
+        if (location.getGround() instanceof Edible && diet.contains(((Edible) location.getGround()).getFoodType())||
                 location.getItems().stream().anyMatch(x -> x instanceof Edible &&
                         diet.contains(((Edible) x).getFoodType())))
         {

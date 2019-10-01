@@ -14,7 +14,7 @@ public class Egg extends Item implements Edible, Sellable
 
     /***
      * Constructor.
-     *  @param name the name of this Item
+     *  @param name the name of this copyItem
      * @param type the type of dinosaur this egg will hatch into
      * @param hatchTime the amount of time the egg will take to hatch
      */
@@ -25,6 +25,7 @@ public class Egg extends Item implements Edible, Sellable
         this.hatchTime = hatchTime;
         this.age = 0;
     }
+
     public Egg(Dinosaur type)
     {
         super(type.dinoType() + " Egg", DISPLAY_CHAR, PORTABLE);
@@ -51,16 +52,7 @@ public class Egg extends Item implements Edible, Sellable
 
     private Dinosaur hatch()
     {
-       //is there a better way to do this without checking what type of Dinosaur we have..?
-        if (type instanceof Protoceratops)
-        {
-            return new Protoceratops("name");
-        }
-        else if (type instanceof Velociraptor)
-        {
-            return new Velociraptor("name");
-        }
-        return null;
+        return type;
     }
 
     @Override
@@ -79,5 +71,11 @@ public class Egg extends Item implements Edible, Sellable
     public int getValue()
     {
         return 10;
+    }
+
+    @Override
+    public Item copyItem()
+    {
+        return new Egg(this.name, type.copyDinosaur(), this.hatchTime);
     }
 }

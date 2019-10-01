@@ -10,4 +10,10 @@ public class PortableDinoItem extends Item {
 	public PortableDinoItem(String name, char displayChar) {
 		super(name, displayChar, true);
 	}
+
+	@Override
+	public Item copyItem()
+	{
+		return null;
+	}
 }

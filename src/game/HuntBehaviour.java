@@ -35,7 +35,8 @@ public class HuntBehaviour implements Behaviour
                         {
                             locationsToVisit.add(exit.getDestination());
                         }
-                        if (location.getActor() instanceof Dinosaur && dino.diet.contains(((Edible) location.getActor()).getFoodType()))
+                        if (location.getActor() instanceof Dinosaur
+                                && !(dino.getClass().isAssignableFrom(location.getActor().getClass())) && dino.diet.contains(((Edible) location.getActor()).getFoodType())) //TODO: Check that the target is NOT the same species
                         {
                             return Util.moveLogic(startPoint, location, dino);
                         }
@@ -57,7 +58,7 @@ public class HuntBehaviour implements Behaviour
         Location startPoint = map.locationOf(dino);
         for (Exit exit : startPoint.getExits())
         {
-            if (exit.getDestination().getActor() instanceof Dinosaur && dino.diet.contains(((Edible) exit.getDestination().getActor()).getFoodType()))
+            if (exit.getDestination().getActor() instanceof Dinosaur && !(dino.getClass().isAssignableFrom(exit.getDestination().getActor().getClass())) && dino.diet.contains(((Edible) exit.getDestination().getActor()).getFoodType()))
             {
                 this.target = (Dinosaur) exit.getDestination().getActor();
                 return true;

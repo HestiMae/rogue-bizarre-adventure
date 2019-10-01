@@ -8,4 +8,10 @@ public class Floor extends Ground {
 		super('.');
 		addSkill(Status.DEAD);
 	}
+
+	@Override
+	public String getName()
+	{
+		return null;
+	}
 }

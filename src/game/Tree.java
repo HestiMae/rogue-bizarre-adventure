@@ -70,6 +70,12 @@ public class Tree extends Ground implements Edible{
 	@Override
 	public FoodType getFoodType()
 	{
-		return null;
+		return FoodType.PLANT;
+	}
+
+	@Override
+	public String getName()
+	{
+		return "Tree";
 	}
 }

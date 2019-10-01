@@ -21,4 +21,10 @@ public class Tree extends Ground {
 		if (age == 20)
 			displayChar = 'T';
 	}
+
+	@Override
+	public String getName()
+	{
+		return null;
+	}
 }

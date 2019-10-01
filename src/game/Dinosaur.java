@@ -23,6 +23,8 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
         behaviours.add(new BreedBehaviour(this));
     }
 
+    abstract Dinosaur copyDinosaur();
+
 
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map)
@@ -43,6 +45,28 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
         return actions;
     }
 
+    @Override
+    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
+    {
+        if (isConscious())
+        {
+            for (Behaviour b : behaviours)
+            {
+                Action outAction = b.getAction(this, map);
+                if (outAction != null)
+                {
+                    return outAction;
+                }
+            }
+        }
+        else
+        {
+            map.locationOf(this).addItem(new Corpse("corpse", this));
+            map.removeActor(this);
+        }
+        return new DoNothingAction();
+    }
+
     public abstract String dinoType();
 
     protected void age(int adultAge)
@@ -54,12 +78,17 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
         }
     }
 
-    protected void hungry(int hungerLoss)
+    protected void hunger(int hungerLoss)
     {
         if (this.hungerLevel > 0)
         {
             this.hungerLevel -= hungerLoss;
         }
+    }
+
+    String isHungry(int hungryTime)
+    {
+        return this.dinoType() + " is " + ((hungerLevel > hungryTime)? " well fed!" : " getting hungry, current hunger level " + hungerLevel);
     }
 
     public void eat(Edible food)
@@ -93,7 +122,16 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
 
     public abstract boolean isFull();
 
-    public abstract void needFood();
+    public void needFood(int hungerDamage)
+    {
+        if (this.hungerLevel == 0)
+        {
+            if (isConscious())
+            {
+                hurt(hungerDamage);
+            }
+        }
+    }
 
     public DinoAge dinoStage()
     {

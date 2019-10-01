@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for a shop for buying and selling items
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class Shop extends Ground
 {
 
-    ArrayList<Item> items = new ArrayList<Item>();
+    List<Item> items = new ArrayList<>();
 
     /**
      * Constructor for shop where actors (player) can buy and sell items, contains a list of all items which are able
@@ -20,10 +21,10 @@ public class Shop extends Ground
     {
         super('$');
         items.add(new DinosaurTag());
-        items.add(new Egg(new Protoceratops("SHOP")));
+        items.add(new Egg(new Protoceratops("Protoceratops")));
         items.add(new CarnivoreFood());
         items.add(new HerbivoreFood());
-        items.add(new Egg(new Velociraptor("SHOP")));
+        items.add(new Egg(new Velociraptor("Velociraptor")));
     }
 
     @Override
@@ -57,9 +58,15 @@ public class Shop extends Ground
         // Every item in the shop can be bought
         for (Item item: items)
         {
-            actions.add(new BuyAction(item));
+            actions.add(new BuyAction(item.copyItem()));
         }
 
         return actions;
+    }
+
+    @Override
+    public String getName()
+    {
+        return "Shop";
     }
 }

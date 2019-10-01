@@ -26,4 +26,10 @@ public class LockedDoor extends Ground {
 	public boolean blocksThrownObjects() {
 		return true;
 	}
+
+	@Override
+	public String getName()
+	{
+		return null;
+	}
 }
