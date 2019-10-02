@@ -4,18 +4,24 @@ import edu.monash.fit2099.engine.*;
 
 public class Velociraptor extends Dinosaur
 {
-    private static final int HIT_POINTS = 75;
-    private static final char DISPLAY_CHAR = 'r';
-    private static final int MAX_HUNGER = 100;
-    private static final int HATCH_TIME = 15;
-    private static final int BREED_HUNGER = 50;
-    private static final int ADULT_AGE = 20;
-    private static final int START_HUNGER_LEVEL = 30;
-    private static final int HUNGER_THRESHOLD = 20;
-    public static final int HUNGER_LOSS = 1;
-    public static final int HUNGER_DAMAGE = 10;
+    private static final int HIT_POINTS = 75; //max HP for velociraptor
+    private static final char DISPLAY_CHAR = 'r'; //display character for velociraptor
+    private static final int MAX_HUNGER = 100; //the max hunger level for velociraptor
+    private static final int HATCH_TIME = 15; //the time a velociraptor egg takes to hatch
+    private static final int BREED_HUNGER = 50; //the hunger level velociraptor require to breed
+    private static final int ADULT_AGE = 20; //the age in turns baby velociraptor will become adults
+    private static final int START_HUNGER_LEVEL = 30; //the hunger level of a new velociraptor
+    private static final int HUNGER_THRESHOLD = 20; //the hunger level when the velociraptor is considered "hungry" - players are warned once it reaches this level
+    public static final int HUNGER_LOSS = 1; //the hunger level loss per turn
+    public static final int HUNGER_DAMAGE = 10; //the HP damage per turn the hunger level is at 0
+    public static final int COST = 2000; //The monetary value of a velociraptor
+    public static final int FOOD_VALUE = 10; //the food value of a velociraptor
 
 
+    /**
+     * Constructor.
+     * @param name the name of the velociraptor
+     */
     public Velociraptor(String name)
     {
         super(name, DISPLAY_CHAR, HIT_POINTS);
@@ -64,7 +70,7 @@ public class Velociraptor extends Dinosaur
     public boolean canBreed()
     {
         return this.hungerLevel > BREED_HUNGER && this.stage == DinoAge.ADULT;
-    } //TODO: Put all the implementations for this stuff thats the same in the superclass.
+    }
 
     @Override
     public boolean isFull()
@@ -75,13 +81,13 @@ public class Velociraptor extends Dinosaur
     @Override
     public int getValue()
     {
-        return 2000;
+        return COST;
     }
 
     @Override
     public int getFoodValue()
     {
-        return 10;
+        return FOOD_VALUE;
     }
 
     @Override

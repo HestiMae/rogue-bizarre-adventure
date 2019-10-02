@@ -11,18 +11,30 @@ import edu.monash.fit2099.engine.GameMap;
  */
 public class Protoceratops extends Dinosaur
 {
-    private static final int HIT_POINTS = 100;
-    private static final char DISPLAY_CHAR = 'd';
-    private static final int ADULT_AGE = 20;
-    private static final int MAX_HUNGER = 50;
-    private static final int HATCH_TIME = 10;
-    private static final int BREED_HUNGER = 50;
-    private static final int START_HUNGER_LEVEL = 30;
-    private static final int HUNGER_THRESHOLD = 20;
-    public static final int HUNGER_LOSS = 2;
-    public static final int HUNGER_DAMAGE = 10;
+    private static final int HIT_POINTS = 100; //max HP for protoceratops
+    private static final char DISPLAY_CHAR = 'd'; //display character for protoceratops
+    private static final int ADULT_AGE = 20; //the age in turns baby protoceratops will become adults
+    private static final int MAX_HUNGER = 50; //the max hunger level for protoceratops
+    private static final int HATCH_TIME = 10; //the time a protoceratops egg takes to hatch
+
+    public static int getBreedHunger()
+    {
+        return BREED_HUNGER;
+    }
+
+    private static final int BREED_HUNGER = 40; //the hunger level protoceratops require to breed
+    private static final int START_HUNGER_LEVEL = 30; //the hunger level of a new protoceratops
+    private static final int HUNGER_THRESHOLD = 20; //the hunger level when the dinosaur is considered "hungry" - players are warned once it reaches this level
+    public static final int HUNGER_LOSS = 2; //the hunger level loss per turn
+    public static final int HUNGER_DAMAGE = 10; //the HP damage per turn the hunger level is at 0
+    public static final int COST = 100; //The monetary value of a protoceratops
+    public static final int FOOD_VALUE = 30; //the food value of a protoceratops
 
 
+    /**
+     * Constructor.
+     * @param name the name of the dinosaur
+     */
     public Protoceratops(String name)
     {
         super(name, DISPLAY_CHAR, HIT_POINTS);
@@ -32,9 +44,6 @@ public class Protoceratops extends Dinosaur
         behaviours.add(new WanderBehaviour());
     }
 
-    /**
-     * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
-     */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
     {
@@ -81,17 +90,16 @@ public class Protoceratops extends Dinosaur
         return this.hungerLevel >= MAX_HUNGER - 10;
     }
 
-
     @Override
     public int getValue()
     {
-        return 100;
+        return COST;
     }
 
     @Override
     public int getFoodValue()
     {
-        return 30;
+        return FOOD_VALUE;
     }
 
     @Override

@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.Item;
 public interface ItemInterface {
 
     /**
-     * Simple "copy constructor" to avoid issues of multiple references to the same copyItem (e.g. in shop).
+     * Simple "copy constructor" to avoid issues of multiple references to the same Item (used in shop).
      * Decided to put it here instead of {@see Sellable} as we may need to duplicate items for other purposes later.
      * @return a copy of the item
      */

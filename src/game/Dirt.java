@@ -12,6 +12,8 @@ import edu.monash.fit2099.engine.Location;
  */
 public class Dirt extends Ground {
 
+	public static final double GROWTH_CHANCE = 0.003;
+
 	/**
 	 * Constructor for dirt.
 	 */
@@ -27,10 +29,9 @@ public class Dirt extends Ground {
 	public void tick(Location location) {
 		super.tick(location);
 
-		double growthChance = 0.003;
 		double rand = Math.random();
 
-		if (rand < growthChance)
+		if (rand < GROWTH_CHANCE)
 		{
 			location.setGround(new Grass());
 		}
@@ -40,8 +41,8 @@ public class Dirt extends Ground {
 	public Actions allowableActions(Actor actor, Location location, String direction)
 	{
 		Actions actions = new Actions();
-		actions.add(new BuildAction(location, direction, new Wall()));
-		actions.add(new BuildAction(location, direction, new Floor()));
+		actions.add(new BuildAction(location, direction, new Wall())); //can build walls on Dirt
+		actions.add(new BuildAction(location, direction, new Floor())); //can build floors on Dirt
 		return actions;
 	}
 

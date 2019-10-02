@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.Item;
 public class CarnivoreFood extends Item implements Edible, Sellable
 {
     private static final boolean PORTABLE = true;
+    public static final int FOOD_VALUE = 100;
+    public static final int COST = 100;
     private static char DISPLAY_CHAR = 'c';
 
     /**
@@ -18,7 +20,7 @@ public class CarnivoreFood extends Item implements Edible, Sellable
     @Override
     public int getFoodValue()
     {
-        return 100;
+        return FOOD_VALUE;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class CarnivoreFood extends Item implements Edible, Sellable
     @Override
     public int getValue()
     {
-        return 100;
+        return COST;
     }
 
     @Override

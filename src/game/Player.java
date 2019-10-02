@@ -13,12 +13,11 @@ import edu.monash.fit2099.engine.Menu;
 public class Player extends Actor
 {
 
-	private Menu menu = new Menu();
-	private int wallet = 0;
+	private Menu menu = new Menu(); //displays the list of options for the player
+	private int wallet = 0; //the players wallet. We decided to put it here and require some downcasts instead of giving all actors wallets (that just seems silly, if you ask me)
 
 	/**
 	 * Constructor.
-	 *
 	 * @param name        Name to call the player in the UI
 	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
@@ -76,10 +75,7 @@ public class Player extends Actor
 	 */
 	public int getWallet() {return this.wallet;}
 
-	/**
-	 * Checks whether or not the player is at full health
-	 * @return true if full health, false if not
-	 */
+
 	@Override
 	public Boolean isHealthy()
 	{

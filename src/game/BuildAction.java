@@ -11,6 +11,12 @@ public class BuildAction extends Action
     String direction;
     Ground ground;
 
+    /**
+     * Simple constructor
+     * @param location the location to build on
+     * @param direction the direction from the actor
+     * @param ground the Ground type to be built
+     */
     public BuildAction(Location location, String direction, Ground ground)
     {
         this.location = location;
@@ -30,12 +36,18 @@ public class BuildAction extends Action
         String oldGround = location.getGround().getName();
         location.setGround(ground);
         return (!(ground instanceof Dirt)? "Player builds a " + ground.getName() : "Player destroys the " + oldGround)
-                + " to the " + direction + " at: (" + location.x() + ", " + location.y() + ")";
+                + " to the " + direction + " at: (" + location.x() + ", " + location.y() + ")"; //Uses the ternary operator to decide which String to return
     }
 
+    /**
+     *
+     * @param actor The actor performing the action.
+     * @return
+     */
     @Override
     public String menuDescription(Actor actor)
     {
         return (!(ground instanceof Dirt)? "Build a " + ground.getName() : "Destroy the " + location.getGround().getName()) + " to the " + direction + " at: (" + location.x() + ", " + location.y() + ")";
+        //Uses the ternary operator to decide which String to return.
     }
 }

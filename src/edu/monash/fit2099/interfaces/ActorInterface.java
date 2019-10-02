@@ -8,5 +8,9 @@ import game.Sellable;
  */
 
 public interface ActorInterface {
-    public Boolean isHealthy();
+    /**
+     * Checks if a target is healthy, i.e. at full health
+     * @return true if full, false if not
+     */
+    Boolean isHealthy();
 }

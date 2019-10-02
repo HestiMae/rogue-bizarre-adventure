@@ -1,9 +1,13 @@
 package game;
 
 /**
- * An interface to facilitate the buying and selling in game.
+ * An interface to facilitate buying and selling in game.
  */
 public interface Sellable
 {
-    int getValue(); //returns the value of the sellable item
+    /**
+     * Returns the value of the sellable
+     * @return the value of the sellable
+     */
+    int getValue();
 }

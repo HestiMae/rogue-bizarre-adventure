@@ -2,7 +2,15 @@ package game;
 
 public interface Edible
 {
-    int getFoodValue(); //returns the food value of the edible
+    /**
+     * Gets the number of hunger points restored when eaten
+     * @return the number of hunger points restored when eaterd
+     */
+    int getFoodValue();
 
-    FoodType getFoodType(); //returns the food type of an edible (PLANT or MEAT)
+    /**
+     * Returns the food type of an edible (PLANT or MEAT)
+     * @return FoodType, PLANT or MEAT
+     */
+    FoodType getFoodType();
 }
