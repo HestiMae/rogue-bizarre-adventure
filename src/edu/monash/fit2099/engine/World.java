@@ -38,7 +38,6 @@ public class World {
 
 	/**
 	 * Set an actor as the player. The map is drawn just before this Actor's turn
-	 * 
 	 * @param player   the player to add
 	 * @param location the Location where the player is to be added
 	 */

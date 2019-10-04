@@ -51,7 +51,7 @@ public class EatBehaviour extends Action implements Behaviour
                     }
                     if (hasEdible(location)) //checks if the current location has an edible
                     {
-                        return moveLogic(startPoint, location); //moves the dinosaur towards the edible
+                        return new StepMoveAction(startPoint, location); //moves the dinosaur towards the edible
                     }
                     visitedLocations.add(location); //adds the location to the list of checked locations
                 }
@@ -105,18 +105,6 @@ public class EatBehaviour extends Action implements Behaviour
         {
             return false;
         }
-    }
-
-    /**
-     * Moves a Dinosaur towards a location
-     * @param here the current location
-     * @param edibleLocation the location of the edible
-     * @return a MoveAction.
-     */
-    private Action moveLogic(Location here, Location edibleLocation)
-    {
-
-        return Util.moveLogic(here, edibleLocation, dino);
     }
 
     @Override

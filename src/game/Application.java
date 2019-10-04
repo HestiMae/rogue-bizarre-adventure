@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.FancyGroundFactory;
 import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.World;
 
 /**
  * The main class for the dinosaur park game.
@@ -16,7 +15,7 @@ import edu.monash.fit2099.engine.World;
 public class Application {
 
 	public static void main(String[] args) {
-		World world = new World(new Display());
+		ZaWarudo world = new ZaWarudo(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
 		

@@ -46,7 +46,7 @@ public class HuntBehaviour implements Behaviour
                         if (location.getActor() instanceof Dinosaur
                                 && !(dino.getClass().isAssignableFrom(location.getActor().getClass())) && dino.diet.contains(((Edible) location.getActor()).getFoodType())) //ensures the target dinosaur isn't of the same species, and is of the right food type.
                         {
-                            return Util.moveLogic(startPoint, location, dino); //creates a move action to move the dinosaur towards the target
+                            return new StepMoveAction(startPoint, location); //creates a move action to move the dinosaur towards the target
                         }
                         visitedLocations.add(location); //adds the checked location to the list of checked locations
                     }

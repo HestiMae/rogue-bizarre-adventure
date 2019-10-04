@@ -7,6 +7,7 @@ import java.util.List;
 
 public abstract class Dinosaur extends Actor implements Sellable, Edible
 {
+    public static final int HUNGER_HEAL = 20; //the amount of health to heal a dinosaur when its hunger is full
     protected int age; //the age of the Dinosaur in turns
     protected List<Behaviour> behaviours; //a list of possible behaviours
     protected DinoAge stage; //the stage of life the Dinosaur is at.
@@ -60,6 +61,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     {
         if (isConscious()) //checks if the Dinosaur is Conscious
         {
+            display.println(hungerHeal());
             for (Behaviour b : behaviours)
             {
                 Action outAction = b.getAction(this, map);
@@ -115,7 +117,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      */
     String isHungry(int hungryTime)
     {
-        return this.dinoType() + " is " + ((hungerLevel > hungryTime)? " well fed!" : " getting hungry, current hunger level " + hungerLevel); //uses the ternary operator to choose which String to return
+        return this.dinoType() + " is " + ((hungerLevel > hungryTime)? " well fed! Hunger level " + hungerLevel : " getting hungry, current hunger level " + hungerLevel); //uses the ternary operator to choose which String to return
     }
 
     /**
@@ -182,6 +184,15 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
                 hurt(hungerDamage);
             }
         }
+    }
+    protected String hungerHeal()
+    {
+        if (hungerLevel == getMaxHunger() && !isHealthy())
+        {
+            heal(HUNGER_HEAL);
+            return "Your " + dinoType() + " is full! They've been healed for " + HUNGER_HEAL;
+        }
+        return "";
     }
 
     /**
