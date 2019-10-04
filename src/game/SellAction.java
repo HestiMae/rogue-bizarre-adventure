@@ -19,12 +19,12 @@ public class SellAction extends Action
     {
         ((Player) actor).addMoney(((Sellable) sellItem).getValue());
         actor.removeItemFromInventory(sellItem);
-        return sellItem.toString() + " sold by player for " + ((Sellable) sellItem).getValue();
+        return sellItem.toString() + " sold by player for $" + ((Sellable) sellItem).getValue();
     }
 
     @Override
     public String menuDescription(Actor actor)
     {
-        return "Sell " + sellItem.toString() + " for " + ((Sellable) sellItem).getValue();
+        return "Sell " + sellItem.toString() + " for $" + ((Sellable) sellItem).getValue();
     }
 }

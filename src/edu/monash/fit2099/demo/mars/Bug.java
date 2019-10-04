@@ -43,4 +43,10 @@ public class Bug extends Actor {
 	{
 		return null;
 	}
+
+	@Override
+	public int getHP()
+	{
+		return 0;
+	}
 }

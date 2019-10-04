@@ -61,7 +61,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     {
         if (isConscious()) //checks if the Dinosaur is Conscious
         {
-            display.println(hungerHeal());
+            displayHungerHeal(display);
             for (Behaviour b : behaviours)
             {
                 Action outAction = b.getAction(this, map);
@@ -117,7 +117,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      */
     String isHungry(int hungryTime)
     {
-        return this.dinoType() + " is " + ((hungerLevel > hungryTime)? " well fed! Hunger level " + hungerLevel : " getting hungry, current hunger level " + hungerLevel); //uses the ternary operator to choose which String to return
+        return this + " is " + ((hungerLevel > hungryTime)? " well fed! Hunger level " + hungerLevel : " getting hungry, current hunger level " + hungerLevel); //uses the ternary operator to choose which String to return
     }
 
     /**
@@ -185,14 +185,13 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
             }
         }
     }
-    protected String hungerHeal()
+    protected void displayHungerHeal(Display display)
     {
         if (hungerLevel == getMaxHunger() && !isHealthy())
         {
             heal(HUNGER_HEAL);
-            return "Your " + dinoType() + " is full! They've been healed for " + HUNGER_HEAL;
+            display.println("Your " + this + " is full! They've been healed for " + HUNGER_HEAL + " HP");
         }
-        return "";
     }
 
     /**
@@ -209,4 +208,9 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
         return new ArrayList<>(diet);
     }
 
+    @Override
+    public int getHP()
+    {
+        return hitPoints;
+    }
 }

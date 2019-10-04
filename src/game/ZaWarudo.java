@@ -2,6 +2,9 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Modified version of World. The name is just a reference to the anime JoJos Bizarre Adventure.
  */
@@ -9,6 +12,7 @@ public class ZaWarudo extends World
 {
     private static final int DIO_RATE = 40;
     private int turnCounter = 0;
+    private List<Enemy> enemies = new ArrayList<>();
 
     /**
      * Constructor.
@@ -50,9 +54,11 @@ public class ZaWarudo extends World
                 turnCounter++;
                 GameMap playersMap = actorLocations.locationOf(player).map();
                 playersMap.draw(display);
-                if (turnCounter % DIO_RATE == 0) //spawns an enemy DIO after specified number of turns
+                if (turnCounter % DIO_RATE == 0 && enemies.stream().noneMatch(x -> x instanceof DIO)) //spawns an enemy DIO after specified number of turns, so long as there isn't already one on the map.
                 {
-                    playersMap.at(10,10).addActor(new DIO("DIO", player));
+                    DIO dio = new DIO("DIO", player);
+                    playersMap.at(10,10).addActor(dio);
+                    enemies.add(dio);
                 }
 
                 // Process all the actors.

@@ -2,12 +2,15 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
+/**
+ * Default behaviour for enemies
+ */
 public class EnemyBehaviour implements Behaviour
 {
     private Actor player;
     private Actor enemy;
 
-    public EnemyBehaviour(Actor player, Actor enemy)
+    public EnemyBehaviour(Actor enemy, Actor player)
     {
         this.enemy = enemy;
         this.player = player;
@@ -17,7 +20,7 @@ public class EnemyBehaviour implements Behaviour
     {
         if (!nextToTarget(enemy, map))
         {
-            return new ApproachAction(map.locationOf(enemy), map.locationOf(player));
+            return new ApproachAction(map.locationOf(player));
         }
         return new AttackAction(player);
     }
@@ -27,7 +30,7 @@ public class EnemyBehaviour implements Behaviour
         Location startPoint = map.locationOf(enemy);
         for (Exit exit : startPoint.getExits())
         {
-            if (exit.getDestination().getActor() instanceof Player)
+            if (exit.getDestination().getActor() == this.player)
             {
                 return true;
             }

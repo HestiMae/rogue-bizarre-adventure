@@ -42,9 +42,9 @@ public class AttackAction extends Action {
 		}
 
 		int damage = weapon.damage();
-		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-
 		target.hurt(damage);
+
+		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.\n" + target + " health: " + target.getHP();
 		if (!target.isConscious()) {
 			Item corpse = new Corpse("dead " + target, target);
 			map.locationOf(target).addItem(corpse);

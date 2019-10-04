@@ -37,6 +37,7 @@ public class Egg extends Item implements Edible, Sellable
     {
         super(type.dinoType() + " Egg", DISPLAY_CHAR, PORTABLE);
         this.type = type;
+
         this.hatchTime = type.getHatchTime();
         this.age = 0;
     }
@@ -50,7 +51,7 @@ public class Egg extends Item implements Edible, Sellable
         {
             displayChar = 'O';
         }
-        else if (age == hatchTime)
+        else if (age >= hatchTime && !(currentLocation.map().isAnActorAt(currentLocation))) //ensures an actor isn't at the Egg's location
         {
             currentLocation.addActor(hatch());
             currentLocation.removeItem(this);

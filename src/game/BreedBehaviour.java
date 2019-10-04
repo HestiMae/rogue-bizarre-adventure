@@ -12,6 +12,7 @@ import java.util.Random;
  */
 public class BreedBehaviour extends Action implements Behaviour
 {
+    private Random rand;
     public static final float BREED_CHANCE = 0.1f; //Chance to breed. Higher means greater chance
     private Dinosaur parent; //the parent Dinosaur who will breed
 
@@ -22,6 +23,7 @@ public class BreedBehaviour extends Action implements Behaviour
     public BreedBehaviour(Dinosaur parent)
     {
         this.parent = parent;
+        this.rand = new Random();
     }
 
     /**
@@ -34,7 +36,6 @@ public class BreedBehaviour extends Action implements Behaviour
     @Override
     public Action getAction(Actor actor, GameMap map)
     {
-        Random rand = new Random();
         if (map.contains(actor) && rand.nextFloat() < BREED_CHANCE
                 && parent.canBreed())
         {
@@ -53,13 +54,13 @@ public class BreedBehaviour extends Action implements Behaviour
     public String execute(Actor actor, GameMap map)
     {
         Location here = map.locationOf(parent);
-        here.addItem(new Egg(parent));
-        return parent.dinoType() + " has made an egg at (" + here.x() + ", " + here.y() + ")";
+        here.addItem(new Egg(parent.copyDinosaur()));
+        return parent + " has made an egg at (" + here.x() + ", " + here.y() + ")";
     }
 
     @Override
     public String menuDescription(Actor actor)
     {
-        return parent.dinoType() + " breeds.";
+        return parent + " breeds.";
     }
 }

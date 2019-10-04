@@ -17,7 +17,7 @@ public class Application {
 	public static void main(String[] args) {
 		ZaWarudo world = new ZaWarudo(new Display());
 
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(), new Grass());
 		
 		List<String> map = Arrays.asList(
 		"................................................................................",
@@ -25,7 +25,7 @@ public class Application {
 		".....#######....................................................................",
 		".....#_____#....................................................................",
 		".....#_____#....................................................................",
-		".....###.###....................................................................",
+		".....###.###......v.............................................................",
 		"................................................................................",
 		"......................................+++.......................................",
 		".......................................++++.....................................",
@@ -54,9 +54,8 @@ public class Application {
 		world.addPlayer(player, gameMap.at(9, 4));
 		
 		// Place a pair of protoceratops in the middle of the map
-		gameMap.at(20, 12).addActor(new Velociraptor("Velociraptor"));
-		gameMap.at(21, 12).addActor(new Velociraptor("Velociraptor"));
-
+		gameMap.at(20, 6).addActor(new Protoceratops("Iggy the Protoceratops"));
+		gameMap.at(21, 6).addActor(new Protoceratops("Horus the Protoceratops"));
 		world.run();
 	}
 }

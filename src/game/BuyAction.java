@@ -34,7 +34,7 @@ public class BuyAction extends Action
         {
             actor.addItemToInventory(purchase);
             ((Player) actor).removeMoney(((Sellable) purchase).getValue());
-            return purchase.toString() + " bought by " + actor + " for " + ((Sellable) purchase).getValue();
+            return purchase.toString() + " bought by " + actor + " for $" + ((Sellable) purchase).getValue();
         }
         return actor + " does not have enough money";
     }
@@ -42,6 +42,6 @@ public class BuyAction extends Action
     @Override
     public String menuDescription(Actor actor)
     {
-        return "Purchase " + purchase.toString() + " for " + ((Sellable) purchase).getValue();
+        return "Purchase " + purchase.toString() + " for $" + ((Sellable) purchase).getValue();
     }
 }

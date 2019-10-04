@@ -49,9 +49,9 @@ public class EatBehaviour extends Action implements Behaviour
                     {
                         locationsToVisit.add(exit.getDestination()); //adds each exit from the locations to check to the list of locations to check
                     }
-                    if (hasEdible(location)) //checks if the current location has an edible
+                    if (hasEdible(location) && !(map.isAnActorAt(location))) //checks if the current location has an edible, and it isn't currently occupied.
                     {
-                        return new ApproachAction(startPoint, location); //moves the dinosaur towards the edible
+                        return new ApproachAction(location); //moves the dinosaur towards the edible
                     }
                     visitedLocations.add(location); //adds the location to the list of checked locations
                 }
@@ -70,7 +70,7 @@ public class EatBehaviour extends Action implements Behaviour
             Ground ground = here.getGround();
             dino.eat(((Edible) here.getGround()));
             here.setGround(new Dirt()); //ground is set to dirt once eaten
-            return dino.dinoType() + " eats " + ground.getName() + " at (" + here.x() + ", " + here.y() + ")"
+            return dino + " eats " + ground.getName() + " at (" + here.x() + ", " + here.y() + ")"
                     + " Dino hunger: " + dino.hungerLevel;
         } else if (here.getItems().stream().anyMatch(x -> x instanceof Edible)) //or if there is an item that is edible, do this
         {
@@ -81,7 +81,7 @@ public class EatBehaviour extends Action implements Behaviour
                     dino.eat(((Edible) item));
                     String name = item.toString();
                     here.removeItem(item);
-                    return dino.dinoType() + " eats " + name + " at (" + here.x() + ", " + here.y() + ")"
+                    return dino + " eats " + name + " at (" + here.x() + ", " + here.y() + ")"
                             + " Dino hunger: " + dino.hungerLevel;
                 }
             }

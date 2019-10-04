@@ -2,15 +2,13 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class DIO extends Actor
+public class DIO extends Enemy
 {
     private static final char DISPLAY_CHAR = 'D';
     private static final int HITPOINTS = 100;
-    private List<Behaviour> behaviours;
-    private Actor player;
+    private static final int STANDDAMAGE = 30;
+    private Stand stand;
 
     /**
      * Constructor.
@@ -19,11 +17,9 @@ public class DIO extends Actor
      */
     public DIO(String name, Actor player)
     {
-        super(name, DISPLAY_CHAR, HITPOINTS);
-        behaviours = new ArrayList<>();
-        this.player = player;
-        behaviours.add(new EnemyBehaviour(this.player, this));
-        behaviours.add(new WanderBehaviour());
+        super(name, DISPLAY_CHAR, HITPOINTS, player);
+        this.stand = new Stand("The World", 'W', STANDDAMAGE, "Muda Muda Muda");
+        inventory.add(this.stand);
     }
 
     @Override

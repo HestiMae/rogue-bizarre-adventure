@@ -35,4 +35,10 @@ public class Player extends Actor {
 	{
 		return null;
 	}
+
+	@Override
+	public int getHP()
+	{
+		return 0;
+	}
 }

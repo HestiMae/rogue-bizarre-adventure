@@ -57,7 +57,7 @@ public class Protoceratops extends Dinosaur
     @Override
     Dinosaur copyDinosaur()
     {
-        return new Protoceratops(this.name);
+        return new Protoceratops(this.name + " Jr.");
     }
 
     @Override

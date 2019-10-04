@@ -13,4 +13,6 @@ public interface ActorInterface {
      * @return true if full, false if not
      */
     Boolean isHealthy();
+
+    int getHP();
 }
