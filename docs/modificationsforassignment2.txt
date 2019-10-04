@@ -1,0 +1,10 @@
+Additions!
+- Floors and walls can be built/destroyed by the player. Destroying them is just building dirt (Sneaky!).
+- World has been subclassed to allow for a welcome screen to be displayed. Enemy spawning is also now possible
+- An enemy has been added, DIO (I know we're supposed to use mixed case but his name is all caps in the show I am referencing)
+, who appears after a set number of turns and chases (and attacks) the player. He will despawn after a time, too.
+- A new move action has been added, ApproachAction, which generates a move that will take the actor 1 step closer to the target.
+- Inside of the Util class, for now there is only 1 method, which calculates distance taking into account there is diagonal movement.
+
+Many of the names of things are references to the anime JoJos Bizarre Adventure, like our project name, Robyns Bizarre Adventure.
+In particular, Stardust Crusaders, part 3 of the anime, is referenced. This is why the World subclass is called ZaWarudo.

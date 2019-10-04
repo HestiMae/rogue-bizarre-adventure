@@ -2,7 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
-public class StepMoveAction extends Action
+public class ApproachAction extends Action
 {
     private Location start;
     private Location end;
@@ -13,7 +13,7 @@ public class StepMoveAction extends Action
      * @param start the start location
      * @param end the end location
      */
-    public StepMoveAction(Location start, Location end)
+    public ApproachAction(Location start, Location end)
     {
         this.start = start;
         this.end = end;

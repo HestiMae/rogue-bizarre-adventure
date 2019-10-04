@@ -17,7 +17,7 @@ public class EnemyBehaviour implements Behaviour
     {
         if (!nextToTarget(enemy, map))
         {
-            return new StepMoveAction(map.locationOf(enemy), map.locationOf(player));
+            return new ApproachAction(map.locationOf(enemy), map.locationOf(player));
         }
         return new AttackAction(player);
     }

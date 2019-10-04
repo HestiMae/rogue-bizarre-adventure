@@ -27,7 +27,7 @@ public class FollowBehaviour implements Behaviour {
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 
-		return new StepMoveAction(here, there);
+		return new ApproachAction(here, there);
 	}
 
 	/**

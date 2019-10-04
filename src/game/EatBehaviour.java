@@ -51,7 +51,7 @@ public class EatBehaviour extends Action implements Behaviour
                     }
                     if (hasEdible(location)) //checks if the current location has an edible
                     {
-                        return new StepMoveAction(startPoint, location); //moves the dinosaur towards the edible
+                        return new ApproachAction(startPoint, location); //moves the dinosaur towards the edible
                     }
                     visitedLocations.add(location); //adds the location to the list of checked locations
                 }

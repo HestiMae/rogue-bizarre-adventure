@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.*;
  */
 public class ZaWarudo extends World
 {
-    public static final int DIO_RATE = 40;
+    private static final int DIO_RATE = 40;
     private int turnCounter = 0;
 
     /**
