@@ -25,10 +25,10 @@ public class Protoceratops extends Dinosaur
     private static final int BREED_HUNGER = 40; //the hunger level protoceratops require to breed
     private static final int START_HUNGER_LEVEL = 30; //the hunger level of a new protoceratops
     private static final int HUNGER_THRESHOLD = 20; //the hunger level when the dinosaur is considered "hungry" - players are warned once it reaches this level
-    public static final int HUNGER_LOSS = 2; //the hunger level loss per turn
-    public static final int HUNGER_DAMAGE = 10; //the HP damage per turn the hunger level is at 0
-    public static final int COST = 100; //The monetary value of a protoceratops
-    public static final int FOOD_VALUE = 30; //the food value of a protoceratops
+    private static final int HUNGER_LOSS = 2; //the hunger level loss per turn
+    private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the hunger level is at 0
+    private static final int COST = 100; //The monetary value of a protoceratops
+    private static final int FOOD_VALUE = 30; //the food value of a protoceratops
 
 
     /**

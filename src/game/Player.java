@@ -79,10 +79,7 @@ public class Player extends Actor
 	@Override
 	public Boolean isHealthy()
 	{
-		if (this.hitPoints < this.maxHitPoints) {
-			return false;
-		}
-		return true;
+		return this.hitPoints >= this.maxHitPoints;
 	}
 
 	@Override

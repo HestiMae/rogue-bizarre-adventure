@@ -7,12 +7,12 @@ import java.util.List;
 
 public abstract class Dinosaur extends Actor implements Sellable, Edible
 {
-    public static final int HUNGER_HEAL = 20; //the amount of health to heal a dinosaur when its hunger is full
-    protected int age; //the age of the Dinosaur in turns
-    protected List<Behaviour> behaviours; //a list of possible behaviours
-    protected DinoAge stage; //the stage of life the Dinosaur is at.
-    protected int hungerLevel; //the current hunger level
-    protected List<FoodType> diet; //the diet of the Dinosaur. Having a List allows for Omnivores
+    private static final int HUNGER_HEAL = 20; //the amount of health to heal a dinosaur when its hunger is full
+    private int age; //the age of the Dinosaur in turns
+    List<Behaviour> behaviours; //a list of possible behaviours
+    DinoAge stage; //the stage of life the Dinosaur is at.
+    int hungerLevel; //the current hunger level
+    List<FoodType> diet; //the diet of the Dinosaur. Having a List allows for Omnivores
 
     /**
      * Constructor. All new Dinosaurs are considered babies, with their age being 0.
@@ -139,11 +139,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     @Override
     public Boolean isHealthy()
     {
-        if (this.hitPoints < this.maxHitPoints)
-        {
-            return false;
-        }
-        return true;
+        return this.hitPoints >= this.maxHitPoints;
     }
 
 
@@ -155,7 +151,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
 
     /**
      * Gets the amount of time a Dinosaur species takes to hatch
-     * @return
+     * @return hatchtime
      */
     public abstract int getHatchTime();
 
@@ -185,7 +181,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
             }
         }
     }
-    protected void displayHungerHeal(Display display)
+    private void displayHungerHeal(Display display)
     {
         if (hungerLevel == getMaxHunger() && !isHealthy())
         {

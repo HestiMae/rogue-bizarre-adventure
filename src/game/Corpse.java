@@ -8,8 +8,8 @@ import edu.monash.fit2099.engine.Item;
  */
 public class Corpse extends Item implements Sellable, Edible
 {
-    public static final int FOOD_VALUE = 50;
-    public static final int COST = 50;
+    private static final int FOOD_VALUE = 50;
+    private static final int COST = 50;
     Actor type;
 
     /***

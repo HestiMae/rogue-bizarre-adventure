@@ -11,7 +11,7 @@ import java.util.List;
 public class Shop extends Ground
 {
 
-    List<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Constructor for shop where actors (player) can buy and sell items, contains a list of all items which are able
@@ -28,10 +28,10 @@ public class Shop extends Ground
         items.add(new SellableWeapon("Basic Sword", '/', 10, "slashes", 50));
     }
 
-    @Override
     /**
      * Actors cannot enter shop
      */
+    @Override
     public boolean canActorEnter(Actor actor) {
         return false;
     }

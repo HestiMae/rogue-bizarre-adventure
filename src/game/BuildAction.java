@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.*;
 public class BuildAction extends Action
 {
     Location location;
-    String direction;
+    private String direction;
     Ground ground;
 
     /**
@@ -39,11 +39,6 @@ public class BuildAction extends Action
                 + " to the " + direction + " at: (" + location.x() + ", " + location.y() + ")"; //Uses the ternary operator to decide which String to return
     }
 
-    /**
-     *
-     * @param actor The actor performing the action.
-     * @return
-     */
     @Override
     public String menuDescription(Actor actor)
     {

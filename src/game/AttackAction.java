@@ -21,7 +21,7 @@ public class AttackAction extends Action {
 	/**
 	 * Random number generator
 	 */
-	protected Random rand = new Random();
+	private Random rand = new Random();
 
 	/**
 	 * Constructor.

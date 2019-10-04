@@ -8,8 +8,8 @@ import edu.monash.fit2099.engine.Item;
 public class HerbivoreFood extends Item implements Sellable, Edible
 {
 
-    public static final int FOOD_VALUE = 50;
-    public static final int COST = 20;
+    private static final int FOOD_VALUE = 50;
+    private static final int COST = 20;
 
     /**
      * Constructor for herbivore food.

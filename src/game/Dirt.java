@@ -12,7 +12,7 @@ import edu.monash.fit2099.engine.Location;
  */
 public class Dirt extends Ground {
 
-	public static final double GROWTH_CHANCE = 0.003;
+	private static final double GROWTH_CHANCE = 0.003;
 
 	/**
 	 * Constructor for dirt.

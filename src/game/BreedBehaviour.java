@@ -13,7 +13,7 @@ import java.util.Random;
 public class BreedBehaviour extends Action implements Behaviour
 {
     private Random rand;
-    public static final float BREED_CHANCE = 0.1f; //Chance to breed. Higher means greater chance
+    private static final float BREED_CHANCE = 0.1f; //Chance to breed. Higher means greater chance
     private Dinosaur parent; //the parent Dinosaur who will breed
 
     /**

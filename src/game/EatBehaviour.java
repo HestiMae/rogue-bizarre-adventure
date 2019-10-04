@@ -96,15 +96,10 @@ public class EatBehaviour extends Action implements Behaviour
      */
     private boolean hasEdible(Location location)
     {
-        if (location.getGround() instanceof Edible && diet.contains(((Edible) location.getGround()).getFoodType())||
+        //checks if the ground is edible and the food type is in the diet, or if an item is edible and is in the diet.
+        return location.getGround() instanceof Edible && diet.contains(((Edible) location.getGround()).getFoodType()) ||
                 location.getItems().stream().anyMatch(x -> x instanceof Edible &&
-                        diet.contains(((Edible) x).getFoodType()))) //checks if the ground is edible and the food type is in the diet, or if an item is edible and is in the diet.
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
+                        diet.contains(((Edible) x).getFoodType()));
     }
 
     @Override

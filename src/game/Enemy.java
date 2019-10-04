@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class Enemy extends Actor
 {
-    protected List<Behaviour> behaviours;
+    List<Behaviour> behaviours;
     protected Actor player;
     /**
      * Constructor.
