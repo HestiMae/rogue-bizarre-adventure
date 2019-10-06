@@ -25,7 +25,7 @@ public class FeedAction extends Action
     }
 
     /**
-     * Executing the feed action which replenishes target hunger level by the food value and removes the food item from
+     * Executing the feed action which replenishes target metabolise level by the food value and removes the food item from
      * the performing actor's inventory
      * @param actor The actor performing the action.
      * @param map The map the actor is on.

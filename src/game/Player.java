@@ -25,6 +25,7 @@ public class Player extends Actor
 	public Player(String name, char displayChar, int hitPoints)
 	{
 		super(name, displayChar, hitPoints);
+		addSkill(PassableTerrain.LAND);
 	}
 
 	/**
@@ -86,5 +87,11 @@ public class Player extends Actor
 	public int getHP()
 	{
 		return hitPoints;
+	}
+
+	@Override
+	public Boolean isFlying()
+	{
+		return false;
 	}
 }

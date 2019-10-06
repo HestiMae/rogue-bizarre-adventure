@@ -15,6 +15,7 @@ public class BreedBehaviour extends Action implements Behaviour
     private Random rand;
     private static final float BREED_CHANCE = 0.1f; //Chance to breed. Higher means greater chance
     private Dinosaur parent; //the parent Dinosaur who will breed
+    private int childCount = 0;
 
     /**
      * Simple constructor
@@ -53,8 +54,9 @@ public class BreedBehaviour extends Action implements Behaviour
     @Override
     public String execute(Actor actor, GameMap map)
     {
+        childCount++;
         Location here = map.locationOf(parent);
-        here.addItem(new Egg(parent.copyDinosaur()));
+        here.addItem(new Egg(parent.copyDinosaur(" Jr. " + (childCount == 1 ? "" : childCount))));
         return parent + " has made an egg at (" + here.x() + ", " + here.y() + ")";
     }
 

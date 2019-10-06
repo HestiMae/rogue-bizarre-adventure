@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class ZaWarudo extends World
 {
+    //TODO: End game options.
     private static final int DIO_RATE = 40;
     private int turnCounter = 0;
     private List<Enemy> enemies = new ArrayList<>();

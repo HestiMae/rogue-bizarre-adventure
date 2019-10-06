@@ -6,14 +6,15 @@ public class Velociraptor extends Dinosaur
 {
     private static final int HIT_POINTS = 75; //max HP for velociraptor
     private static final char DISPLAY_CHAR = 'r'; //display character for velociraptor
-    private static final int MAX_HUNGER = 100; //the max hunger level for velociraptor
+    private static final int MAX_HUNGER = 100; //the max metabolise level for velociraptor
+    private static final int HUNGRY_AT_LEVEL = MAX_HUNGER - 20;
     private static final int HATCH_TIME = 15; //the time a velociraptor egg takes to hatch
-    private static final int BREED_HUNGER = 50; //the hunger level velociraptor require to breed
+    private static final int BREED_HUNGER = 50; //the metabolise level velociraptor require to breed
     private static final int ADULT_AGE = 20; //the age in turns baby velociraptor will become adults
-    private static final int START_HUNGER_LEVEL = 30; //the hunger level of a new velociraptor
-    private static final int HUNGER_THRESHOLD = 20; //the hunger level when the velociraptor is considered "hungry" - players are warned once it reaches this level
-    private static final int HUNGER_LOSS = 1; //the hunger level loss per turn
-    private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the hunger level is at 0
+    private static final int START_HUNGER_LEVEL = 30; //the metabolise level of a new velociraptor
+    private static final int HUNGER_THRESHOLD = 20; //the metabolise level when the velociraptor is considered "hungry" - players are warned once it reaches this level
+    private static final int HUNGER_LOSS = 1; //the metabolise level loss per turn
+    private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 2000; //The monetary value of a velociraptor
     private static final int FOOD_VALUE = 10; //the food value of a velociraptor
 
@@ -26,9 +27,11 @@ public class Velociraptor extends Dinosaur
     {
         super(name, DISPLAY_CHAR, HIT_POINTS);
         diet.add(FoodType.MEAT);
-        this.hungerLevel = START_HUNGER_LEVEL;
+        this.foodLevel = START_HUNGER_LEVEL;
+        addSkill(PassableTerrain.LAND);
         behaviours.add(new EatBehaviour(this, diet));
         behaviours.add(new HuntBehaviour(this));
+        behaviours.add(new FollowBehaviour<Dinosaur>(this, Dinosaur::isHungry, (x, y) -> false, Dinosaur::canHunt, Dinosaur::canEat));
         behaviours.add(new WanderBehaviour());
     }
 
@@ -36,9 +39,9 @@ public class Velociraptor extends Dinosaur
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
     {
         age(ADULT_AGE);
-        hunger(HUNGER_LOSS);
-        needFood(HUNGER_DAMAGE);
-        display.println(isHungry(HUNGER_THRESHOLD));
+        metabolise(HUNGER_LOSS);
+        starve(HUNGER_DAMAGE);
+        display.println(hungerStatus(HUNGER_THRESHOLD));
         return super.playTurn(actions, lastAction, map, display);
     }
 
@@ -49,13 +52,19 @@ public class Velociraptor extends Dinosaur
     }
 
     @Override
+    Dinosaur copyDinosaur(String nameExtension)
+    {
+        return new Velociraptor(this.name + nameExtension);
+    }
+
+    @Override
     public String dinoType()
     {
         return "Velociraptor";
     }
 
     @Override
-    public int getMaxHunger()
+    public int getMaxFoodLevel()
     {
         return MAX_HUNGER;
     }
@@ -69,13 +78,13 @@ public class Velociraptor extends Dinosaur
     @Override
     public boolean canBreed()
     {
-        return this.hungerLevel > BREED_HUNGER && this.stage == DinoAge.ADULT;
+        return this.foodLevel > BREED_HUNGER && this.stage == DinoAge.ADULT;
     }
 
     @Override
-    public boolean isFull()
+    public boolean isHungry()
     {
-        return this.hungerLevel == MAX_HUNGER - 20;
+        return this.foodLevel <= HUNGRY_AT_LEVEL;
     }
 
     @Override
@@ -94,5 +103,11 @@ public class Velociraptor extends Dinosaur
     public FoodType getFoodType()
     {
         return FoodType.MEAT;
+    }
+
+    @Override
+    public Boolean isFlying()
+    {
+        return false;
     }
 }

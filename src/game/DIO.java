@@ -8,6 +8,8 @@ public class DIO extends Enemy
     private static final char DISPLAY_CHAR = 'D';
     private static final int HITPOINTS = 100;
     private static final int STANDDAMAGE = 30;
+    private static final int LIFETIME = 20;
+    private int turnsAlive = 0;
 
     /**
      * Constructor.
@@ -24,13 +26,21 @@ public class DIO extends Enemy
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
     {
-        for (Behaviour b : behaviours)
+        turnsAlive++;
+        if (turnsAlive < LIFETIME)
         {
-            Action outAction = b.getAction(this, map);
-            if (outAction != null)
+            for (Behaviour b : behaviours)
             {
-                return outAction;
+                Action outAction = b.getAction(this, map);
+                if (outAction != null)
+                {
+                    return outAction;
+                }
             }
+        }
+        else
+        {
+            return new RemoveActorAction();
         }
         return new DoNothingAction();
     }
@@ -39,5 +49,11 @@ public class DIO extends Enemy
     public Boolean isHealthy()
     {
         return hitPoints == maxHitPoints;
+    }
+
+    @Override
+    public Boolean isFlying()
+    {
+        return false;
     }
 }

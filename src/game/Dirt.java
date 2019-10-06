@@ -1,6 +1,7 @@
 package game;
 
 import java.lang.Math;
+import java.util.Random;
 
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
@@ -13,12 +14,15 @@ import edu.monash.fit2099.engine.Location;
 public class Dirt extends Ground {
 
 	private static final double GROWTH_CHANCE = 0.003;
+	private Random rand;
 
 	/**
 	 * Constructor for dirt.
 	 */
 	public Dirt() {
 		super('.');
+		rand = new Random();
+		this.addSkill(PassableTerrain.LAND);
 	}
 
 	/**
@@ -29,9 +33,7 @@ public class Dirt extends Ground {
 	public void tick(Location location) {
 		super.tick(location);
 
-		double rand = Math.random();
-
-		if (rand < GROWTH_CHANCE)
+		if (rand.nextFloat() < GROWTH_CHANCE)
 		{
 			location.setGround(new Grass());
 		}
@@ -50,6 +52,12 @@ public class Dirt extends Ground {
 	public String getName()
 	{
 		return "Dirt";
+	}
+
+	@Override
+	public boolean canActorEnter(Actor actor)
+	{
+		return actor.hasSkill(PassableTerrain.LAND);
 	}
 }
 

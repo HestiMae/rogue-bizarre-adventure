@@ -18,4 +18,14 @@ public class Util
     {
         return Math.max(Math.abs(a.x()-b.x()), Math.abs(a.y()-b.y())); //Since we can move diagonally, the distance is just the greater of x or y.
     }
+
+    /**
+     * Returns the coords of a location in a useful format
+     * @param location the location to get the coords of
+     * @return a String of the coords of the location
+     */
+    public static String locationString(Location location)
+    {
+        return "(" + location.x() + ", " + location.y() + ")";
+    }
 }

@@ -1,5 +1,6 @@
 package game;
 
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.Exit;
@@ -54,8 +55,8 @@ public class Tree extends Ground implements Edible{
 	}
 
 	/**
-	 * Gets the number of hunger points restored when eaten
-	 * @return hunger points restored when eaten
+	 * Gets the number of metabolise points restored when eaten
+	 * @return metabolise points restored when eaten
 	 */
 	@Override
 	public int getFoodValue()
@@ -77,5 +78,11 @@ public class Tree extends Ground implements Edible{
 	public String getName()
 	{
 		return "Tree";
+	}
+
+	@Override
+	public boolean canActorEnter(Actor actor)
+	{
+		return actor.hasSkill(PassableTerrain.LAND);
 	}
 }

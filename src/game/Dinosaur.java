@@ -5,13 +5,16 @@ import edu.monash.fit2099.engine.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Dinosaur abstract Class
+ */
 public abstract class Dinosaur extends Actor implements Sellable, Edible
 {
-    private static final int HUNGER_HEAL = 20; //the amount of health to heal a dinosaur when its hunger is full
+    private static final int HUNGER_HEAL = 20; //the amount of health to heal a dinosaur when its metabolise is full
     private int age; //the age of the Dinosaur in turns
     List<Behaviour> behaviours; //a list of possible behaviours
     DinoAge stage; //the stage of life the Dinosaur is at.
-    int hungerLevel; //the current hunger level
+    int foodLevel; //the current food level
     List<FoodType> diet; //the diet of the Dinosaur. Having a List allows for Omnivores
 
     /**
@@ -35,6 +38,8 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      * @return a copy of the Dinosaur
      */
     abstract Dinosaur copyDinosaur();
+
+    abstract Dinosaur copyDinosaur(String nameExtension);
 
 
     @Override
@@ -99,25 +104,25 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     }
 
     /**
-     * Decrements hunger level every turn by a specifiable amount
-     * @param hungerLoss the amount of hunger to lose per turn
+     * Decrements metabolise level every turn by a specifiable amount
+     * @param hungerLoss the amount of foodlevel to lose per turn
      */
-    protected void hunger(int hungerLoss)
+    protected void metabolise(int hungerLoss)
     {
-        if (this.hungerLevel > 0)
+        if (this.foodLevel > 0)
         {
-            this.hungerLevel -= hungerLoss;
+            this.foodLevel -= hungerLoss;
         }
     }
 
     /**
      * A string descriptor to alert the player if a Dinosaur is hungry
-     * @param hungryTime the hunger level to start warning the player at
+     * @param hungryTime the metabolise level to start warning the player at
      * @return a String alerting the player to the hunger level of their dinosaurs
      */
-    String isHungry(int hungryTime)
+    String hungerStatus(int hungryTime) //TODO: add instance variable to check what last turn of hunger was, then only output if dinosaur has just become hungry.
     {
-        return this + " is " + ((hungerLevel > hungryTime)? " well fed! Hunger level " + hungerLevel : " getting hungry, current hunger level " + hungerLevel); //uses the ternary operator to choose which String to return
+        return this + " is " + ((foodLevel > hungryTime)? " well fed! Hunger level " + foodLevel : " getting hungry, current hunger level " + foodLevel); //uses the ternary operator to choose which String to return
     }
 
     /**
@@ -126,13 +131,13 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      */
     public void eat(Edible food)
     {
-        if (food.getFoodValue() + hungerLevel <= getMaxHunger()) //ensures the food level can't go over the maximum.
+        if (food.getFoodValue() + foodLevel <= getMaxFoodLevel()) //ensures the food level can't go over the maximum.
         {
-            this.hungerLevel += food.getFoodValue();
+            this.foodLevel += food.getFoodValue();
         }
         else
         {
-            this.hungerLevel = getMaxHunger();
+            this.foodLevel = getMaxFoodLevel();
         }
     }
 
@@ -144,10 +149,10 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
 
 
     /**
-     * Gets the maximum hunger for a Dinosaur
-     * @return the maximum hunger level
+     * Gets the maximum foodlevel for a Dinosaur
+     * @return the maximum metabolise level
      */
-    public abstract int getMaxHunger();
+    public abstract int getMaxFoodLevel();
 
     /**
      * Gets the amount of time a Dinosaur species takes to hatch
@@ -165,15 +170,15 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      * Checks if the dinosaur is full or not
      * @return true if it is full, false if not
      */
-    public abstract boolean isFull();
+    public abstract boolean isHungry();
 
     /**
-     * Hurts the dinosaur for every turn it is at 0 hunger.
+     * Hurts the dinosaur for every turn it is at 0 foodlevel.
      * @param hungerDamage the damage to deal per turn
      */
-    public void needFood(int hungerDamage)
+    public void starve(int hungerDamage)
     {
-        if (this.hungerLevel == 0)
+        if (this.foodLevel == 0)
         {
             if (isConscious())
             {
@@ -183,7 +188,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     }
     private void displayHungerHeal(Display display)
     {
-        if (hungerLevel == getMaxHunger() && !isHealthy())
+        if (foodLevel == getMaxFoodLevel() && !isHealthy())
         {
             heal(HUNGER_HEAL);
             display.println("Your " + this + " is full! They've been healed for " + HUNGER_HEAL + " HP");
@@ -208,5 +213,16 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     public int getHP()
     {
         return hitPoints;
+    }
+
+    protected boolean canEat(Object possibleEdible)
+    {
+        return possibleEdible instanceof Edible && this.diet.contains(((Edible) possibleEdible).getFoodType());
+    }
+
+    protected boolean canHunt(Actor possiblePrey)
+    {
+        return possiblePrey != null && !this.getClass().isAssignableFrom(possiblePrey.getClass())
+                && canEat(possiblePrey); //TODO: Add a check to stop non-flying dinosaurs from looking for flying ones
     }
 }

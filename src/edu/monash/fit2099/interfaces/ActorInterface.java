@@ -15,4 +15,10 @@ public interface ActorInterface {
     Boolean isHealthy();
 
     int getHP();
+
+    /**
+     * A way to separate flying Actors from non-flying ones. Stops non-flying dinos being able to attack flying ones.
+     * @return true if flying, false if not.
+     */
+    Boolean isFlying();
 }

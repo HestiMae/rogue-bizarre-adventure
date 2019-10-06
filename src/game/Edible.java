@@ -3,8 +3,8 @@ package game;
 public interface Edible
 {
     /**
-     * Gets the number of hunger points restored when eaten
-     * @return the number of hunger points restored when eaterd
+     * Gets the number of metabolise points restored when eaten
+     * @return the number of metabolise points restored when eaterd
      */
     int getFoodValue();
 

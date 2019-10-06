@@ -22,7 +22,7 @@ public class HerbivoreFood extends Item implements Sellable, Edible
     @Override
     public int getFoodValue()
     {
-        return FOOD_VALUE; // Max hunger level for herbivore currently is 50
+        return FOOD_VALUE; // Max metabolise level for herbivore currently is 50
     }
 
     @Override
