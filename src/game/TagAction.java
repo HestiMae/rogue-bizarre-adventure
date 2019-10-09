@@ -41,7 +41,7 @@ public class TagAction extends Action
 
     /**
      * Executes the tag action which consumes a tag from the actor's inventory and sells the target for its associated
-     * value. Can only be completed if the player is holding a tag and the dinosaur is healthy and not hungry.
+     * value. Can only be completed if the player is holding a tag and the dinosaur is healthy and full.
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return String to be displayed based on the outcome of the action
@@ -49,7 +49,7 @@ public class TagAction extends Action
     @Override
     public String execute(Actor actor, GameMap map)
     {
-        if (getTag(actor) && target.isHealthy() && !target.isHungry())
+        if (target.isHealthy() && target.isFull() && getTag(actor))
         {
             map.removeActor(target);
             ((Player) actor).addMoney(target.getValue());

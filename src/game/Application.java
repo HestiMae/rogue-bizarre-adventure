@@ -18,7 +18,7 @@ public class Application {
 		ZaWarudo world = new ZaWarudo(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(), new Grass());
-		//TODO: Add another map.
+		
 		List<String> map = Arrays.asList(
 		"................................................................................",
 		"................................................................................",
@@ -50,18 +50,13 @@ public class Application {
 
 		gameMap.at(0,0).setGround(new Shop());
 		
-		Actor player = new Player("Anne", '@', 100);
-		world.addPlayer(player, gameMap.at(9, 4));
+		Actor player = new Player("Player", '@', 100);
+		world.addPlayer(player, gameMap.at(1, 0));
 		
 		// Place a pair of protoceratops in the middle of the map
-		gameMap.at(20, 6).addActor(new Protoceratops("Horus the Protoceratops"));
-		gameMap.at(60, 6).addActor(new Protoceratops("Osiris the Protoceratops"));
-		gameMap.at(40, 10).addActor(new Protoceratops("Death the Protoceratops"));
-		gameMap.at(0, 20).addActor(new Protoceratops("Sun the Protoceratops"));
-
-		gameMap.at(30, 5).addActor(new Velociraptor("Star the Velociraptor"));
-		gameMap.at(30, 20).addActor(new Velociraptor("Red the Velociraptor"));
-
+		gameMap.at(2, 0).addActor(new Protoceratops("Iggy the Protoceratops"));
+		gameMap.at(21, 6).addActor(new Protoceratops("Horus the Protoceratops"));
+		gameMap.at(22, 6).addActor(new Velociraptor("Velociraptor"));
 		world.run();
 	}
 }
