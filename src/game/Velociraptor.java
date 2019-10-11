@@ -17,6 +17,7 @@ public class Velociraptor extends Dinosaur
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 2000; //The monetary value of a velociraptor
     private static final int FOOD_VALUE = 10; //the food value of a velociraptor
+    private static final int EGG_COST = 1000; //the cost of a velociraptor egg
 
 
     /**
@@ -25,7 +26,7 @@ public class Velociraptor extends Dinosaur
      */
     public Velociraptor(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
         diet.add(FoodType.MEAT);
         this.foodLevel = START_HUNGER_LEVEL;
         addSkill(PassableTerrain.LAND);
@@ -41,7 +42,7 @@ public class Velociraptor extends Dinosaur
         age(ADULT_AGE);
         metabolise(HUNGER_LOSS);
         starve(HUNGER_DAMAGE);
-        display.println(hungerStatus(HUNGER_THRESHOLD));
+        hungerStatus(HUNGER_THRESHOLD, display);
         return super.playTurn(actions, lastAction, map, display);
     }
 

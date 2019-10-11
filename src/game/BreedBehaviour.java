@@ -15,7 +15,7 @@ public class BreedBehaviour extends Action implements Behaviour
     private Random rand;
     private static final float BREED_CHANCE = 0.1f; //Chance to breed. Higher means greater chance
     private Dinosaur parent; //the parent Dinosaur who will breed
-    private int childCount = 0;
+    private int childCount = 0; //the number of children this dinosaur has had.
 
     /**
      * Simple constructor

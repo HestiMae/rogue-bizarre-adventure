@@ -15,19 +15,6 @@ public class Egg extends Item implements Edible, Sellable
     private static final boolean PORTABLE = true; //Eggs can be picked up
     private static char DISPLAY_CHAR = 'o'; //display character for eggs
 
-    /***
-     * Constructor.
-     *  @param name the name of this copyItem
-     * @param type the type of dinosaur this egg will hatch into
-     * @param hatchTime the amount of time the egg will take to hatch
-     */
-    public Egg(String name, Dinosaur type, int hatchTime)
-    {
-        super("egg", DISPLAY_CHAR, PORTABLE);
-        this.type = type;
-        this.hatchTime = hatchTime;
-        this.age = 0;
-    }
 
     /**
      * Simple constructor taking only a type as all other parameters are shared between instances
@@ -82,12 +69,12 @@ public class Egg extends Item implements Edible, Sellable
     @Override
     public int getValue()
     {
-        return 10;
+        return type.getEggValue();
     }
 
     @Override
     public Item copyItem()
     {
-        return new Egg(this.name, type.copyDinosaur(), this.hatchTime);
+        return new Egg(type.copyDinosaur());
     }
 }

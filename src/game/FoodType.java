@@ -6,5 +6,6 @@ package game;
 public enum FoodType
 {
     PLANT,
-    MEAT
+    MEAT,
+    MARINE
 }
