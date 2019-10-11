@@ -100,7 +100,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      *
      * @param adultAge the age the dinosaur reaches adulthood.
      */
-    protected void age(int adultAge)
+    void age(int adultAge)
     {
         this.age++;
         if (age == adultAge)
@@ -114,7 +114,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      *
      * @param hungerLoss the amount of foodlevel to lose per turn
      */
-    protected void metabolise(int hungerLoss)
+    void metabolise(int hungerLoss)
     {
         lastTurnFoodLevel = this.foodLevel;
         if (this.foodLevel > 0)
@@ -124,10 +124,9 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     }
 
     /**
-     * A string descriptor to alert the player if a Dinosaur is hungry
+     * Prints a string descriptor to alert the player if a Dinosaur is hungry
      *
      * @param hungryTime the metabolise level to start warning the player at
-     * @return a String alerting the player to the hunger level of their dinosaurs
      */
     void hungerStatus(int hungryTime, Display display)
     {
@@ -241,11 +240,16 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
 
     protected boolean canHunt(Actor possiblePrey)
     {
-        return possiblePrey != null && !this.getClass().isAssignableFrom(possiblePrey.getClass()) //TODO: Flying vs non-flying
-                && canEat(possiblePrey);
+        boolean flyingCheck = true;
+        if (!this.isFlying() && possiblePrey.isFlying())
+        {
+            flyingCheck = false;
+        }
+        return possiblePrey != null && !this.getClass().isAssignableFrom(possiblePrey.getClass())
+                && canEat(possiblePrey) && flyingCheck;
     }
 
-    public int getEggValue() //gets the value of an egg for a dinosaur
+    public int getEggValue()
     {
         return eggValue;
     }

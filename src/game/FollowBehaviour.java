@@ -12,7 +12,6 @@ import java.util.function.Predicate;
  */
 public class FollowBehaviour<ActorType extends Actor> implements Behaviour
 {
-    //TODO: Can we search only one kind of terrain..?
 
     private List<Actor> targets = new ArrayList<>();
     private Predicate<ActorType> performsBehaviour;
