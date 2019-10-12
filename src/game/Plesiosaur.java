@@ -19,13 +19,16 @@ public class Plesiosaur extends Dinosaur
     private static final int HUNGER_LOSS = 2; //the metabolise level loss per turn
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 10000; //The monetary value of a plesiosaur
+    private static final int EGG_COST = 10000; //the cost of a plesiosaur egg
     private static final int FOOD_VALUE = 30; //the food value of a plesiosaur
-    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the plesiosaur can travel through
+
+    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.WATER; //terrain type the plesiosaur can lay eggs on
 
 
     public Plesiosaur(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
+        diet.add(FoodType.MARINE);
         diet.add(FoodType.MEAT);
         this.foodLevel = START_HUNGER_LEVEL;
         addSkill(PassableTerrain.WATER);
@@ -43,7 +46,7 @@ public class Plesiosaur extends Dinosaur
         age(ADULT_AGE);
         metabolise(HUNGER_LOSS);
         starve(HUNGER_DAMAGE);
-        display.println(hungerStatus(HUNGER_THRESHOLD));
+        hungerStatus(HUNGER_THRESHOLD, display);
         return super.playTurn(actions, lastAction, map, display);
     }
 

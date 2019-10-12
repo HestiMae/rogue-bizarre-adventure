@@ -18,6 +18,7 @@ public class Velociraptor extends Dinosaur
     private static final int COST = 2000; //The monetary value of a velociraptor
     private static final int FOOD_VALUE = 10; //the food value of a velociraptor
     private static final int EGG_COST = 1000; //the cost of a velociraptor egg
+    private static PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //the type of terrain the velociraptor can lay eggs on
 
 
     /**
@@ -87,6 +88,10 @@ public class Velociraptor extends Dinosaur
     {
         return this.foodLevel <= HUNGRY_AT_LEVEL;
     }
+
+    @Override
+    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
+
 
     @Override
     public int getValue()

@@ -20,7 +20,8 @@ public class TyrannosaurusRex extends Dinosaur
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 2000; //The monetary value of a tyrannosaurus rex
     private static final int FOOD_VALUE = 10; //the food value of a tyrannosaurus rex
-    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the tyrannosaurus rex can travel through
+    private static final int EGG_COST = 100000; //the cost of a tyrannosaurus rex egg
+    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the tyrannosaurus rex can lay eggs on
 
 
     /**
@@ -29,7 +30,7 @@ public class TyrannosaurusRex extends Dinosaur
      */
     public TyrannosaurusRex(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
         diet.add(FoodType.MEAT);
         this.foodLevel = START_HUNGER_LEVEL;
         addSkill(PassableTerrain.LAND);
@@ -45,7 +46,7 @@ public class TyrannosaurusRex extends Dinosaur
         age(ADULT_AGE);
         metabolise(HUNGER_LOSS);
         starve(HUNGER_DAMAGE);
-        display.println(hungerStatus(HUNGER_THRESHOLD));
+        hungerStatus(HUNGER_THRESHOLD, display);
         return super.playTurn(actions, lastAction, map, display);
     }
 

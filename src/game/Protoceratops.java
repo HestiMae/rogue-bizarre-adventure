@@ -25,6 +25,7 @@ public class Protoceratops extends Dinosaur
     private static final int COST = 100; //The monetary value of a protoceratops
     private static final int FOOD_VALUE = 30; //the food value of a protoceratops
     private static final int EGG_COST = 10; //the cost of a protoceratops egg
+    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the protoceratops can lay eggs on
 
 
     /**
@@ -101,6 +102,9 @@ public class Protoceratops extends Dinosaur
     {
         return this.foodLevel < HUNGRY_AT_LEVEL;
     }
+
+    @Override
+    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
 
     @Override
     public int getValue()
