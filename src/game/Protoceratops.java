@@ -24,6 +24,7 @@ public class Protoceratops extends Dinosaur
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 100; //The monetary value of a protoceratops
     private static final int FOOD_VALUE = 30; //the food value of a protoceratops
+    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the protoceratops can travel through
 
 
     /**
@@ -54,11 +55,6 @@ public class Protoceratops extends Dinosaur
         return super.playTurn(actions, lastAction, map, display);
     }
 
-    public static int getBreedHunger()
-    {
-        return BREED_HUNGER;
-    }
-
     @Override
     Dinosaur copyDinosaur()
     {
@@ -69,6 +65,11 @@ public class Protoceratops extends Dinosaur
     Dinosaur copyDinosaur(String nameExtension)
     {
         return new Protoceratops(this.name + nameExtension);
+    }
+
+    public static int getBreedHunger()
+    {
+        return BREED_HUNGER;
     }
 
     @Override
@@ -124,4 +125,7 @@ public class Protoceratops extends Dinosaur
     {
         return false;
     }
+
+    @Override
+    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
 }

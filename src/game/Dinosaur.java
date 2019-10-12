@@ -173,10 +173,10 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     public abstract boolean isHungry();
 
     /**
-     * Gets the type of terrain that the dinosaur can travel on
+     * Gets the type of terrain that the dinosaur lays its eggs on
      * @return enum for terrain type
      */
-    public abstract PassableTerrain getTerrainType();
+    public abstract PassableTerrain getEggTerrain();
 
     /**
      * Hurts the dinosaur for every turn it is at 0 foodlevel.

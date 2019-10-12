@@ -20,7 +20,7 @@ public class TyrannosaurusRex extends Dinosaur
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 2000; //The monetary value of a tyrannosaurus rex
     private static final int FOOD_VALUE = 10; //the food value of a tyrannosaurus rex
-    private static final PassableTerrain TERRAIN_TYPE = PassableTerrain.LAND; //terrain type the tyrannosaurus rex can travel through
+    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the tyrannosaurus rex can travel through
 
 
     /**
@@ -116,5 +116,5 @@ public class TyrannosaurusRex extends Dinosaur
     }
 
     @Override
-    public PassableTerrain getTerrainType() { return TERRAIN_TYPE; }
+    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
 }

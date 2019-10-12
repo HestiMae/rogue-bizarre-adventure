@@ -12,6 +12,7 @@ public class Egg extends Item implements Edible, Sellable
     private Dinosaur type; //the type of Dinosaur
     private int hatchTime; //the time the Egg will take to hatch
     private int age; //the current age in turns of the Egg
+    private PassableTerrain terrainType; //the type of terrain the egg is supposed to be on
     private static final boolean PORTABLE = true; //Eggs can be picked up
     private static char DISPLAY_CHAR = 'o'; //display character for eggs
 
@@ -37,7 +38,7 @@ public class Egg extends Item implements Edible, Sellable
     {
         super(type.dinoType() + " Egg", DISPLAY_CHAR, PORTABLE);
         this.type = type;
-
+        this.terrainType = type.getEggTerrain();
         this.hatchTime = type.getHatchTime();
         this.age = 0;
     }

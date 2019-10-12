@@ -17,6 +17,7 @@ public class Velociraptor extends Dinosaur
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 2000; //The monetary value of a velociraptor
     private static final int FOOD_VALUE = 10; //the food value of a velociraptor
+    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the velociraptor can travel through
 
 
     /**
@@ -110,4 +111,7 @@ public class Velociraptor extends Dinosaur
     {
         return false;
     }
+
+    @Override
+    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
 }

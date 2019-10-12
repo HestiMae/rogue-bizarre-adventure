@@ -20,7 +20,7 @@ public class Plesiosaur extends Dinosaur
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 10000; //The monetary value of a plesiosaur
     private static final int FOOD_VALUE = 30; //the food value of a plesiosaur
-    private static final PassableTerrain TERRAIN_TYPE = PassableTerrain.LAND; //terrain type the plesiosaur can travel through
+    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the plesiosaur can travel through
 
 
     public Plesiosaur(String name)
@@ -114,5 +114,5 @@ public class Plesiosaur extends Dinosaur
     }
 
     @Override
-    public PassableTerrain getTerrainType() { return TERRAIN_TYPE; }
+    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
 }
