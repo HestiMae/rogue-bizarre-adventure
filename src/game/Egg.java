@@ -1,5 +1,6 @@
 package game;
 
+import edu.monash.fit2099.engine.Exit;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 
@@ -41,8 +42,31 @@ public class Egg extends Item implements Edible, Sellable
         }
         else if (age >= hatchTime && !(currentLocation.map().isAnActorAt(currentLocation))) //ensures an actor isn't at the Egg's location
         {
-            currentLocation.addActor(hatch());
-            currentLocation.removeItem(this);
+            if (this.terrainType == PassableTerrain.LAND) //if the egg is a land egg
+            {
+                currentLocation.addActor(hatch());
+                currentLocation.removeItem(this);
+            }
+            else if (this.terrainType == PassableTerrain.WATER) // if the egg is a water egg
+            {
+                if (currentLocation.getGround().hasSkill(PassableTerrain.WATER))
+                {
+                    currentLocation.addActor(hatch());
+                    currentLocation.removeItem(this);
+                }
+                else // check if any space around the egg is water and there is no actor at the location to hatch
+                {
+                    for (Exit exit: currentLocation.getExits())
+                    {
+                        Location exitLocation = exit.getDestination();
+                        if (exitLocation.getGround().hasSkill(PassableTerrain.WATER) && !(exitLocation.map().isAnActorAt(exitLocation)))
+                        {
+                            exitLocation.addActor(hatch());
+                            currentLocation.removeItem(this);
+                        }
+                    }
+                }
+            }
         }
     }
 
