@@ -20,6 +20,7 @@ public class Pteranodon extends Dinosaur
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 20000; //The monetary value of a pteranodon
     private static final int FOOD_VALUE = 30; //the food value of a pteranodon
+    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //the type of land pteranodons lay eggs on
     private static final int EGG_COST = 10000; //the cost of a pteranodons egg
 
     /**
@@ -96,6 +97,8 @@ public class Pteranodon extends Dinosaur
         return this.foodLevel < HUNGRY_AT_LEVEL;
     }
 
+    @Override
+    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
 
     @Override
     public Boolean isFlying()

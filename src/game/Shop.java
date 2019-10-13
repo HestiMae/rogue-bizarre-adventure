@@ -25,6 +25,8 @@ public class Shop extends Ground
         items.add(new CarnivoreFood());
         items.add(new HerbivoreFood());
         items.add(new Egg(new Velociraptor("Velociraptor")));
+        items.add(new Egg(new Plesiosaur("Plesiosaur")));
+        items.add(new Egg(new TyrannosaurusRex("Tyrannosaurus Rex")));
         items.add(new SellableWeapon("Basic Sword", '/', 10, "slashes", 50));
     }
 

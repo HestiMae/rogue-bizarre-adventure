@@ -7,8 +7,8 @@ import edu.monash.fit2099.engine.GameMap;
 
 public class Plesiosaur extends Dinosaur
 {
-    private static final int HIT_POINTS = 200; //max HP for plesiosaur
-    private static final char DISPLAY_CHAR = 'P'; //display character for plesiosaur
+    private static final int HIT_POINTS = 75; //max HP for plesiosaur
+    private static final char DISPLAY_CHAR = '?'; //display character for plesiosaur
     private static final int ADULT_AGE = 20; //the age in turns baby plesiosaur will become adults
     private static final int MAX_HUNGER = 50; //the max metabolise level for plesiosaur
     private static final int HUNGRY_AT_LEVEL = MAX_HUNGER - 10;
@@ -18,13 +18,16 @@ public class Plesiosaur extends Dinosaur
     private static final int HUNGER_THRESHOLD = 20; //the metabolise level when the dinosaur is considered "hungry" - players are warned once it reaches this level
     private static final int HUNGER_LOSS = 2; //the metabolise level loss per turn
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
-    private static final int COST = 10000; //The monetary value of a plesiosaur
+    private static final int COST = 20000; //The monetary value of a plesiosaur
     private static final int EGG_COST = 10000; //the cost of a plesiosaur egg
     private static final int FOOD_VALUE = 30; //the food value of a plesiosaur
-
     private static final PassableTerrain EGG_TERRAIN = PassableTerrain.WATER; //terrain type the plesiosaur can lay eggs on
 
 
+    /**
+     * Constructor for plesiosaur
+     * @param name Name of the plesiosaur
+     */
     public Plesiosaur(String name)
     {
         super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
