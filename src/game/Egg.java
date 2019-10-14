@@ -20,6 +20,7 @@ public class Egg extends Item implements Edible, Sellable
 
     /**
      * Simple constructor taking only a type as all other parameters are shared between instances
+     *
      * @param type the type of Dinosaur
      */
     public Egg(Dinosaur type)
@@ -36,47 +37,27 @@ public class Egg extends Item implements Edible, Sellable
     {
         super.tick(currentLocation);
         age++;
-        if (age == hatchTime/2)
+        if (age == hatchTime / 2)
         {
             displayChar = 'O';
-        }
-        else if (age >= hatchTime && !(currentLocation.map().isAnActorAt(currentLocation))) //ensures an actor isn't at the Egg's location
+        } else if (age >= hatchTime && !(currentLocation.map().isAnActorAt(currentLocation))) //ensures an actor isn't at the Egg's location
         {
-            if (this.terrainType == PassableTerrain.LAND) //if the egg is a land egg
-            {
-                currentLocation.addActor(hatch());
-                currentLocation.removeItem(this);
-            }
-            else if (this.terrainType == PassableTerrain.WATER) // if the egg is a water egg
-            {
-                if (currentLocation.getGround().hasSkill(PassableTerrain.WATER))
-                {
-                    currentLocation.addActor(hatch());
-                    currentLocation.removeItem(this);
-                }
-                else // check if any space around the egg is water and there is no actor at the location to hatch
-                {
-                    for (Exit exit: currentLocation.getExits())
-                    {
-                        Location exitLocation = exit.getDestination();
-                        if (exitLocation.getGround().hasSkill(PassableTerrain.WATER) && !(exitLocation.map().isAnActorAt(exitLocation)))
-                        {
-                            exitLocation.addActor(hatch());
-                            currentLocation.removeItem(this);
-                        }
-                    }
-                }
-            }
+            hatch(currentLocation);
         }
     }
 
     /**
      * Returns the Dinosaur object used as the type to allow it to be placed on the map
+     *
      * @return a Dinosaur object
      */
-    private Dinosaur hatch()
+    private Dinosaur hatch(Location currentLocation)
     {
-        return type;
+        if (currentLocation.getGround().hasSkill(terrainType) || currentLocation.getExits().stream().anyMatch(exit -> exit.getDestination().getGround().hasSkill(terrainType)))
+        {
+            return type;
+        }
+        return null;
     }
 
     @Override

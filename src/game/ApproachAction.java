@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.*;
  */
 public class ApproachAction extends Action
 {
+    //TODO: ApproachActions that move more than one space at a time?
     private Location end;
     private String direction;
 

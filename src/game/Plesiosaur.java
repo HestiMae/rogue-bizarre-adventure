@@ -37,9 +37,9 @@ public class Plesiosaur extends Dinosaur
         addSkill(PassableTerrain.WATER);
         behaviours.add(new EatBehaviour(this, diet));
         behaviours.add(new FollowBehaviour<Dinosaur>(this, Dinosaur::isHungry,
-                Dinosaur::canEat,
-                (dinosaur, actor) -> false,
-                Dinosaur::canEat));
+                (dinosaur, ground) -> false,
+                Dinosaur::canHunt,
+                (Dinosaur::canEat)));
         behaviours.add(new WanderBehaviour());
     }
 

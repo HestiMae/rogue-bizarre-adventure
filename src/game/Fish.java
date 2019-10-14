@@ -37,6 +37,6 @@ public class Fish extends SimpleCreature
     @Override
     public FoodType getFoodType()
     {
-        return FoodType.MEAT;
+        return FoodType.MARINE;
     }
 }

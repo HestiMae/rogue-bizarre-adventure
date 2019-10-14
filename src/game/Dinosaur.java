@@ -10,6 +10,7 @@ import java.util.List;
  */
 public abstract class Dinosaur extends Actor implements Sellable, Edible
 {
+    //TODO: make sure all Dinosaurs weapons make sense (no more dinosaur punching..)
     private static final int HUNGER_HEAL = 20; //the amount of health to heal a dinosaur when its metabolise is full
     private int age; //the age of the Dinosaur in turns
     List<Behaviour> behaviours; //a list of possible behaviours

@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 
-public class TyrannosaurusRex extends Dinosaur
+public class TRex extends Dinosaur
 {
     private static final int HIT_POINTS = 500; //max HP for tyrannosaurus rex
     private static final char DISPLAY_CHAR = 'T'; //display character for tyrannosaurus rex
@@ -28,7 +28,7 @@ public class TyrannosaurusRex extends Dinosaur
      * Constructor.
      * @param name the name of the Trex
      */
-    public TyrannosaurusRex(String name)
+    public TRex(String name)
     {
         super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
         diet.add(FoodType.MEAT);
@@ -53,13 +53,13 @@ public class TyrannosaurusRex extends Dinosaur
     @Override
     Dinosaur copyDinosaur()
     {
-        return new TyrannosaurusRex(this.name);
+        return new TRex(this.name);
     }
 
     @Override
     Dinosaur copyDinosaur(String nameExtension)
     {
-        return new TyrannosaurusRex(this.name + nameExtension);
+        return new TRex(this.name + nameExtension);
     }
 
     @Override
