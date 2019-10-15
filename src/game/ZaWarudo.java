@@ -84,7 +84,7 @@ public class ZaWarudo extends World
     }
 
     void connectMaps(GameMap map1, GameMap map2) //attaches 2 maps together, map2 goes on top of map1 in this way.
-    {
+    { //TODO: Make a method that creates the exits to avoid duplication
         for (Integer i : map1.getXRange())
         {
 

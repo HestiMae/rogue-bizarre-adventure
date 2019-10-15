@@ -16,6 +16,7 @@ public class Egg extends Item implements Edible, Sellable
     private PassableTerrain terrainType; //the type of terrain the egg is supposed to be on
     private static final boolean PORTABLE = true; //Eggs can be picked up
     private static char DISPLAY_CHAR = 'o'; //display character for eggs
+    //TODO: ditch Skills - no way to iterate through/get a skill.
 
 
     /**

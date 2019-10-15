@@ -26,7 +26,7 @@ public class RadialAttackAction extends Action
         StringBuilder outString = new StringBuilder();
         for (Actor target : targets)
         {
-            outString.append(new AttackAction(target).execute(actor, map));
+            outString.append(new AttackAction(target).execute(actor, map)).append("\n");
         }
         return outString.toString();
     }

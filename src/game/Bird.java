@@ -38,6 +38,6 @@ public class Bird extends SimpleCreature
     @Override
     public FoodType getFoodType()
     {
-        return FoodType.MEAT;
+        return FoodType.FLYING;
     }
 }

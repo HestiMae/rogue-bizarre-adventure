@@ -7,5 +7,6 @@ public enum FoodType
 {
     PLANT,
     MEAT,
-    MARINE
+    MARINE,
+    FLYING
 }

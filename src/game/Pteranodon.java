@@ -34,6 +34,7 @@ public class Pteranodon extends Dinosaur
         super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
         diet.add(FoodType.MARINE);
         diet.add(FoodType.MEAT);
+        diet.add(FoodType.FLYING);
         this.foodLevel = START_HUNGER_LEVEL;
         addSkill(PassableTerrain.LAND);
         addSkill(PassableTerrain.WATER);
@@ -47,7 +48,7 @@ public class Pteranodon extends Dinosaur
 
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
-    {
+    { //TODO: tidy up playTurn actions that are common to different dinosaurs.
         age(ADULT_AGE);
         metabolise(HUNGER_LOSS);
         starve(HUNGER_DAMAGE);
@@ -115,7 +116,7 @@ public class Pteranodon extends Dinosaur
     @Override
     public FoodType getFoodType()
     {
-        return FoodType.MEAT;
+        return FoodType.FLYING;
     }
 
     @Override

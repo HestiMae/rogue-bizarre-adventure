@@ -1,5 +1,6 @@
 package edu.monash.fit2099.interfaces;
 
+import edu.monash.fit2099.engine.Skills;
 import game.Sellable;
 
 /**
