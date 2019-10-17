@@ -42,6 +42,8 @@ public class Shop extends Ground
      * Generates all the possible SellActions from the items in the actor's inventory which can be sold and all the
      * BuyActions for all the items the actor is able to purchase.
      * @param actor Actor interacting with the shop
+     * @param location location of the actor
+     * @param Direction direction of the actor
      * @return collection of allowable actions the actor can perform on the shop
      */
     @Override
