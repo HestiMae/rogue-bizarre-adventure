@@ -35,14 +35,19 @@ public class BuildAction extends Action
     {
         String oldGround = location.getGround().getName();
         location.setGround(ground);
+        // PERHAPS FIND A BETTER WAY TO ADD TELEPORTER LOCATIONS IF POSSIBLE
+        if (ground instanceof Teleporter)
+        {
+            ((Teleporter) ground).addTeleporter(location);
+        }
         return (!(ground instanceof Dirt)? "Player builds a " + ground.getName() : "Player destroys the " + oldGround)
-                + " to the " + direction + " at: (" + location.x() + ", " + location.y() + ")"; //Uses the ternary operator to decide which String to return
+                + " " + direction + " at: (" + location.x() + ", " + location.y() + ")"; //Uses the ternary operator to decide which String to return
     }
 
     @Override
     public String menuDescription(Actor actor)
     {
-        return (!(ground instanceof Dirt)? "Build a " + ground.getName() : "Destroy the " + location.getGround().getName()) + " to the " + direction + " at: (" + location.x() + ", " + location.y() + ")";
+        return (!(ground instanceof Dirt)? "Build a " + ground.getName() : "Destroy the " + location.getGround().getName()) + " " + direction + " at: (" + location.x() + ", " + location.y() + ")";
         //Uses the ternary operator to decide which String to return.
     }
 }

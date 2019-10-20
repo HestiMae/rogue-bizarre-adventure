@@ -10,17 +10,14 @@ import edu.monash.fit2099.engine.Location;
  */
 public class TeleportAction extends Action
 {
-    Actor actor;
     Location location;
 
     /**
      * constructor
-     * @param actor actor to be teleported
      * @param location location to teleport to
      */
-    public TeleportAction(Actor actor, Location location)
+    public TeleportAction(Location location)
     {
-        this.actor = actor;
         this.location = location;
     }
 
@@ -33,9 +30,13 @@ public class TeleportAction extends Action
     @Override
     public String execute(Actor actor, GameMap map)
     {
-        Location actorLocation = map.locationOf(actor);
-        map.moveActor(actor, this.location);
-        return actor + " teleported from " + actorLocation + " to " + "(" + location.x() + location.y() + ")";
+        if (!(location.map().isAnActorAt(location)))
+        {
+            Location actorLocation = map.locationOf(actor);
+            map.moveActor(actor, this.location);
+            return actor + " teleported from " + actorLocation + " to " + "(" + location.x() + "," + location.y() + ")";
+        }
+        return "There ia already another actor at " + "(" + location.x() + "," + location.y() + ")";
     }
 
     /**
@@ -46,6 +47,6 @@ public class TeleportAction extends Action
     @Override
     public String menuDescription(Actor actor)
     {
-        return "teleport to " + "(" + location.x() + location.y() + ")";
+        return actor + " teleport to " + "(" + location.x() + "," + location.y() + ")";
     }
 }

@@ -247,13 +247,13 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
 
     protected boolean canHunt(Actor possiblePrey)
     {
-        boolean flyingCheck = true;
-        if (!this.isFlying() && possiblePrey.isFlying())
-        {
-            flyingCheck = false;
-        }
+//        boolean flyingCheck = true;
+//        if (!this.isFlying() && possiblePrey.isFlying())
+//        {
+//            flyingCheck = false;
+//        }
         return possiblePrey != null && !this.getClass().isAssignableFrom(possiblePrey.getClass())
-                && canEat(possiblePrey) && flyingCheck;
+                && canEat(possiblePrey); //&& flyingCheck;
     }
 
     public int getEggValue()

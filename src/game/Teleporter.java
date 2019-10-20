@@ -22,7 +22,6 @@ public class Teleporter extends Ground
      */
     public Teleporter(Location location) {
         super('=');
-        this.locations.add(location);
         this.location = location;
     }
 
@@ -46,14 +45,19 @@ public class Teleporter extends Ground
         Actions actions = new Actions();
 
         // From one teleporter, all other teleporters should be accessible
-        for (Location teleporter: locations)
+        for (Location teleporter: this.locations)
         {
-            if (teleporter != this.location)
+            if (!teleporter.equals(this.location))
             {
-                actions.add(new TeleportAction(actor, teleporter));
+                actions.add(new TeleportAction(teleporter));
             }
         }
 
         return actions;
+    }
+
+    public void addTeleporter(Location location)
+    {
+        this.locations.add(location);
     }
 }
