@@ -19,7 +19,7 @@ public class DIO extends Enemy
     public DIO(String name, Actor player)
     {
         super(name, DISPLAY_CHAR, HITPOINTS, player);
-        Stand stand = new Stand("The World", 'W', STANDDAMAGE, "Muda Muda Muda");
+        Stand stand = new Stand("The World", 'W', STANDDAMAGE, "Muda Muda Muda", 1000, 1, WeaponType.MELEE);
         inventory.add(stand);
     }
 
@@ -29,14 +29,7 @@ public class DIO extends Enemy
         turnsAlive++;
         if (turnsAlive < LIFETIME)
         {
-            for (Behaviour b : behaviours)
-            {
-                Action outAction = b.getAction(this, map);
-                if (outAction != null)
-                {
-                    return outAction;
-                }
-            }
+            super.playTurn(actions, lastAction, map, display);
         }
         else
         {
@@ -49,11 +42,5 @@ public class DIO extends Enemy
     public Boolean isHealthy()
     {
         return hitPoints == maxHitPoints;
-    }
-
-    @Override
-    public Boolean isFlying()
-    {
-        return false;
     }
 }

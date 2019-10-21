@@ -111,11 +111,5 @@ public class TRex extends Dinosaur
     }
 
     @Override
-    public Boolean isFlying()
-    {
-        return false;
-    }
-
-    @Override
     public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
 }

@@ -240,6 +240,18 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
         return hitPoints;
     }
 
+    @Override
+    public void addBehaviour(Behaviour behaviour)
+    {
+        behaviours.add(behaviour);
+    }
+
+    @Override
+    public boolean hasBehaviour(Behaviour behaviour)
+    {
+        return behaviours.stream().anyMatch(behaviour1 -> behaviour.getClass().equals(behaviour1.getClass()));
+    }
+
     protected boolean canEat(Object possibleEdible)
     {
         return possibleEdible instanceof Edible && this.diet.contains(((Edible) possibleEdible).getFoodType());
@@ -247,13 +259,8 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
 
     protected boolean canHunt(Actor possiblePrey)
     {
-//        boolean flyingCheck = true;
-//        if (!this.isFlying() && possiblePrey.isFlying())
-//        {
-//            flyingCheck = false;
-//        }
         return possiblePrey != null && !this.getClass().isAssignableFrom(possiblePrey.getClass())
-                && canEat(possiblePrey); //&& flyingCheck;
+                && canEat(possiblePrey);
     }
 
     public int getEggValue()

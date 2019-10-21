@@ -1,11 +1,11 @@
 package game;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.Menu;
+import edu.monash.fit2099.engine.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Class representing the Player.
@@ -14,7 +14,8 @@ public class Player extends Actor
 {
 
 	private Menu menu = new Menu(); //displays the list of options for the player
-	private int wallet = 50; //the players wallet. We decided to put it here and require some downcasts instead of giving all actors wallets (that just seems silly, if you ask me)
+	private int wallet = 5000; //the players wallet. We decided to put it here and require some downcasts instead of giving all actors wallets (that just seems silly, if you ask me)
+	private List<Behaviour> behaviours = new ArrayList<>();
 
 	/**
 	 * Constructor.
@@ -26,6 +27,8 @@ public class Player extends Actor
 	{
 		super(name, displayChar, hitPoints);
 		addSkill(PassableTerrain.LAND);
+		behaviours.add(new RangedBehaviour());
+		inventory.add(new Stand("Magician's Red", '*', 50, "Crossfire Hurricane", 10000, 20, WeaponType.RANGED));
 	}
 
 	/**
@@ -42,7 +45,15 @@ public class Player extends Actor
 	{
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
+		{
 			return lastAction.getNextAction();
+		}
+		if (behaviours.stream().anyMatch(behaviour -> behaviour instanceof ActionQuestBehaviour))
+		{
+			behaviours.stream().filter(behaviour -> behaviour instanceof ActionQuestBehaviour)
+					.forEach(behaviour -> ((ActionQuestBehaviour) behaviour).setLastAction(lastAction)); //Gives action based quests the last action completed.
+		}
+		behaviours.stream().map(behaviour -> behaviour.getAllActions(this, map)).filter(Objects::nonNull).forEach(actions::add);
 		return menu.showMenu(this, actions, display);
 	}
 
@@ -89,9 +100,15 @@ public class Player extends Actor
 		return hitPoints;
 	}
 
+    @Override
+    public void addBehaviour(Behaviour behaviour)
+    {
+        behaviours.add(behaviour);
+    }
+
 	@Override
-	public Boolean isFlying()
+	public boolean hasBehaviour(Behaviour behaviour)
 	{
-		return false;
+		return behaviours.stream().anyMatch(behaviour1 -> behaviour.getClass().equals(behaviour1.getClass()));
 	}
 }

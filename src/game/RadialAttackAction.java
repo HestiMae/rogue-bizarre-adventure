@@ -1,32 +1,33 @@
 package game;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Exit;
-import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.*;
 
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class RadialAttackAction extends Action
 {
-    private List<Actor> targets;
+    private Weapon weapon;
     /**
      * Constructor.
      *
-     * @param targets the Actors to attack
+     * @param weapon the weapon to attack with
      */
-    public RadialAttackAction(List<Actor> targets)
+    public RadialAttackAction(Weapon weapon)
     {
-        this.targets = targets;
+        this.weapon = weapon;
     }
 
     @Override
     public String execute(Actor actor, GameMap map)
     {
         StringBuilder outString = new StringBuilder();
-        for (Actor target : targets)
+        for (Exit exit : map.locationOf(actor).getExits())
         {
-            outString.append(new AttackAction(target).execute(actor, map)).append("\n");
+            if (exit.getDestination().containsAnActor())
+            {
+                outString.append(new AttackAction(exit.getDestination().getActor(), weapon).execute(actor, map)).append("\n");
+            }
         }
         return outString.toString();
     }
@@ -34,6 +35,6 @@ public class RadialAttackAction extends Action
     @Override
     public String menuDescription(Actor actor)
     {
-        return null;
+        return "Attack all foes around you";
     }
 }

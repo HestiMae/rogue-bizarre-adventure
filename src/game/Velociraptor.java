@@ -110,10 +110,4 @@ public class Velociraptor extends Dinosaur
     {
         return FoodType.MEAT;
     }
-
-    @Override
-    public Boolean isFlying()
-    {
-        return false;
-    }
 }

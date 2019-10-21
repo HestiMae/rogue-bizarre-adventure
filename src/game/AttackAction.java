@@ -23,6 +23,8 @@ public class AttackAction extends Action {
 	 */
 	private Random rand = new Random();
 
+	private Weapon weapon;
+
 	/**
 	 * Constructor.
 	 * 
@@ -32,10 +34,20 @@ public class AttackAction extends Action {
 		this.target = target;
 	}
 
+	public AttackAction(Actor target, Weapon weapon)
+	{
+		this.target = target;
+		this.weapon = weapon;
+	}
+
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
-		Weapon weapon = actor.getWeapon();
+		//assigns a weapon if it wasn't in the constructor
+		if (weapon == null)
+		{
+			this.weapon = actor.getWeapon();
+		}
 
 		if (rand.nextBoolean()) {
 			return actor + " misses " + target + ".";

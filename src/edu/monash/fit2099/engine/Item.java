@@ -19,9 +19,9 @@ public abstract class Item implements ItemInterface, Printable, Skilled {
 	/***
 	 * Constructor.
 	 * 
-	 * @param name the name of this copyItem
+	 * @param name the name of this item
 	 * @param displayChar the character to use to represent this item if it is on the ground
-	 * @param portable true if and only if the copyItem can be picked up
+	 * @param portable true if and only if the item can be picked up
 	 */
 	public Item(String name, char displayChar, boolean portable) {
 		this.name = name;
@@ -31,17 +31,17 @@ public abstract class Item implements ItemInterface, Printable, Skilled {
 	}
 
     /**
-     * Inform a carried copyItem of the passage of time.
+     * Inform a carried item of the passage of time.
      * 
-     * This method is called once per turn, if the copyItem is being carried.
-     * @param currentLocation The location of the actor carrying this copyItem.
-     * @param actor The actor carrying this copyItem.
+     * This method is called once per turn, if the item is being carried.
+     * @param currentLocation The location of the actor carrying this item.
+     * @param actor The actor carrying this item.
      */
 	public void tick(Location currentLocation, Actor actor) {
 	}
 	
     /**
-     * Inform an copyItem on the ground of the passage of time.
+     * Inform an item on the ground of the passage of time.
      * This method is called once per turn, if the item rests upon the ground.
      * @param currentLocation The location of the ground on which we lie.
      */
@@ -59,10 +59,10 @@ public abstract class Item implements ItemInterface, Printable, Skilled {
 	}
 
 	/**
-	 * Create and return an action to pick this copyItem up.
-	 * If this copyItem is not portable, returns null.
+	 * Create and return an action to pick this item up.
+	 * If this item is not portable, returns null.
 	 * 
-	 * @return a new PickUpItemAction if this copyItem is portable, null otherwise.
+	 * @return a new PickUpItemAction if this item is portable, null otherwise.
 	 */
 	public PickUpItemAction getPickUpAction() {
 		if(portable)
@@ -72,9 +72,9 @@ public abstract class Item implements ItemInterface, Printable, Skilled {
 	}
 
 	/**
-	 * Create and return an action to drop this copyItem.
-	 * If this copyItem is not portable, returns null.
-	 * @return a new DropItemAction if this copyItem is portable, null otherwise.
+	 * Create and return an action to drop this item.
+	 * If this item is not portable, returns null.
+	 * @return a new DropItemAction if this item is portable, null otherwise.
 	 */
 	public DropItemAction getDropAction() {
 		if(portable)
@@ -87,7 +87,7 @@ public abstract class Item implements ItemInterface, Printable, Skilled {
 	 * Getter.
 	 * 
 	 * Returns an unmodifiable copy of the actions list so that calling methods won't
-	 * be able to change what this copyItem can do without the copyItem checking.
+	 * be able to change what this item can do without the item checking.
 	 * @return an unmodifiable list of Actions
 	 */
 	public List<Action> getAllowableActions() {
@@ -96,25 +96,25 @@ public abstract class Item implements ItemInterface, Printable, Skilled {
 
 
 	/**
-	 * Casts this copyItem to a Weapon if possible.
+	 * Casts this item to a Weapon if possible.
 	 * 
-	 * @return a reference to the current copyItem as type Weapon, or null if this copyItem isn't a Weapon
+	 * @return a reference to the current item as type Weapon, or null if this item isn't a Weapon
 	 */
 	public Weapon asWeapon() {
 		return this instanceof Weapon ? (Weapon) this : null;
 	}
 
 	/**
-	 * Does this copyItem have the given Skill?
+	 * Does this item have the given Skill?
 	 * 
-	 * @return true if and only if is copyItem has the given Skill
+	 * @return true if and only if is item has the given Skill
 	 */
 	public boolean hasSkill(Enum<?> skill) {
 		return skills.hasSkill(skill);
 	}
 
 	/**
-	 * Add a Skill to this copyItem.
+	 * Add a Skill to this item.
 	 * 
 	 * @param skill the Skill to add
 	 */
@@ -123,7 +123,7 @@ public abstract class Item implements ItemInterface, Printable, Skilled {
 	}
 
 	/**
-	 * Remove a Skill from this copyItem.
+	 * Remove a Skill from this item.
 	 * 
 	 * @param skill the Skill to remove
 	 */

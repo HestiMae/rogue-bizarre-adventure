@@ -12,6 +12,7 @@ public class Shop extends Ground
 {
 
     private List<Item> items = new ArrayList<>();
+    //TODO: Add some different stuff in here
 
     /**
      * Constructor for shop where actors (player) can buy and sell items, contains a list of all items which are able
@@ -27,7 +28,7 @@ public class Shop extends Ground
         items.add(new Egg(new Velociraptor("Velociraptor")));
         items.add(new Egg(new Plesiosaur("Plesiosaur")));
         items.add(new Egg(new TRex("Tyrannosaurus Rex")));
-        items.add(new SellableWeapon("Basic Sword", '/', 10, "slashes", 50));
+        items.add(new SellableWeapon("Basic Sword", '/', 10, "slashes", 50, 1, WeaponType.MELEE));
         items.add(new TeleporterKit("Teleporter kit"));
     }
 

@@ -80,4 +80,10 @@ public class EatBehaviour extends Action implements Behaviour
     {
         return null;
     }
+
+    @Override
+    public Actions getAllActions(Actor actor, GameMap map)
+    {
+        return new Actions(getAction(actor, map));
+    }
 }

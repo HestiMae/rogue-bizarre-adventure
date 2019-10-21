@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 
@@ -24,4 +25,6 @@ public interface Behaviour {
 	 * @return an Action that actor can perform, or null if actor can't do this.
 	 */
 	Action getAction(Actor actor, GameMap map);
+
+	Actions getAllActions(Actor actor, GameMap map);
 }

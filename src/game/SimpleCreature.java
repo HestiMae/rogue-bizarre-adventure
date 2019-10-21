@@ -44,4 +44,16 @@ public abstract class SimpleCreature extends Actor implements Edible
     {
         return hitPoints;
     }
+
+    @Override
+    public void addBehaviour(Behaviour behaviour)
+    {
+        behaviours.add(behaviour);
+    }
+
+    @Override
+    public boolean hasBehaviour(Behaviour behaviour)
+    {
+        return behaviours.stream().anyMatch(behaviour1 -> behaviour.getClass().equals(behaviour1.getClass()));
+    }
 }

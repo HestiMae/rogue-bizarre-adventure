@@ -1,6 +1,6 @@
 package game;
 
-import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,42 @@ public abstract class Enemy extends Actor
     }
 
     @Override
+    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display)
+    {
+        for (Behaviour b : behaviours)
+        {
+            Action outAction = b.getAction(this, map);
+            if (outAction != null)
+            {
+                return outAction;
+            }
+        }
+        return new DoNothingAction();
+    }
+
+    @Override
     public int getHP()
     {
         return hitPoints;
+    }
+
+    @Override
+    public void addBehaviour(Behaviour behaviour)
+    {
+        behaviours.add(behaviour);
+    }
+
+    @Override
+    public boolean hasBehaviour(Behaviour behaviour)
+    {
+        return behaviours.stream().anyMatch(behaviour1 -> behaviour.getClass().equals(behaviour1.getClass()));
+    }
+
+    @Override
+    public Actions getAllowableActions(Actor otherActor, String direction, GameMap map)
+    {
+        Actions actions = new Actions();
+        actions.add(new AttackAction(this));
+        return actions;
     }
 }

@@ -43,7 +43,6 @@ public class FollowBehaviour<ActorType extends Actor> implements Behaviour
         this.groundIsTarget = groundIsTarget;
         this.actorIsTarget = actorIsTarget;
         this.itemIsTarget = itemIsTarget;
-
     }
 
     @Override
@@ -66,9 +65,9 @@ public class FollowBehaviour<ActorType extends Actor> implements Behaviour
                         {
                             locationsToVisit.add(exit.getDestination()); //adds each exit from the locations to check to the list of locations to check
                         }
-                        if (hasTarget(location)) //checks if the current location has an edible
+                        if (hasTarget(location)) //checks if the current location has a target object
                         {
-                            return new ApproachAction(location); //moves the dinosaur towards the edible
+                            return new ApproachAction(location); //moves the actor towards the object
                         }
                         visitedLocations.add(location); //adds the location to the list of checked locations
                     }
@@ -90,5 +89,11 @@ public class FollowBehaviour<ActorType extends Actor> implements Behaviour
         return groundIsTarget.test(performingActor, location.getGround())
                 || actorIsTarget.test(performingActor, location.getActor())
                 || location.getItems().stream().anyMatch(item -> itemIsTarget.test(performingActor, item));
+    }
+
+    @Override
+    public Actions getAllActions(Actor actor, GameMap map)
+    {
+        return new Actions(getAction(actor, map));
     }
 }

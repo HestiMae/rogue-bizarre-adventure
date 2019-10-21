@@ -1,6 +1,7 @@
 package edu.monash.fit2099.interfaces;
 
 import edu.monash.fit2099.engine.Skills;
+import game.Behaviour;
 import game.Sellable;
 
 /**
@@ -17,9 +18,7 @@ public interface ActorInterface {
 
     int getHP();
 
-    /**
-     * A way to separate flying Actors from non-flying ones. Stops non-flying dinos being able to attack flying ones.
-     * @return true if flying, false if not.
-     */
-    Boolean isFlying();
+    void addBehaviour(Behaviour behaviour);
+
+    boolean hasBehaviour(Behaviour behaviour);
 }

@@ -1,9 +1,6 @@
 package game;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.engine.*;
 
 import java.util.Random;
 
@@ -64,5 +61,11 @@ public class BreedBehaviour extends Action implements Behaviour
     public String menuDescription(Actor actor)
     {
         return parent + " breeds.";
+    }
+
+    @Override
+    public Actions getAllActions(Actor actor, GameMap map)
+    {
+        return new Actions(getAction(actor, map));
     }
 }

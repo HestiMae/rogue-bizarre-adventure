@@ -24,12 +24,6 @@ public class Bird extends SimpleCreature
     }
 
     @Override
-    public Boolean isFlying()
-    {
-        return true;
-    }
-
-    @Override
     public int getFoodValue()
     {
         return FOOD_VALUE;

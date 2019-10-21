@@ -48,7 +48,7 @@ public class Reed extends Ground implements Edible
         {
             location.setGround(new Water());
         }
-        else if (rand.nextFloat() < FISH_CHANCE && !(location.map().isAnActorAt(location)))
+        else if (rand.nextFloat() < FISH_CHANCE && !location.containsAnActor())
         {
             location.addActor(new Fish("Fish"));
         }

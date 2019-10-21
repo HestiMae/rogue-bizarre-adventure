@@ -123,10 +123,4 @@ public class Protoceratops extends Dinosaur
     {
         return FoodType.MEAT;
     }
-
-    @Override
-    public Boolean isFlying()
-    {
-        return false;
-    }
 }

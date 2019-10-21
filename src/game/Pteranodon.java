@@ -102,12 +102,6 @@ public class Pteranodon extends Dinosaur
     public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
 
     @Override
-    public Boolean isFlying()
-    {
-        return true;
-    }
-
-    @Override
     public int getFoodValue()
     {
         return FOOD_VALUE;
