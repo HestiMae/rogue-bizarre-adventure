@@ -37,7 +37,7 @@ public class Teleporter extends Ground
      * @param actor the Actor acting
      * @param location location of the actor
      * @param Direction direction of the actor
-     * @return
+     * @return the Teleport actions to all other teleporters on the map
      */
     @Override
     public Actions allowableActions(Actor actor, Location location, String Direction)
@@ -56,6 +56,10 @@ public class Teleporter extends Ground
         return actions;
     }
 
+    /**
+     * Adds the location of a teleporter to the static array of teleporter locations
+     * @param location the location of the teleporter to be added
+     */
     public void addTeleporter(Location location)
     {
         this.locations.add(location);

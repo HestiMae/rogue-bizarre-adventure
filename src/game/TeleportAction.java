@@ -25,11 +25,12 @@ public class TeleportAction extends Action
      * Executes the actor to teleport them
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
-     * @return The string stating that the action has been complete
+     * @return The string stating that result of the action
      */
     @Override
     public String execute(Actor actor, GameMap map)
     {
+        // Only teleport if there is not another actor at the location
         if (!(location.map().isAnActorAt(location)))
         {
             Location actorLocation = map.locationOf(actor);

@@ -14,7 +14,7 @@ public class Player extends Actor
 {
 
 	private Menu menu = new Menu(); //displays the list of options for the player
-	private int wallet = 5000; //the players wallet. We decided to put it here and require some downcasts instead of giving all actors wallets (that just seems silly, if you ask me)
+	private int wallet = 50; //the players wallet. We decided to put it here and require some downcasts instead of giving all actors wallets (that just seems silly, if you ask me)
 	private List<Behaviour> behaviours = new ArrayList<>();
 
 	/**
