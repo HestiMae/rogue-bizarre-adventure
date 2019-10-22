@@ -5,6 +5,11 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Plesiosaur extends Dinosaur
 {
     private static final int HIT_POINTS = 75; //max HP for plesiosaur
@@ -21,7 +26,7 @@ public class Plesiosaur extends Dinosaur
     private static final int COST = 20000; //The monetary value of a plesiosaur
     private static final int EGG_COST = 10000; //the cost of a plesiosaur egg
     private static final int FOOD_VALUE = 30; //the food value of a plesiosaur
-    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.WATER; //terrain type the plesiosaur can lay eggs on
+    private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.WATER); //terrain type the plesiosaur can lay eggs on
 
 
     /**
@@ -114,5 +119,5 @@ public class Plesiosaur extends Dinosaur
     }
 
     @Override
-    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
+    public List<PassableTerrain> getEggTerrain() { return EGG_TERRAIN; }
 }

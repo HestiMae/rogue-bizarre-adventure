@@ -6,6 +6,10 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * A herbivorous dinosaur.
  */
@@ -25,7 +29,7 @@ public class Protoceratops extends Dinosaur
     private static final int COST = 100; //The monetary value of a protoceratops
     private static final int FOOD_VALUE = 30; //the food value of a protoceratops
     private static final int EGG_COST = 10; //the cost of a protoceratops egg
-    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the protoceratops can lay eggs on
+    private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //terrain type the protoceratops can lay eggs on
 
 
     /**
@@ -104,7 +108,7 @@ public class Protoceratops extends Dinosaur
     }
 
     @Override
-    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
+    public List<PassableTerrain> getEggTerrain() { return EGG_TERRAIN; }
 
     @Override
     public int getValue()

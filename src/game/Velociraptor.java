@@ -2,6 +2,9 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Velociraptor extends Dinosaur
 {
     private static final int HIT_POINTS = 75; //max HP for velociraptor
@@ -18,7 +21,7 @@ public class Velociraptor extends Dinosaur
     private static final int COST = 2000; //The monetary value of a velociraptor
     private static final int FOOD_VALUE = 10; //the food value of a velociraptor
     private static final int EGG_COST = 1000; //the cost of a velociraptor egg
-    private static PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //the type of terrain the velociraptor can lay eggs on
+    private static List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //the type of terrain the velociraptor can lay eggs on
 
 
     /**
@@ -90,7 +93,7 @@ public class Velociraptor extends Dinosaur
     }
 
     @Override
-    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
+    public List<PassableTerrain> getEggTerrain() { return EGG_TERRAIN; }
 
 
     @Override

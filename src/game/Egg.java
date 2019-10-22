@@ -4,6 +4,8 @@ import edu.monash.fit2099.engine.Exit;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 
+import java.util.List;
+
 
 /**
  * Class representing Eggs in game
@@ -13,10 +15,9 @@ public class Egg extends Item implements Edible, Sellable
     private Dinosaur type; //the type of Dinosaur
     private int hatchTime; //the time the Egg will take to hatch
     private int age; //the current age in turns of the Egg
-    private PassableTerrain terrainType; //the type of terrain the egg is supposed to be on
+    private List<PassableTerrain> terrainTypes; //the type of terrain the egg is supposed to be on
     private static final boolean PORTABLE = true; //Eggs can be picked up
     private static char DISPLAY_CHAR = 'o'; //display character for eggs
-    //TODO: ditch Skills - no way to iterate through/get a skill.
 
 
     /**
@@ -28,7 +29,7 @@ public class Egg extends Item implements Edible, Sellable
     {
         super(type.dinoType() + " Egg", DISPLAY_CHAR, PORTABLE);
         this.type = type;
-        this.terrainType = type.getEggTerrain();
+        this.terrainTypes = type.getEggTerrain();
         this.hatchTime = type.getHatchTime();
         this.age = 0;
     }
@@ -54,7 +55,9 @@ public class Egg extends Item implements Edible, Sellable
      */
     private Dinosaur hatch(Location currentLocation)
     {
-        if (currentLocation.getGround().hasSkill(terrainType) || currentLocation.getExits().stream().anyMatch(exit -> exit.getDestination().getGround().hasSkill(terrainType)))
+        if (terrainTypes.stream().anyMatch(t -> currentLocation.getGround().hasSkill(t))
+                || currentLocation.getExits().stream().anyMatch(exit -> terrainTypes.stream()
+                .anyMatch(t -> currentLocation.getGround().hasSkill(t))))
         {
             return type;
         }

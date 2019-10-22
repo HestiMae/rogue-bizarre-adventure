@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Pteranodon extends Dinosaur
 {
     private static final int HIT_POINTS = 75; //max HP for pteranodons
@@ -20,7 +23,7 @@ public class Pteranodon extends Dinosaur
     private static final int HUNGER_DAMAGE = 10; //the HP damage per turn the metabolise level is at 0
     private static final int COST = 20000; //The monetary value of a pteranodon
     private static final int FOOD_VALUE = 30; //the food value of a pteranodon
-    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //the type of land pteranodons lay eggs on
+    private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //the type of land pteranodons lay eggs on
     private static final int EGG_COST = 10000; //the cost of a pteranodons egg
 
     /**
@@ -99,7 +102,7 @@ public class Pteranodon extends Dinosaur
     }
 
     @Override
-    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
+    public List<PassableTerrain> getEggTerrain() { return EGG_TERRAIN; }
 
     @Override
     public int getFoodValue()

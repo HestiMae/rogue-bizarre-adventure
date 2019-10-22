@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 
+import java.util.Collections;
+import java.util.List;
+
 public class TRex extends Dinosaur
 {
     private static final int HIT_POINTS = 500; //max HP for tyrannosaurus rex
@@ -21,7 +24,7 @@ public class TRex extends Dinosaur
     private static final int COST = 200000; //The monetary value of a tyrannosaurus rex
     private static final int FOOD_VALUE = 100; //the food value of a tyrannosaurus rex
     private static final int EGG_COST = 100000; //the cost of a tyrannosaurus rex egg
-    private static final PassableTerrain EGG_TERRAIN = PassableTerrain.LAND; //terrain type the tyrannosaurus rex can lay eggs on
+    private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //terrain type the tyrannosaurus rex can lay eggs on
 
 
     /**
@@ -111,5 +114,5 @@ public class TRex extends Dinosaur
     }
 
     @Override
-    public PassableTerrain getEggTerrain() { return EGG_TERRAIN; }
+    public List<PassableTerrain> getEggTerrain() { return EGG_TERRAIN; }
 }

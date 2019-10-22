@@ -12,7 +12,6 @@ import java.util.function.Predicate;
  */
 public class FollowBehaviour<ActorType extends Actor> implements Behaviour
 {
-
     private List<Actor> targets = new ArrayList<>();
     private Predicate<ActorType> performsBehaviour;
     private ActorType performingActor;
@@ -22,7 +21,6 @@ public class FollowBehaviour<ActorType extends Actor> implements Behaviour
 
     /**
      * Constructor.
-     *
      * @param targets the Actors to follow
      */
     public FollowBehaviour(ActorType performingActor, Predicate<ActorType> performsBehaviour, List<Actor> targets)
@@ -33,7 +31,6 @@ public class FollowBehaviour<ActorType extends Actor> implements Behaviour
         this.groundIsTarget = (x, y) -> false;
         this.actorIsTarget = (x, y) -> false;
         this.itemIsTarget = (x, y) -> false;
-
     }
 
     public FollowBehaviour(ActorType performingActor, Predicate<ActorType> performsBehaviour, BiPredicate<ActorType, Ground> groundIsTarget, BiPredicate<ActorType, Actor> actorIsTarget, BiPredicate<ActorType, Item> itemIsTarget)
@@ -52,27 +49,7 @@ public class FollowBehaviour<ActorType extends Actor> implements Behaviour
         {
             if (targets.isEmpty())
             {
-                Location startPoint = map.locationOf(actor);
-                Set<Location> visitedLocations = new HashSet<>();
-                Set<Location> locationsToVisit = new HashSet<>();
-                locationsToVisit.add(startPoint);
-
-                while (!visitedLocations.containsAll(locationsToVisit)) //loops until all locations to check have been checked
-                {
-                    for (Location location : new HashSet<>(locationsToVisit))
-                    {
-                        for (Exit exit : location.getExits())
-                        {
-                            locationsToVisit.add(exit.getDestination()); //adds each exit from the locations to check to the list of locations to check
-                        }
-                        if (hasTarget(location)) //checks if the current location has a target object
-                        {
-                            return new ApproachAction(location); //moves the actor towards the object
-                        }
-                        visitedLocations.add(location); //adds the location to the list of checked locations
-                    }
-                    locationsToVisit.removeAll(visitedLocations); //removes locations already checked/"visited"
-                }
+                Util.searchAlgorithm(actor, map, this::hasTarget, 100);
             } else
             {
                 return new ApproachAction(map.locationOf(
