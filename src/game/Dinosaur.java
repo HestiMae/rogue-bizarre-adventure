@@ -19,6 +19,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     List<FoodType> diet; //the diet of the Dinosaur. Having a List allows for Omnivores
     private int lastTurnFoodLevel; //the Hunger on the previous turn. Used for output purposes.
     private int eggValue; //the cost of an egg for each dinosaur type
+    private int moveSpeed; //how many spaces the dinosaur can move per turn
 
     /**
      * Constructor. All new Dinosaurs are considered babies, with their age being 0.
@@ -27,7 +28,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      * @param hitPoints   the hitPoints of the Dinosaur
      * @param eggValue the cost of this dinosaurs eggs
      */
-    public Dinosaur(String name, char displayChar, int hitPoints, int eggValue)
+    public Dinosaur(String name, char displayChar, int hitPoints, int eggValue, int moveSpeed)
     {
         super(name, displayChar, hitPoints);
         this.age = 0;
@@ -36,6 +37,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
         this.behaviours = new ArrayList<>();
         this.diet = new ArrayList<>();
         behaviours.add(new BreedBehaviour(this));
+        this.moveSpeed = moveSpeed;
     }
 
     /**
@@ -250,6 +252,12 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     public boolean hasBehaviour(Behaviour behaviour)
     {
         return behaviours.stream().anyMatch(behaviour1 -> behaviour.getClass().equals(behaviour1.getClass()));
+    }
+
+    @Override
+    public int moveSpeed()
+    {
+        return this.moveSpeed;
     }
 
     protected boolean canEat(Object possibleEdible)

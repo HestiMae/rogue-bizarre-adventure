@@ -27,6 +27,7 @@ public class Plesiosaur extends Dinosaur
     private static final int EGG_COST = 10000; //the cost of a plesiosaur egg
     private static final int FOOD_VALUE = 30; //the food value of a plesiosaur
     private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.WATER); //terrain type the plesiosaur can lay eggs on
+    private static int MOVE_SPEED = 1;
 
 
     /**
@@ -35,7 +36,7 @@ public class Plesiosaur extends Dinosaur
      */
     public Plesiosaur(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_SPEED);
         diet.add(FoodType.MARINE);
         diet.add(FoodType.MEAT);
         this.foodLevel = START_HUNGER_LEVEL;

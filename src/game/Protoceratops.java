@@ -30,6 +30,8 @@ public class Protoceratops extends Dinosaur
     private static final int FOOD_VALUE = 30; //the food value of a protoceratops
     private static final int EGG_COST = 10; //the cost of a protoceratops egg
     private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //terrain type the protoceratops can lay eggs on
+    private static int MOVE_SPEED = 1;
+
 
 
     /**
@@ -38,7 +40,7 @@ public class Protoceratops extends Dinosaur
      */
     public Protoceratops(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_SPEED);
         diet.add(FoodType.PLANT);
         this.foodLevel = START_HUNGER_LEVEL;
         addSkill(PassableTerrain.LAND);

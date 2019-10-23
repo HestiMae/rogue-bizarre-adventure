@@ -25,6 +25,8 @@ public class Pteranodon extends Dinosaur
     private static final int FOOD_VALUE = 30; //the food value of a pteranodon
     private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //the type of land pteranodons lay eggs on
     private static final int EGG_COST = 10000; //the cost of a pteranodons egg
+    private static int MOVE_SPEED = 2;
+
 
     /**
      * Constructor. All new Dinosaurs are considered babies, with their age being 0.
@@ -34,7 +36,7 @@ public class Pteranodon extends Dinosaur
      */
     public Pteranodon(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_SPEED);
         diet.add(FoodType.MARINE);
         diet.add(FoodType.MEAT);
         diet.add(FoodType.FLYING);

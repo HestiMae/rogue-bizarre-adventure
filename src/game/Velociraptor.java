@@ -22,6 +22,8 @@ public class Velociraptor extends Dinosaur
     private static final int FOOD_VALUE = 10; //the food value of a velociraptor
     private static final int EGG_COST = 1000; //the cost of a velociraptor egg
     private static List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //the type of terrain the velociraptor can lay eggs on
+    private static int MOVE_SPEED = 1;
+
 
 
     /**
@@ -30,7 +32,7 @@ public class Velociraptor extends Dinosaur
      */
     public Velociraptor(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_SPEED);
         diet.add(FoodType.MEAT);
         this.foodLevel = START_HUNGER_LEVEL;
         addSkill(PassableTerrain.LAND);

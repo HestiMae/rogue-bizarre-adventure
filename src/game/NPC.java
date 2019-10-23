@@ -9,6 +9,7 @@ public class NPC extends Actor
 {
     private List<Behaviour> behaviours = new ArrayList<>();
     private List<ActionQuestBehaviour> quests = new ArrayList<>();
+    private int moveSpeed;
     /**
      * Constructor.
      *
@@ -20,13 +21,14 @@ public class NPC extends Actor
      * @param damage the damage their stand will deal
      * @param attackVerb the verb for their stand attack (e.g. ora ora ora)
      */
-    public NPC(String name, char displayChar, int hitPoints, String standName, char standDisplayChar, int damage, String attackVerb, int standValue, int weaponRange, WeaponType type)
+    public NPC(String name, char displayChar, int hitPoints, int moveSpeed, String standName, char standDisplayChar, int damage, String attackVerb, int standValue, int weaponRange, WeaponType type)
     {
         super(name, displayChar, hitPoints);
         behaviours.add(new FollowBehaviour<>(this, npc -> true, (npc, ground) -> false, NPC::canAttack, ((npc, item) -> false)));
         behaviours.add(new WanderBehaviour());
         this.addItemToInventory(new Stand(standName, standDisplayChar, damage, attackVerb, standValue, weaponRange, type));
         this.addSkill(PassableTerrain.LAND);
+        this.moveSpeed = moveSpeed;
     }
 
     @Override
@@ -65,6 +67,12 @@ public class NPC extends Actor
     public boolean hasBehaviour(Behaviour behaviour)
     {
         return behaviours.stream().anyMatch(behaviour1 -> behaviour.getClass().equals(behaviour1.getClass()));
+    }
+
+    @Override
+    public int moveSpeed()
+    {
+        return moveSpeed;
     }
 
     boolean canAttack(Actor target)

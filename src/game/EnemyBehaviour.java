@@ -24,7 +24,6 @@ public class EnemyBehaviour implements Behaviour
         {
             if (exit.getDestination().getActor() == this.player)
             {
-
                 return new AttackAction(player);
             }
         }

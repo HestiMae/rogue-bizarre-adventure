@@ -2,8 +2,12 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 /**
@@ -14,17 +18,19 @@ public class Util
 
     /**
      * Distance calculation between 2 locations, allowing for diagonal movement.
+     *
      * @param a first location
      * @param b second location
      * @return the distance
      */
     public static int distance(Location a, Location b)
     {
-        return Math.max(Math.abs(a.x()-b.x()), Math.abs(a.y()-b.y())); //Since we can move diagonally, the distance is just the greater of x or y.
+        return Math.max(Math.abs(a.x() - b.x()), Math.abs(a.y() - b.y())); //Since we can move diagonally, the distance is just the greater of x or y.
     }
 
     /**
      * Returns the coords of a location in a useful format
+     *
      * @param location the location to get the coords of
      * @return a String of the coords of the location
      */
@@ -33,9 +39,20 @@ public class Util
         return "(" + location.x() + ", " + location.y() + ")";
     }
 
-    public static Action searchAlgorithm(Actor actor, GameMap map, Function<Location, Boolean> hasTarget, int range)
+    /**
+     * Search algorithm for finding locations that match a condition and doing something with them.
+     * @param returnFunction what to do with each location
+     * @param actor the actor to start from (also required in test conditions)
+     * @param map current map
+     * @param hasTarget predicate for testing locations
+     * @param range depth to test to (how many iterations to do)
+     * @param <ReturnType> Generic return type so that different things can be returned
+     * @return A list of generic type
+     */
+    public static <ReturnType> List<ReturnType> searchAlgorithm(BiFunction<Actor, Location, List<ReturnType>> returnFunction, Actor actor, GameMap map, BiPredicate<Actor, Location> hasTarget, int range)
     {
         Location startPoint = map.locationOf(actor);
+        List<ReturnType> returnList = new ArrayList<>();
         Set<Location> visitedLocations = new HashSet<>();
         Set<Location> locationsToVisit = new HashSet<>();
         locationsToVisit.add(startPoint);
@@ -49,15 +66,30 @@ public class Util
                 {
                     locationsToVisit.add(exit.getDestination()); //adds each exit from the locations to check to the list of locations to check
                 }
-                if (hasTarget.apply(location)) //checks if the current location has a target object
+                if (hasTarget.test(actor, location)) //checks if the current location has a target object
                 {
-                    return new ApproachAction(location); //moves the actor towards the object
+                    returnList.addAll(returnFunction.apply(actor, location));
                 }
                 visitedLocations.add(location); //adds the location to the list of checked locations
             }
             locationsToVisit.removeAll(visitedLocations); //removes locations already checked/"visited"
             counter++;
         }
-        return null;
+        return returnList;
+    }
+
+    /**
+     * Just an easy way to have {@link #searchAlgorithm(BiFunction, Actor, GameMap, BiPredicate, int)} return a single object
+     * @param returnFunction what to do with each location
+     * @param actor the actor to start from (also required in test conditions)
+     * @param map current map
+     * @param hasTarget predicate for testing locations
+     * @param range depth to test to (how many iterations to do)
+     * @param <ReturnType> Generic return type so that different things can be returned
+     * @return An object of generic type
+     */
+    static <ReturnType> ReturnType singleSearchAlgorithm(BiFunction<Actor, Location, List<ReturnType>> returnFunction, Actor actor, GameMap map, BiPredicate<Actor, Location> hasTarget, int range)
+    {
+        return searchAlgorithm(returnFunction, actor, map, hasTarget, range).stream().findFirst().orElse(null);
     }
 }

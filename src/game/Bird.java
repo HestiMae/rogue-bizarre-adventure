@@ -5,6 +5,7 @@ public class Bird extends SimpleCreature
     private static int HITPOINTS = 10;
     private static int FOOD_VALUE = 10;
     private static char DISPLAY_CHAR = '{';
+    private static int MOVE_SPEED = 1;
     /**
      * Constructor.
      *
@@ -12,7 +13,7 @@ public class Bird extends SimpleCreature
      */
     public Bird(String name)
     {
-        super(name, DISPLAY_CHAR, HITPOINTS);
+        super(name, DISPLAY_CHAR, HITPOINTS, MOVE_SPEED);
         addSkill(PassableTerrain.WATER);
         addSkill(PassableTerrain.LAND);
     }

@@ -21,4 +21,6 @@ public interface ActorInterface {
     void addBehaviour(Behaviour behaviour);
 
     boolean hasBehaviour(Behaviour behaviour);
+
+    int moveSpeed();
 }

@@ -26,5 +26,12 @@ public interface Behaviour {
 	 */
 	Action getAction(Actor actor, GameMap map);
 
+	/**
+	 * Returns a list of Actions instead of a single one. Required in order to integrate behaviours and player
+	 * for things like ranged attacks which give the player multiple options for what to do.
+	 * @param actor the Actor acting
+	 * @param map the GameMap containing the Actor
+	 * @return A list of possible actions from the behaviour.
+	 */
 	Actions getAllActions(Actor actor, GameMap map);
 }

@@ -10,6 +10,7 @@ public class DIO extends Enemy
     private static final int STANDDAMAGE = 30;
     private static final int LIFETIME = 20;
     private int turnsAlive = 0;
+    private static int MOVE_SPEED = 1;
 
     /**
      * Constructor.
@@ -18,7 +19,7 @@ public class DIO extends Enemy
      */
     public DIO(String name, Actor player)
     {
-        super(name, DISPLAY_CHAR, HITPOINTS, player);
+        super(name, DISPLAY_CHAR, HITPOINTS, player, MOVE_SPEED);
         Stand stand = new Stand("The World", 'W', STANDDAMAGE, "Muda Muda Muda", 1000, 1, WeaponType.MELEE);
         inventory.add(stand);
     }
