@@ -30,6 +30,7 @@ public class Shop extends Ground
         items.add(new Egg(new TRex("Tyrannosaurus Rex")));
         items.add(new SellableWeapon("Basic Sword", '/', 10, "slashes", 50, 1, WeaponType.MELEE));
         items.add(new TeleporterKit("Teleporter kit"));
+        items.add(new WaterBoots("Water Boots"));
     }
 
     /**

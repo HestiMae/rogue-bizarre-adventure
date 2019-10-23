@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.*;
  */
 public class TeleporterKit extends Item implements Sellable
 {
+    public static final int COST = 10000;
     private static char DISPLAY_CHAR = 'k'; //display character for teleporter kit
     private static final boolean PORTABLE = true; //teleporter kits can be picked up
 
@@ -36,7 +37,7 @@ public class TeleporterKit extends Item implements Sellable
     @Override
     public int getValue()
     {
-        return 10000;
+        return COST;
     }
 
     /**
