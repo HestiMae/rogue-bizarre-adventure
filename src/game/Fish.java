@@ -5,7 +5,7 @@ public class Fish extends SimpleCreature
     private static int HITPOINTS = 10;
     private static int FOOD_VALUE = 10;
     private static char DISPLAY_CHAR = '^';
-    private static int MOVE_SPEED = 1;
+    private static boolean MOVE_TWO = false;
 
     /**
      * Constructor.
@@ -14,7 +14,7 @@ public class Fish extends SimpleCreature
      */
     public Fish(String name)
     {
-        super(name, DISPLAY_CHAR, HITPOINTS, MOVE_SPEED);
+        super(name, DISPLAY_CHAR, HITPOINTS, MOVE_TWO);
         addSkill(PassableTerrain.WATER);
     }
 

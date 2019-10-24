@@ -25,7 +25,8 @@ public class TRex extends Dinosaur
     private static final int FOOD_VALUE = 100; //the food value of a tyrannosaurus rex
     private static final int EGG_COST = 100000; //the cost of a tyrannosaurus rex egg
     private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //terrain type the tyrannosaurus rex can lay eggs on
-    private static int MOVE_SPEED = 1;
+    private static boolean MOVE_TWO = false;
+    private static final int DAMAGE = 80;
 
 
 
@@ -35,7 +36,7 @@ public class TRex extends Dinosaur
      */
     public TRex(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_SPEED);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_TWO, DAMAGE);
         diet.add(FoodType.MEAT);
         this.foodLevel = START_HUNGER_LEVEL;
         addSkill(PassableTerrain.LAND);

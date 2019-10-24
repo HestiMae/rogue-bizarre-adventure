@@ -43,22 +43,17 @@ public class Egg extends Item implements Edible, Sellable
         if (age == hatchTime / 2)
         {
             displayChar = 'O';
-        }
-        else if (age >= hatchTime && !(currentLocation.map().isAnActorAt(currentLocation))) //ensures an actor isn't at the Egg's location
+        } else if (age >= hatchTime && !(currentLocation.map().isAnActorAt(currentLocation))) //ensures an actor isn't at the Egg's location
         {
-            Dinosaur babyDinosaur = hatch(currentLocation);
-            if (babyDinosaur != null)
-            {
-                currentLocation.removeItem(this);
-                currentLocation.addActor(hatch(currentLocation));
-            }
+            hatch(currentLocation);
         }
     }
 
     /**
      * Allow the egg to age even when being carried
+     *
      * @param currentLocation The location of the actor carrying this item.
-     * @param actor The actor carrying this item.
+     * @param actor           The actor carrying this item.
      */
     @Override
     public void tick(Location currentLocation, Actor actor)
@@ -70,7 +65,6 @@ public class Egg extends Item implements Edible, Sellable
         }
     }
 
-
     /**
      * Returns the Dinosaur object used as the type to allow it to be placed on the map
      *
@@ -80,7 +74,7 @@ public class Egg extends Item implements Edible, Sellable
     {
         if (terrainTypes.stream().anyMatch(t -> currentLocation.getGround().hasSkill(t))
                 || currentLocation.getExits().stream().anyMatch(exit -> terrainTypes.stream()
-                .anyMatch(t -> currentLocation.getGround().hasSkill(t))))
+                .anyMatch(t -> exit.getDestination().getGround().hasSkill(t))))
         {
             return this.type;
         }

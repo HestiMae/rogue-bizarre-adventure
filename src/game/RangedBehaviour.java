@@ -21,7 +21,7 @@ public class RangedBehaviour implements Behaviour
         int maxRange = actor.getInventory().stream().filter(item -> item instanceof SellableWeapon)
                 .map(item -> (SellableWeapon) item)
                 .map(SellableWeapon::getRange).reduce(Integer::max).orElse(-1); //finds the weapon with the highest range in player inventory
-        actions.add(Util.searchAlgorithm(this::returnFunction, actor, map, this::hasTarget, maxRange));
+        actions.add(Util.searchAlgorithm(this::returnFunction, actor, map, this::hasTarget, maxRange, false));
         return actions;
     }
 

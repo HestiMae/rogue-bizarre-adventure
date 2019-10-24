@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 public class BetterMenu extends Menu
 {
+    //TODO: Back button
     @Override
     public Action showMenu(Actor actor, Actions actions, Display display)
     {
@@ -29,7 +30,7 @@ public class BetterMenu extends Menu
             } else if (action instanceof MoveActorAction)
             {
                 moveActions.add(action);
-            } else if (action instanceof AcceptQuest || action instanceof RewardAction)
+            } else if (action instanceof AcceptQuest || action instanceof RewardAction || action instanceof EndGameBehaviour)
             {
                 questActions.add(action);
             } else
@@ -47,7 +48,7 @@ public class BetterMenu extends Menu
         switch (display.readChar())
         {
             case '0':
-                display.println("Selected quit game!");
+                display.println("Selected quit game");
                 return new RemoveActorAction();
             case '1':
                 display.println("Selected Move Actions");

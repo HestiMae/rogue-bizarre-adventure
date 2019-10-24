@@ -2,6 +2,8 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,6 +13,7 @@ public class EatBehaviour extends Action implements Behaviour
 {
     private Dinosaur dino; //the Dinosaur doing the eating
     private List<FoodType> diet; //the diet of the Dinosaur
+    private TextMap eatingVerbs; //text variety for eating
 
     /**
      * Constructor
@@ -22,6 +25,10 @@ public class EatBehaviour extends Action implements Behaviour
     {
         this.dino = dino;
         this.diet = diet;
+        eatingVerbs = new TextMap();
+        List<String> verbs = new ArrayList<>(Arrays.asList("eats", "nibbles", "munches", "slurps",
+                "devours", "noshes", "swallows", "takes nourishment in the simple form of"));
+        eatingVerbs.addEntries("eats", verbs);
     }
 
     @Override
@@ -43,7 +50,7 @@ public class EatBehaviour extends Action implements Behaviour
             Ground ground = here.getGround();
             dino.eat(((Edible) here.getGround()));
             here.setGround(new Dirt()); //ground is set to dirt once eaten
-            return dino + " eats " + ground.getName() + " at " + Util.locationString(here)
+            return dino + " " + eatingVerbs.randomText("eats") + " " + ground.getName() + " at " + Util.locationString(here)
                     + " Dino hunger: " + dino.foodLevel;
         } else
         {
@@ -54,7 +61,7 @@ public class EatBehaviour extends Action implements Behaviour
                     dino.eat(((Edible) item));
                     String name = item.toString();
                     here.removeItem(item);
-                    return dino + " eats " + name + " at " + Util.locationString(here)
+                    return dino + " " + eatingVerbs.randomText("eats") + " " + name + " at " + Util.locationString(here)
                             + " Dino hunger: " + dino.foodLevel;
                 }
             }

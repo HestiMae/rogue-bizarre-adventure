@@ -9,26 +9,21 @@ public class NPC extends Actor
 {
     private List<Behaviour> behaviours = new ArrayList<>();
     private List<ActionQuestBehaviour> quests = new ArrayList<>();
-    private int moveSpeed;
+    private boolean moveTwo;
     /**
      * Constructor.
      *
      * @param name        the name of the Actor
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
-     * @param standName   the NPC's stand
-     * @param standDisplayChar the display character for their stand
-     * @param damage the damage their stand will deal
-     * @param attackVerb the verb for their stand attack (e.g. ora ora ora)
      */
-    public NPC(String name, char displayChar, int hitPoints, int moveSpeed, String standName, char standDisplayChar, int damage, String attackVerb, int standValue, int weaponRange, WeaponType type)
+    public NPC(String name, char displayChar, int hitPoints, boolean moveTwo)
     {
         super(name, displayChar, hitPoints);
         behaviours.add(new FollowBehaviour<>(this, npc -> true, (npc, ground) -> false, NPC::canAttack, ((npc, item) -> false)));
         behaviours.add(new WanderBehaviour());
-        this.addItemToInventory(new Stand(standName, standDisplayChar, damage, attackVerb, standValue, weaponRange, type));
         this.addSkill(PassableTerrain.LAND);
-        this.moveSpeed = moveSpeed;
+        this.moveTwo = moveTwo;
     }
 
     @Override
@@ -70,9 +65,9 @@ public class NPC extends Actor
     }
 
     @Override
-    public int moveSpeed()
+    public boolean moveTwo()
     {
-        return moveSpeed;
+        return this.moveTwo;
     }
 
     boolean canAttack(Actor target)

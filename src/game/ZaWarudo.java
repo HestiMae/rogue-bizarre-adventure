@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class ZaWarudo extends World
 {
-    //TODO: End game options.
     private static final int DIO_RATE = 40;
     private int turnCounter = 0;
     private List<Enemy> enemies = new ArrayList<>();
@@ -127,12 +126,12 @@ public class ZaWarudo extends World
     }
 
     void connectMaps(GameMap map1, GameMap map2) //attaches 2 maps together, map2 goes on top of map1 in this way.
-    { //TODO: Make a method that creates the exits to avoid duplication
+    {
         for (Integer i : map1.getXRange())
         {
 
             if (map2.getXRange().contains(i))
-            {
+            {   //you can always move up and down between the maps.
                 map1.at(i, map1.getYRange().min()).addExit(new Exit("North", map2.at(i, map2.getYRange().max()), "8"));
                 map2.at(i, map2.getYRange().max()).addExit(new Exit("South", map1.at(i, map1.getYRange().min()), "2"));
                 if (i == map2.getXRange().min()) //Westmost section of the map - unable to move further west so only add east exits
@@ -143,7 +142,7 @@ public class ZaWarudo extends World
                 {
                     map1.at(i, map1.getYRange().min()).addExit(new Exit("North-West", map2.at(i - 1, map2.getYRange().max()), "7"));
                     map2.at(i, map2.getYRange().max()).addExit(new Exit("South-West", map1.at(i - 1, map1.getYRange().min()), "1"));
-                } else
+                } else //adds exits in all directions
                 {
                     map1.at(i, map1.getYRange().min()).addExit(new Exit("North-East", map2.at(i + 1, map2.getYRange().max()), "9"));
                     map2.at(i, map2.getYRange().max()).addExit(new Exit("South-East", map1.at(i + 1, map1.getYRange().min()), "3"));

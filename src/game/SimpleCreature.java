@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class SimpleCreature extends Actor implements Edible
 {
     private List<Behaviour> behaviours;
-    private int moveSpeed;
+    private boolean moveTwo;
     /**
      * Constructor.
      *
@@ -19,12 +19,12 @@ public abstract class SimpleCreature extends Actor implements Edible
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public SimpleCreature(String name, char displayChar, int hitPoints, int moveSpeed)
+    public SimpleCreature(String name, char displayChar, int hitPoints, boolean moveTwo)
     {
         super(name, displayChar, hitPoints);
         behaviours = new ArrayList<>();
         behaviours.add(new WanderBehaviour());
-        this.moveSpeed = moveSpeed;
+        this.moveTwo = moveTwo;
     }
 
     @Override
@@ -60,8 +60,8 @@ public abstract class SimpleCreature extends Actor implements Edible
     }
 
     @Override
-    public int moveSpeed()
+    public boolean moveTwo()
     {
-        return 1;
+        return this.moveTwo;
     }
 }

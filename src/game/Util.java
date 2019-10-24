@@ -41,15 +41,18 @@ public class Util
 
     /**
      * Search algorithm for finding locations that match a condition and doing something with them.
+     * Unfortunately in generalising this often some arguments are unused - but they are required elsewhere, so they have to stay.
+     * Bit of a trade-off I suppose but I like having the search in one place.
      * @param returnFunction what to do with each location
      * @param actor the actor to start from (also required in test conditions)
      * @param map current map
      * @param hasTarget predicate for testing locations
      * @param range depth to test to (how many iterations to do)
      * @param <ReturnType> Generic return type so that different things can be returned
+     * @param returnFirst whether to return only the first thing found or not
      * @return A list of generic type
      */
-    public static <ReturnType> List<ReturnType> searchAlgorithm(BiFunction<Actor, Location, List<ReturnType>> returnFunction, Actor actor, GameMap map, BiPredicate<Actor, Location> hasTarget, int range)
+    public static <ReturnType> List<ReturnType> searchAlgorithm(BiFunction<Actor, Location, List<ReturnType>> returnFunction, Actor actor, GameMap map, BiPredicate<Actor, Location> hasTarget, int range, boolean returnFirst)
     {
         Location startPoint = map.locationOf(actor);
         List<ReturnType> returnList = new ArrayList<>();
@@ -69,6 +72,10 @@ public class Util
                 if (hasTarget.test(actor, location)) //checks if the current location has a target object
                 {
                     returnList.addAll(returnFunction.apply(actor, location));
+                    if (returnFirst)
+                    {
+                        return returnList;
+                    }
                 }
                 visitedLocations.add(location); //adds the location to the list of checked locations
             }
@@ -79,17 +86,18 @@ public class Util
     }
 
     /**
-     * Just an easy way to have {@link #searchAlgorithm(BiFunction, Actor, GameMap, BiPredicate, int)} return a single object
+     * Just an easy way to have {@link #searchAlgorithm(BiFunction, Actor, GameMap, BiPredicate, int, boolean)} return a single object
      * @param returnFunction what to do with each location
      * @param actor the actor to start from (also required in test conditions)
      * @param map current map
      * @param hasTarget predicate for testing locations
      * @param range depth to test to (how many iterations to do)
      * @param <ReturnType> Generic return type so that different things can be returned
+     * @param returnFirst whether to return only the first thing found or not
      * @return An object of generic type
      */
-    static <ReturnType> ReturnType singleSearchAlgorithm(BiFunction<Actor, Location, List<ReturnType>> returnFunction, Actor actor, GameMap map, BiPredicate<Actor, Location> hasTarget, int range)
+    static <ReturnType> ReturnType singleSearchAlgorithm(BiFunction<Actor, Location, List<ReturnType>> returnFunction, Actor actor, GameMap map, BiPredicate<Actor, Location> hasTarget, int range, boolean returnFirst)
     {
-        return searchAlgorithm(returnFunction, actor, map, hasTarget, range).stream().findFirst().orElse(null);
+        return searchAlgorithm(returnFunction, actor, map, hasTarget, range, returnFirst).stream().findFirst().orElse(null);
     }
 }

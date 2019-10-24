@@ -79,10 +79,20 @@ public class Application
 
         Actor player = new Player("Hestia", '@', 100);
         world.addPlayer(player, gameMap.at(1, 0));
-        NPC jotaro = new NPC("Jotaro", 'J', 100, 1,"Star Platinum", 'S', 60, "ora ora ora", 100000, 1, WeaponType.MELEE);
+        //Creating a couple of NPCs and associated quests
+        NPC jotaro = new NPC("Kujo Jotaro", 'J', 100, false);
         jotaro.addQuest(new ActionQuestBehaviour(new BuyAction(new HerbivoreFood()),
                 new Stand("Star Platinum", 'S', 60, "ora ora ora", 100000, 1, WeaponType.MELEE),
-                500, "Feed your herbivores", "Purchase 1 herbivore food from the store."));
+                500, "Feed your herbivores", "Purchase 1 herbivore food from the store.")); //just a starter quest as a demo
+        jotaro.addItemToInventory(new Stand("Star Platinum", 'S', 60, "ora ora ora", 100000, 1, WeaponType.MELEE));
+        NPC abdul = new NPC("Muhammad Abdul", 'm', 150, false);
+        abdul.addItemToInventory(new Stand("Magician's Red", '*', 50, "Crossfire Hurricane", 10000, 20, WeaponType.RANGED));
+        abdul.addQuest(new ActionQuestBehaviour(new TagAction(new Plesiosaur("Vanilla Ice")),
+                new Stand("Magician's Red", '*', 50, "Crossfire Hurricane", 10000, 20, WeaponType.RANGED),
+                10000, "Track Down Vanilla Ice", "Find and tag the plesiosaur named Vanilla Ice, and I'll reward you.")); //more advanced quest
+
+        gameMap2.at(34, 13).addActor(abdul);
+
 
         // Place a pair of protoceratops in the middle of the map
         gameMap.at(20, 6).addActor(new Protoceratops("Horus the Protoceratops"));
@@ -90,9 +100,9 @@ public class Application
         gameMap.at(40, 10).addActor(new Protoceratops("Death 13 the Protoceratops"));
         gameMap.at(3, 0).addActor(new Protoceratops("Sun the Protoceratops"));
         gameMap.at(2, 0).addActor(jotaro);
-
         gameMap.at(30, 5).addActor(new Velociraptor("Star the Velociraptor"));
         gameMap.at(30, 20).addActor(new Velociraptor("Red the Velociraptor"));
+        gameMap2.at(6, 3).addActor(new Plesiosaur("Vanilla Ice"));
 
         world.run();
     }

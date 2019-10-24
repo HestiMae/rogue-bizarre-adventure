@@ -49,13 +49,13 @@ public class FollowBehaviour<ActorType extends Actor> implements Behaviour
         {
             if (targets.isEmpty())
             {
-                return Util.singleSearchAlgorithm(this::returnAction, performingActor, map, this::hasTarget, map.getXRange().max());
+                return Util.singleSearchAlgorithm(this::returnAction, performingActor, map, this::hasTarget, map.getXRange().max(), true);
             } else
             {
                 return new ApproachAction(map.locationOf(
                         Collections.min(targets, Comparator.comparing(
                                 target -> Util.distance(map.locationOf(actor), map.locationOf(target))
-                        ))), performingActor.moveSpeed());
+                        ))), actor.moveTwo());
             }
         }
         return null;
@@ -76,6 +76,6 @@ public class FollowBehaviour<ActorType extends Actor> implements Behaviour
 
     private List<Action> returnAction(Actor actor, Location location)
     {
-        return Collections.singletonList(new ApproachAction(location, actor.moveSpeed()));
+        return Collections.singletonList(new ApproachAction(location, actor.moveTwo()));
     }
 }

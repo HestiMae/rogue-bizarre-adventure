@@ -28,7 +28,7 @@ public class Player extends Actor
 		super(name, displayChar, hitPoints);
 		addSkill(PassableTerrain.LAND);
 		behaviours.add(new RangedBehaviour());
-		inventory.add(new Stand("Magician's Red", '*', 50, "Crossfire Hurricane", 10000, 20, WeaponType.RANGED));
+		behaviours.add(new EndGameBehaviour());
 	}
 
 	/**
@@ -50,8 +50,12 @@ public class Player extends Actor
 		}
 		if (behaviours.stream().anyMatch(behaviour -> behaviour instanceof ActionQuestBehaviour))
 		{
+			display.println("Active Quests:");
 			behaviours.stream().filter(behaviour -> behaviour instanceof ActionQuestBehaviour)
-					.forEach(behaviour -> ((ActionQuestBehaviour) behaviour).setLastAction(lastAction)); //Gives action based quests the last action completed.
+					.forEach(behaviour -> {((ActionQuestBehaviour) behaviour).setLastAction(lastAction);
+					display.println(behaviour.toString());
+					}); //Gives action based quests the last action completed, and displays the details of any active quests.
+
 		}
 		behaviours.stream().map(behaviour -> behaviour.getAllActions(this, map)).filter(Objects::nonNull).forEach(actions::add);
 		return menu.showMenu(this, actions, display);
@@ -113,8 +117,17 @@ public class Player extends Actor
 	}
 
 	@Override
-	public int moveSpeed()
+	public boolean moveTwo()
 	{
-		return 1;
+		return false;
+	}
+
+	/**
+	 * Required for quest functionality
+	 * @param behaviour removes a behaviour from the player list
+	 */
+	void removeBehaviour(Behaviour behaviour)
+	{
+		behaviours.remove(behaviour);
 	}
 }

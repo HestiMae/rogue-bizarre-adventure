@@ -9,7 +9,7 @@ public abstract class Enemy extends Actor
 {
     List<Behaviour> behaviours;
     protected Actor player;
-    private int moveSpeed;
+    private boolean moveTwo;
     /**
      * Constructor.
      *
@@ -17,14 +17,14 @@ public abstract class Enemy extends Actor
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public Enemy(String name, char displayChar, int hitPoints, Actor player, int moveSpeed)
+    public Enemy(String name, char displayChar, int hitPoints, Actor player, boolean moveTwo)
     {
         super(name, displayChar, hitPoints);
         this.player = player;
         behaviours = new ArrayList<>();
         behaviours.add(new EnemyBehaviour(this, player));
         behaviours.add(new WanderBehaviour());
-        this.moveSpeed = moveSpeed;
+        this.moveTwo = moveTwo;
     }
 
     @Override
@@ -60,9 +60,9 @@ public abstract class Enemy extends Actor
     }
 
     @Override
-    public int moveSpeed()
+    public boolean moveTwo()
     {
-        return moveSpeed;
+        return moveTwo;
     }
 
     @Override

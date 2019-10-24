@@ -26,7 +26,7 @@ public class ActionQuestBehaviour implements Behaviour
     @Override
     public Action getAction(Actor actor, GameMap map)
     {
-        return (lastAction.getClass().equals(goalAction.getClass()))? new RewardAction(rewardItem, rewardMoney, questName) : null; //If the desired action has been completed - reward the actor.
+        return (lastAction.menuDescription(actor).equals(goalAction.menuDescription(actor)))? new RewardAction(rewardItem, rewardMoney, this) : null; //If the desired action has been completed - reward the actor.
     }
 
     @Override
@@ -44,5 +44,10 @@ public class ActionQuestBehaviour implements Behaviour
     public String toString()
     {
         return questName + " " + description;
+    }
+
+    public String getQuestName()
+    {
+        return questName;
     }
 }

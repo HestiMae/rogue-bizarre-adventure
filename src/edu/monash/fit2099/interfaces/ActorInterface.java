@@ -22,5 +22,5 @@ public interface ActorInterface {
 
     boolean hasBehaviour(Behaviour behaviour);
 
-    int moveSpeed();
+    boolean moveTwo();
 }

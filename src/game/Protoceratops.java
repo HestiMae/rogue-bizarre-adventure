@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,7 +29,8 @@ public class Protoceratops extends Dinosaur
     private static final int FOOD_VALUE = 30; //the food value of a protoceratops
     private static final int EGG_COST = 10; //the cost of a protoceratops egg
     private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //terrain type the protoceratops can lay eggs on
-    private static int MOVE_SPEED = 1;
+    private static boolean MOVE_TWO = false;
+    private static final int DAMAGE = 30;
 
 
 
@@ -40,7 +40,7 @@ public class Protoceratops extends Dinosaur
      */
     public Protoceratops(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_SPEED);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_TWO, DAMAGE);
         diet.add(FoodType.PLANT);
         this.foodLevel = START_HUNGER_LEVEL;
         addSkill(PassableTerrain.LAND);

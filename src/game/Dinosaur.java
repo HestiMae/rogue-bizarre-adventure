@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,7 +11,6 @@ import java.util.List;
  */
 public abstract class Dinosaur extends Actor implements Sellable, Edible
 {
-    //TODO: make sure all Dinosaurs weapons make sense (no more dinosaur punching..)
     private static final int HUNGER_HEAL = 20; //the amount of health to heal a dinosaur when its metabolise is full
     private int age; //the age of the Dinosaur in turns
     List<Behaviour> behaviours; //a list of possible behaviours
@@ -19,7 +19,9 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     List<FoodType> diet; //the diet of the Dinosaur. Having a List allows for Omnivores
     private int lastTurnFoodLevel; //the Hunger on the previous turn. Used for output purposes.
     private int eggValue; //the cost of an egg for each dinosaur type
-    private int moveSpeed; //how many spaces the dinosaur can move per turn
+    private boolean moveTwo; //how many spaces the dinosaur can move per turn
+    private TextMap attackVerbs; //some flavour text for dinosaur weapons (so they aren't all punching each other)
+    private int damage; //the damage this dino can deal
 
     /**
      * Constructor. All new Dinosaurs are considered babies, with their age being 0.
@@ -28,7 +30,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      * @param hitPoints   the hitPoints of the Dinosaur
      * @param eggValue the cost of this dinosaurs eggs
      */
-    public Dinosaur(String name, char displayChar, int hitPoints, int eggValue, int moveSpeed)
+    public Dinosaur(String name, char displayChar, int hitPoints, int eggValue, boolean moveTwo, int damage)
     {
         super(name, displayChar, hitPoints);
         this.age = 0;
@@ -37,7 +39,12 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
         this.behaviours = new ArrayList<>();
         this.diet = new ArrayList<>();
         behaviours.add(new BreedBehaviour(this));
-        this.moveSpeed = moveSpeed;
+        this.moveTwo = moveTwo;
+        this.damage = damage;
+        this.attackVerbs = new TextMap();
+        List<String> verbs = new ArrayList<>(Arrays.asList("bites", "gnaws", "claws", "lacerates", "eviscerates", "pierces", "rends", "charges",
+                "vibe checks", "mauls"));
+        attackVerbs.addEntries("verb", verbs);
     }
 
     /**
@@ -133,7 +140,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
      */
     void hungerStatus(int hungryTime, Display display)
     {
-        if (foodLevel < hungryTime && lastTurnFoodLevel < hungryTime) //TODO: Only outputs if dino is continuously hungry. Maybe change to be when dino is only just hungry?
+        if (foodLevel < hungryTime && lastTurnFoodLevel < hungryTime)
         {
             display.println(this + " is getting hungry, current hunger level " + foodLevel);
         }
@@ -255,9 +262,9 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     }
 
     @Override
-    public int moveSpeed()
+    public boolean moveTwo()
     {
-        return this.moveSpeed;
+        return this.moveTwo;
     }
 
     protected boolean canEat(Object possibleEdible)
@@ -274,5 +281,11 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     public int getEggValue()
     {
         return eggValue;
+    }
+
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon()
+    {
+        return new IntrinsicWeapon(damage, attackVerbs.randomText("verb"));
     }
 }

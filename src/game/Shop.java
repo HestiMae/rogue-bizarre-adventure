@@ -30,9 +30,11 @@ public class Shop extends Ground
         items.add(new Egg(new Plesiosaur("Plesiosaur")));
         items.add(new Egg(new Pteranodon("Pteranodon")));
         items.add(new Egg(new TRex("Tyrannosaurus Rex")));
-        items.add(new SellableWeapon("Basic Sword", '/', 10, "slashes", 50, 1, WeaponType.MELEE));
+        items.add(new SellableWeapon("Basic Sword", '/', 20, "slashes", 50, 1, WeaponType.MELEE));
         items.add(new TeleporterKit("Teleporter kit"));
         items.add(new WaterBoots("Water Boots"));
+        items.add(new SellableWeapon("Simple Flail", '7', 30, "strikes", 100, 1, WeaponType.RADIAL));
+        items.add(new SellableWeapon("Fireball", '"', 50, "blasts", 1000, 10, WeaponType.RANGED));
     }
 
     /**

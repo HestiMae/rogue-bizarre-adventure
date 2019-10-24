@@ -1,9 +1,6 @@
 package game;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +22,8 @@ public class Pteranodon extends Dinosaur
     private static final int FOOD_VALUE = 30; //the food value of a pteranodon
     private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //the type of land pteranodons lay eggs on
     private static final int EGG_COST = 10000; //the cost of a pteranodons egg
-    private static int MOVE_SPEED = 2;
+    private static boolean MOVE_TWO = true;
+    private static final int DAMAGE = 30;
 
 
     /**
@@ -36,7 +34,7 @@ public class Pteranodon extends Dinosaur
      */
     public Pteranodon(String name)
     {
-        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_SPEED);
+        super(name, DISPLAY_CHAR, HIT_POINTS, EGG_COST, MOVE_TWO, DAMAGE);
         diet.add(FoodType.MARINE);
         diet.add(FoodType.MEAT);
         diet.add(FoodType.FLYING);

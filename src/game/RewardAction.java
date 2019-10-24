@@ -9,13 +9,13 @@ public class RewardAction extends Action
 {
     private Item rewardItem;
     private int rewardMoney;
-    private String questName;
+    private ActionQuestBehaviour quest;
 
-    public RewardAction(Item rewardItem, int rewardMoney, String questName)
+    public RewardAction(Item rewardItem, int rewardMoney, ActionQuestBehaviour quest)
     {
         this.rewardItem = rewardItem;
         this.rewardMoney = rewardMoney;
-        this.questName = questName;
+        this.quest = quest;
     }
 
     @Override
@@ -23,13 +23,19 @@ public class RewardAction extends Action
     {
         actor.addItemToInventory(rewardItem);
         ((Player) actor).addMoney(rewardMoney);
+        ((Player) actor).removeBehaviour(quest);
         return menuDescription(actor);
     }
 
     @Override
     public String menuDescription(Actor actor)
     {
-        return "Congratulations! You've completed " + questName + "! You've been awarded " + rewardItem.toString()
+        return "Congratulations! You've completed " + quest.getQuestName() + "! You've been awarded " + rewardItem.toString()
                 + " and earned $" + rewardMoney + ".";
+    }
+
+    public ActionQuestBehaviour getQuest()
+    {
+        return quest;
     }
 }
