@@ -15,7 +15,7 @@ public class Water extends Ground
     private static final double GROWTH_CHANCE_WATER = 0.05;
     /**
      * Constructor.
-    **/
+     **/
     public Water()
     {
         super(DISPLAY_CHAR);
@@ -39,22 +39,28 @@ public class Water extends Ground
     public void tick(Location location)
     {
         super.tick(location);
+        PassableTerrain reedEnvironment = null;
 
         if (location.getExits().stream().anyMatch(exit -> exit.getDestination().getGround().hasSkill(PassableTerrain.LAND))) //Checks if adjacent tiles are land
         {
-            if (rand.nextFloat() < GROWTH_CHANCE_LAND)
-            {
-                location.setGround(new Reed());
-            }
+            reedEnvironment = PassableTerrain.LAND;
         }
         else if (rand.nextFloat() < GROWTH_CHANCE_WATER && location.getExits().stream()//checks if adjacent tiles are reeds (only if adjacent tiles are not land)
                 .map(Exit::getDestination)
                 .map(Location::getGround)
                 .anyMatch(x -> x instanceof Reed)
-                )
+        )
+        {
+            reedEnvironment = PassableTerrain.WATER;
+        }
+
+        if (reedEnvironment == PassableTerrain.LAND && rand.nextFloat() < GROWTH_CHANCE_LAND)
         {
             location.setGround(new Reed());
         }
-
+        else if (reedEnvironment == PassableTerrain.WATER && rand.nextFloat() < GROWTH_CHANCE_WATER)
+        {
+            location.setGround(new Reed());
+        }
     }
 }

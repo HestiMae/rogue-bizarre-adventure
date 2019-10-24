@@ -22,11 +22,13 @@ public class Shop extends Ground
     {
         super('$');
         items.add(new DinosaurTag());
-        items.add(new Egg(new Protoceratops("Protoceratops")));
         items.add(new CarnivoreFood());
         items.add(new HerbivoreFood());
+        items.add(new MarineFood());
+        items.add(new Egg(new Protoceratops("Protoceratops")));
         items.add(new Egg(new Velociraptor("Velociraptor")));
         items.add(new Egg(new Plesiosaur("Plesiosaur")));
+        items.add(new Egg(new Pteranodon("Pteranodon")));
         items.add(new Egg(new TRex("Tyrannosaurus Rex")));
         items.add(new SellableWeapon("Basic Sword", '/', 10, "slashes", 50, 1, WeaponType.MELEE));
         items.add(new TeleporterKit("Teleporter kit"));

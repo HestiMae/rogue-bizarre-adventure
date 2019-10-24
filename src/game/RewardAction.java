@@ -21,7 +21,7 @@ public class RewardAction extends Action
     @Override
     public String execute(Actor actor, GameMap map)
     {
-        actor.getInventory().add(rewardItem);
+        actor.addItemToInventory(rewardItem);
         ((Player) actor).addMoney(rewardMoney);
         return menuDescription(actor);
     }

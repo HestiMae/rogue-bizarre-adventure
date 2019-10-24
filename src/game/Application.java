@@ -88,7 +88,7 @@ public class Application
         gameMap.at(20, 6).addActor(new Protoceratops("Horus the Protoceratops"));
         gameMap.at(60, 6).addActor(new Protoceratops("Osiris the Protoceratops"));
         gameMap.at(40, 10).addActor(new Protoceratops("Death 13 the Protoceratops"));
-        gameMap.at(0, 20).addActor(new Protoceratops("Sun the Protoceratops"));
+        gameMap.at(3, 0).addActor(new Protoceratops("Sun the Protoceratops"));
         gameMap.at(2, 0).addActor(jotaro);
 
         gameMap.at(30, 5).addActor(new Velociraptor("Star the Velociraptor"));
