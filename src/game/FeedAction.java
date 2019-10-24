@@ -36,7 +36,7 @@ public class FeedAction extends Action
     {
         actor.removeItemFromInventory((Item) food);
         target.eat(food);
-        return actor + " feeds " + target + " food";
+        return actor + " feeds " + target + " " + food + " " + target + " new hunger level is " + target.getFoodValue();
     }
 
     /**
