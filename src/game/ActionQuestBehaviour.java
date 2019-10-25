@@ -7,13 +7,21 @@ import edu.monash.fit2099.engine.*;
  */
 public class ActionQuestBehaviour implements Behaviour
 {
-    private Action lastAction;
-    private Action goalAction;
-    private Item rewardItem;
-    private int rewardMoney;
-    private String questName;
-    private String description;
+    private Action lastAction; //the last action performed by the actor
+    private Action goalAction; //the goal action to complete the quest
+    private Item rewardItem; //the reward item for completion
+    private int rewardMoney; //a monetary reward for the quest
+    private String questName; //the name of the quest
+    private String description; //the description of the quest
 
+    /**
+     * Constructor to create a new quest
+     * @param goalAction the goal action to complete the quest
+     * @param rewardItem the reward item for completion
+     * @param rewardMoney a monetary reward for the quest
+     * @param questName the name of the quest
+     * @param description the description of the quest
+     */
     public ActionQuestBehaviour(Action goalAction, Item rewardItem, int rewardMoney, String questName, String description)
     {
         this.goalAction = goalAction;

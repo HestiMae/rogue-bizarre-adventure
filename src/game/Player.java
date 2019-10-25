@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,6 +30,7 @@ public class Player extends Actor
 		addSkill(PassableTerrain.LAND);
 		behaviours.add(new RangedBehaviour());
 		behaviours.add(new EndGameBehaviour());
+		inventory.add(new Stand("Magician's Red", '*', 50, "Crossfire Hurricane", 10000, 20, Arrays.asList(WeaponType.MELEE, WeaponType.RANGED, WeaponType.RADIAL)));
 	}
 
 	/**

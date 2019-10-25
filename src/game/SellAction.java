@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
 
+/**
+ * An action to sell an item.
+ */
 public class SellAction extends Action
 {
     private Item sellItem;

@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 
+/**
+ * A simple structure that can be built by the player for protection of themselves or their dinosaurs.
+ */
 public class Wall extends Ground {
 
 	public Wall() {

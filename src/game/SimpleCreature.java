@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * A class for simple creatures like Fish or Birds
+ * These actors' actions are not displayed in the menu
  */
 public abstract class SimpleCreature extends Actor implements Edible
 {

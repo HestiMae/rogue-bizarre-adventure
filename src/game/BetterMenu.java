@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
+/**
+ * A simple improvement on the base menu class. Categorises actions for the player.
+ */
 public class BetterMenu extends Menu
 {
     //TODO: Back button
@@ -18,6 +21,7 @@ public class BetterMenu extends Menu
         Actions moveActions = new Actions();
         Actions miscActions = new Actions();
         Actions questActions = new Actions();
+        Actions buildActions = new Actions();
 
         for (Action action : actions)
         {
@@ -33,6 +37,10 @@ public class BetterMenu extends Menu
             } else if (action instanceof AcceptQuest || action instanceof RewardAction || action instanceof EndGameBehaviour)
             {
                 questActions.add(action);
+            }
+            else if (action instanceof BuildAction)
+            {
+                buildActions.add(action);
             } else
             {
                 miscActions.add(action);
@@ -43,7 +51,8 @@ public class BetterMenu extends Menu
                 + "\nSelect 2 for Attack Actions (" + attackActions.size() + ")"
                 + "\nSelect 3 for Quest Actions (" + questActions.size() + ")"
                 + "\nSelect 4 for Shop Actions (" + shopActions.size() + ")"
-                + "\nSelect 5 for Misc Actions (" + miscActions.size() + ")");
+                + "\nSelect 5 for Build Actions (" + shopActions.size() + ")"
+                + "\nSelect 6 for Misc Actions (" + miscActions.size() + ")");
 
         switch (display.readChar())
         {
@@ -63,6 +72,9 @@ public class BetterMenu extends Menu
                 display.println("Selected Shop Actions");
                 return sortActions(actor, shopActions, display);
             case '5':
+                display.println("Selected Build Actions");
+                return sortActions(actor, buildActions, display);
+            case '6':
                 display.println("Selected Misc Actions");
                 return sortActions(actor, miscActions, display);
         }

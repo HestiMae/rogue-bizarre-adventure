@@ -15,7 +15,7 @@ public class SellableWeapon extends WeaponItem implements Sellable
 {
     protected WeaponType type;
     private int value;
-    private int range; //how far away a target can be - 1 for melee
+    private int range; //how far away a target can be: 1 for melee
     /**
      * Constructor.
      *
@@ -53,7 +53,7 @@ public class SellableWeapon extends WeaponItem implements Sellable
     public List<Action> getAllowableActions()
     {
         List<Action> actions = new ArrayList<>();
-        if (this.type == WeaponType.RADIAL)
+        if (this.type == WeaponType.RADIAL || (this instanceof Stand && ((Stand) this).getTypes().contains(WeaponType.RADIAL)))
         {
             actions.add(new RadialAttackAction(this));
         }

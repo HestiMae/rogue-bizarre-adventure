@@ -23,7 +23,7 @@ public class Pteranodon extends Dinosaur
     private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //the type of land pteranodons lay eggs on
     private static final int EGG_COST = 10000; //the cost of a pteranodons egg
     private static boolean MOVE_TWO = true;
-    private static final int DAMAGE = 30;
+    private static final int DAMAGE = 30; //the damage this dinosaur can deal
 
 
     /**

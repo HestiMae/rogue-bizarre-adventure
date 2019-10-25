@@ -76,7 +76,7 @@ public class NPC extends Actor
     }
 
     @Override
-    public Actions getAllowableActions(Actor otherActor, String direction, GameMap map)
+    public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) //offers quests to nearby actors if they don't have them already
     {
         Actions actions = new Actions();
         for (ActionQuestBehaviour aqb : quests)
@@ -90,8 +90,8 @@ public class NPC extends Actor
         return actions;
     }
 
-    public void addQuest(ActionQuestBehaviour aqb)
+    public void setQuest(ActionQuestBehaviour aqb)
     {
         quests.add(aqb);
-    }
+    } //sets the quest for this NPC
 }

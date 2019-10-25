@@ -8,8 +8,8 @@ import java.util.List;
 public abstract class Enemy extends Actor
 {
     List<Behaviour> behaviours;
-    protected Actor player;
-    private boolean moveTwo;
+    protected Actor player; //the currrent player actor
+    private boolean moveTwo; //can this enemy move 2 spaces at once
     /**
      * Constructor.
      *
@@ -23,6 +23,7 @@ public abstract class Enemy extends Actor
         this.player = player;
         behaviours = new ArrayList<>();
         behaviours.add(new EnemyBehaviour(this, player));
+        behaviours.add(new FollowBehaviour<>(this, enemy -> true, (enemy, ground) -> false, (enemy, actor) -> actor instanceof Player, (enemy, item) -> false));
         behaviours.add(new WanderBehaviour());
         this.moveTwo = moveTwo;
     }
@@ -55,7 +56,7 @@ public abstract class Enemy extends Actor
 
     @Override
     public boolean hasBehaviour(Behaviour behaviour)
-    {
+    { //TODO: Better check for having a behaviour?
         return behaviours.stream().anyMatch(behaviour1 -> behaviour.getClass().equals(behaviour1.getClass()));
     }
 
@@ -69,7 +70,7 @@ public abstract class Enemy extends Actor
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map)
     {
         Actions actions = new Actions();
-        actions.add(new AttackAction(this));
+        actions.add(new AttackAction(this, map));
         return actions;
     }
 }

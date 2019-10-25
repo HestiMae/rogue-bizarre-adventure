@@ -81,14 +81,14 @@ public class Application
         world.addPlayer(player, gameMap.at(1, 0));
         //Creating a couple of NPCs and associated quests
         NPC jotaro = new NPC("Kujo Jotaro", 'J', 100, false);
-        jotaro.addQuest(new ActionQuestBehaviour(new BuyAction(new HerbivoreFood()),
-                new Stand("Star Platinum", 'S', 60, "ora ora ora", 100000, 1, WeaponType.MELEE),
+        jotaro.setQuest(new ActionQuestBehaviour(new BuyAction(new HerbivoreFood()),
+                new Stand("Star Platinum", 'S', 60, "ora ora ora", 100000, 1, Arrays.asList(WeaponType.MELEE, WeaponType.RADIAL)),
                 500, "Feed your herbivores", "Purchase 1 herbivore food from the store.")); //just a starter quest as a demo
-        jotaro.addItemToInventory(new Stand("Star Platinum", 'S', 60, "ora ora ora", 100000, 1, WeaponType.MELEE));
+        jotaro.addItemToInventory(new Stand("Star Platinum", 'S', 60, "ora ora ora", 100000, 1, Arrays.asList(WeaponType.MELEE, WeaponType.RADIAL)));
         NPC abdul = new NPC("Muhammad Abdul", 'm', 150, false);
-        abdul.addItemToInventory(new Stand("Magician's Red", '*', 50, "Crossfire Hurricane", 10000, 20, WeaponType.RANGED));
-        abdul.addQuest(new ActionQuestBehaviour(new TagAction(new Plesiosaur("Vanilla Ice")),
-                new Stand("Magician's Red", '*', 50, "Crossfire Hurricane", 10000, 20, WeaponType.RANGED),
+        abdul.addItemToInventory(new Stand("Magician's Red", '*', 50, "Crossfire Hurricane", 10000, 20, Arrays.asList(WeaponType.MELEE, WeaponType.RANGED)));
+        abdul.setQuest(new ActionQuestBehaviour(new TagAction(new Plesiosaur("Vanilla Ice")),
+                new Stand("Magician's Red", '*', 50, "Crossfire Hurricane", 10000, 20, Arrays.asList(WeaponType.MELEE, WeaponType.RANGED)),
                 10000, "Track Down Vanilla Ice", "Find and tag the plesiosaur named Vanilla Ice, and I'll reward you.")); //more advanced quest
 
         gameMap2.at(34, 13).addActor(abdul);

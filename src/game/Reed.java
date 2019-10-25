@@ -48,11 +48,11 @@ public class Reed extends Ground implements Edible
     public void tick(Location location)
     {
         super.tick(location);
-        if (location.getExits().stream().filter(x -> x.getDestination().getGround() instanceof Reed).count() > OVERCROWDED)
+        if (location.getExits().stream().filter(x -> x.getDestination().getGround() instanceof Reed).count() > OVERCROWDED) //removes this reed if the area is overcrowded
         {
             location.setGround(new Water());
         }
-        else if (rand.nextFloat() < FISH_CHANCE && !location.containsAnActor())
+        else if (rand.nextFloat() < FISH_CHANCE && !location.containsAnActor()) //spawns a fish
         {
             location.addActor(new Fish("Fish"));
         }

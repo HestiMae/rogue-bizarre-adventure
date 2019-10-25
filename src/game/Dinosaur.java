@@ -61,7 +61,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map)
     {
         Actions actions = new Actions();
-        actions.add(new AttackAction(this)); //Dinosaurs can be attacked when nearby
+        actions.add(new AttackAction(this, map)); //Dinosaurs can be attacked when nearby
         actions.add(new TagAction(this)); //Dinosaurs can be tagged when nearby
         List<Item> items = otherActor.getInventory();
         for (Item item : items)

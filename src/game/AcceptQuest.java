@@ -4,6 +4,9 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 
+/**
+ * An action to accept a quest. Adds it to the actors behaviours list
+ */
 public class AcceptQuest extends Action
 {
     ActionQuestBehaviour quest;

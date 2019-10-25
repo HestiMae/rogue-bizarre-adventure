@@ -8,6 +8,9 @@ import edu.monash.fit2099.engine.GameMap;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Another kind of Dinosaur - late-game dino that when bred + raised ends the game.
+ */
 public class TRex extends Dinosaur
 {
     private static final int HIT_POINTS = 500; //max HP for tyrannosaurus rex

@@ -26,7 +26,7 @@ public class Plesiosaur extends Dinosaur
     private static final int FOOD_VALUE = 30; //the food value of a plesiosaur
     private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.WATER); //terrain type the plesiosaur can lay eggs on
     private static boolean MOVE_TWO = false;
-    private static final int DAMAGE = 50;
+    private static final int DAMAGE = 50; //the damage this dinosaur deals
 
 
     /**

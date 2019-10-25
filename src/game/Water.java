@@ -7,6 +7,9 @@ import edu.monash.fit2099.engine.Location;
 
 import java.util.Random;
 
+/**
+ * Water ground type.
+ */
 public class Water extends Ground
 {
     private static final char DISPLAY_CHAR = '~';

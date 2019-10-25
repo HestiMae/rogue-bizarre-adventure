@@ -2,12 +2,7 @@ package game;
 
 import java.util.Random;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.Item;
-import edu.monash.fit2099.engine.Weapon;
+import edu.monash.fit2099.engine.*;
 
 /**
  * Special Action for attacking other Actors.
@@ -18,6 +13,7 @@ public class AttackAction extends Action {
 	 * The Actor that is to be attacked
 	 */
 	protected Actor target;
+	private GameMap map;
 	/**
 	 * Random number generator
 	 */
@@ -30,14 +26,16 @@ public class AttackAction extends Action {
 	 * 
 	 * @param target the Actor to attack
 	 */
-	public AttackAction(Actor target) {
+	public AttackAction(Actor target, GameMap map) {
 		this.target = target;
+		this.map = map;
 	}
 
-	public AttackAction(Actor target, Weapon weapon)
+	public AttackAction(Actor target, Weapon weapon, GameMap map)
 	{
 		this.target = target;
 		this.weapon = weapon;
+		this.map = map;
 	}
 
 	@Override
@@ -49,7 +47,7 @@ public class AttackAction extends Action {
 			this.weapon = actor.getWeapon();
 		}
 
-		if (rand.nextBoolean()) {
+		if (rand.nextInt(10) < 3) {
 			return actor + " misses " + target + ".";
 		}
 
@@ -76,6 +74,6 @@ public class AttackAction extends Action {
 
 	@Override
 	public String menuDescription(Actor actor) {
-		return actor + " attacks " + target + " with " + weapon;
+		return actor + " attacks " + target + " with " + weapon + ((Util.distance(map.locationOf(actor), map.locationOf(target)) > 1)? " (ranged)" : " (melee)");
 	}
 }

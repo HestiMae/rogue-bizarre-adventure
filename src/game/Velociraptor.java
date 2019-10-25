@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.*;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A kind of dinosaur - the first carnivore of the game.
+ */
 public class Velociraptor extends Dinosaur
 {
     private static final int HIT_POINTS = 75; //max HP for velociraptor

@@ -30,7 +30,7 @@ public class Protoceratops extends Dinosaur
     private static final int EGG_COST = 10; //the cost of a protoceratops egg
     private static final List<PassableTerrain> EGG_TERRAIN = Collections.singletonList(PassableTerrain.LAND); //terrain type the protoceratops can lay eggs on
     private static boolean MOVE_TWO = false;
-    private static final int DAMAGE = 30;
+    private static final int DAMAGE = 30; //the damage this dinosaur can deal
 
 
 

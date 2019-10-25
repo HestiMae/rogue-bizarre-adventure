@@ -32,7 +32,7 @@ public class HuntBehaviour implements Behaviour
         {
             if (dino.canHunt(exit.getDestination().getActor()))
             {
-                return new AttackAction(exit.getDestination().getActor()); //returns an attack action once the hunter is next to them
+                return new AttackAction(exit.getDestination().getActor(), map); //returns an attack action once the hunter is next to them
             }
         }
         return null;

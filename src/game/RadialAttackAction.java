@@ -5,6 +5,10 @@ import edu.monash.fit2099.engine.*;
 import java.util.List;
 import java.util.function.BiPredicate;
 
+/**
+ * A kind of Attack that hits all targets surrounding the actor.
+ * Requires a weapon of Radial type.
+ */
 public class RadialAttackAction extends Action
 {
     private Weapon weapon;
@@ -26,7 +30,8 @@ public class RadialAttackAction extends Action
         {
             if (exit.getDestination().containsAnActor())
             {
-                outString.append(new AttackAction(exit.getDestination().getActor(), weapon).execute(actor, map)).append("\n");
+                //executes and appends the string result of an attack for each actor found
+                outString.append(new AttackAction(exit.getDestination().getActor(), weapon, map).execute(actor, map)).append("\n");
             }
         }
         return outString.toString();
@@ -35,6 +40,6 @@ public class RadialAttackAction extends Action
     @Override
     public String menuDescription(Actor actor)
     {
-        return "Attack all foes around you";
+        return "Attack all foes around you using " + weapon;
     }
 }

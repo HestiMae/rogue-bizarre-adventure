@@ -70,7 +70,7 @@ public class Shop extends Ground
         // Every item in the shop can be bought
         for (Item item: items)
         {
-            actions.add(new BuyAction(item.copyItem()));
+            actions.add(new BuyAction(item.copyItem())); //creates a buy action with a copy of the item, to avoid multi-referencing
         }
 
         return actions;
