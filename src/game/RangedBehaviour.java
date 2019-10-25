@@ -30,7 +30,7 @@ public class RangedBehaviour implements Behaviour
     }
 
     /**
-     * Checks if there is an actor at the location and that its not of the same class
+     * Checks if there is an actor at the location and that the performing actor is allowed to attack them
      * Used in the search algorithm
      * @param actor the actor performing the behaviour
      * @param location the location to check
@@ -38,7 +38,7 @@ public class RangedBehaviour implements Behaviour
      */
     boolean hasTarget(Actor actor, Location location)
     {
-        return location.containsAnActor() && !location.getActor().getClass().isAssignableFrom(actor.getClass());
+        return location.containsAnActor() && actor.canAttack(location.getActor());
     }
 
     /**

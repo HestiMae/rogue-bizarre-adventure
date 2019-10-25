@@ -1,8 +1,11 @@
 package edu.monash.fit2099.interfaces;
 
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Skills;
 import game.Behaviour;
 import game.Sellable;
+
+import java.util.List;
 
 /**
  * This interface provides the ability to add methods to Actor, without modifying code in the engine,
@@ -23,4 +26,8 @@ public interface ActorInterface {
     boolean hasBehaviour(Behaviour behaviour);
 
     boolean moveTwo();
+
+    boolean canAttack(Actor actor);
+
+    List<Behaviour> getBehaviours();
 }

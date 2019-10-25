@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -265,6 +266,18 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     public boolean moveTwo()
     {
         return this.moveTwo;
+    }
+
+    @Override
+    public boolean canAttack(Actor actor)
+    {
+        return false;
+    }
+
+    @Override
+    public List<Behaviour> getBehaviours()
+    {
+        return Collections.unmodifiableList(behaviours);
     }
 
     protected boolean canEat(Object possibleEdible)

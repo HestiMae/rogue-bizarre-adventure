@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NPC extends Actor
@@ -20,6 +21,7 @@ public class NPC extends Actor
     public NPC(String name, char displayChar, int hitPoints, boolean moveTwo)
     {
         super(name, displayChar, hitPoints);
+        behaviours.add(new RangedBehaviour());
         behaviours.add(new FollowBehaviour<>(this, npc -> true, (npc, ground) -> false, NPC::canAttack, ((npc, item) -> false)));
         behaviours.add(new WanderBehaviour());
         this.addSkill(PassableTerrain.LAND);
@@ -69,10 +71,17 @@ public class NPC extends Actor
     {
         return this.moveTwo;
     }
-
-    boolean canAttack(Actor target)
+    @Override
+    public boolean canAttack(Actor actor)
     {
-        return target instanceof Enemy;
+        return actor instanceof Enemy  && !actor.getClass().isAssignableFrom(this.getClass());
+
+    }
+
+    @Override
+    public List<Behaviour> getBehaviours()
+    {
+        return Collections.unmodifiableList(this.behaviours);
     }
 
     @Override
@@ -81,7 +90,8 @@ public class NPC extends Actor
         Actions actions = new Actions();
         for (ActionQuestBehaviour aqb : quests)
         {
-            if (!otherActor.hasBehaviour(aqb))
+            if (otherActor.getBehaviours().stream().filter(behaviour -> behaviour instanceof ActionQuestBehaviour)
+                .anyMatch(behaviour -> behaviour.getAction(otherActor, map).menuDescription(otherActor).equals(aqb.getAction(otherActor, map).menuDescription(otherActor))))
             {
                 actions.add(new AcceptQuest(aqb));
             }

@@ -2,16 +2,13 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Class representing the Player.
  */
-public class Player extends Actor
+public class Player extends Actor implements Edible
 {
 
 	private Menu menu = new BetterMenu(); //displays the list of options for the player
@@ -124,6 +121,18 @@ public class Player extends Actor
 		return false;
 	}
 
+    @Override
+    public boolean canAttack(Actor actor)
+    {
+        return actor instanceof Enemy  && !actor.getClass().isAssignableFrom(this.getClass());
+    }
+
+	@Override
+	public List<Behaviour> getBehaviours()
+	{
+		return Collections.unmodifiableList(this.behaviours);
+	}
+
 	/**
 	 * Required for quest functionality
 	 * @param behaviour removes a behaviour from the player list
@@ -131,5 +140,17 @@ public class Player extends Actor
 	void removeBehaviour(Behaviour behaviour)
 	{
 		behaviours.remove(behaviour);
+	}
+
+	@Override
+	public int getFoodValue()
+	{
+		return 100;
+	}
+
+	@Override
+	public FoodType getFoodType()
+	{
+		return FoodType.MEAT; //carnivorous dinos will hunt the player
 	}
 }

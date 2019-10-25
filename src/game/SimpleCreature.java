@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -64,5 +65,17 @@ public abstract class SimpleCreature extends Actor implements Edible
     public boolean moveTwo()
     {
         return this.moveTwo;
+    }
+
+    @Override
+    public boolean canAttack(Actor actor)
+    {
+        return false;
+    }
+
+    @Override
+    public List<Behaviour> getBehaviours()
+    {
+        return Collections.unmodifiableList(this.behaviours);
     }
 }

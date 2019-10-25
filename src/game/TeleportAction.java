@@ -35,9 +35,9 @@ public class TeleportAction extends Action
         {
             Location actorLocation = map.locationOf(actor);
             map.moveActor(actor, this.location);
-            return actor + " teleported from " + actorLocation + " to " + "(" + location.x() + "," + location.y() + ")";
+            return actor + " teleported from " + actorLocation + " to " + Util.locationString(location);
         }
-        return "There ia already another actor at " + "(" + location.x() + "," + location.y() + ")";
+        return "There ia already another actor at " + Util.locationString(location);
     }
 
     /**
@@ -48,6 +48,6 @@ public class TeleportAction extends Action
     @Override
     public String menuDescription(Actor actor)
     {
-        return actor + " teleport to " + "(" + location.x() + "," + location.y() + ")";
+        return actor + " teleport to " + Util.locationString(location);
     }
 }

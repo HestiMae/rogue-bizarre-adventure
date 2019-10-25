@@ -3,9 +3,10 @@ package game;
 import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public abstract class Enemy extends Actor
+public abstract class Enemy extends Actor implements Edible
 {
     List<Behaviour> behaviours;
     protected Actor player; //the currrent player actor
@@ -56,7 +57,7 @@ public abstract class Enemy extends Actor
 
     @Override
     public boolean hasBehaviour(Behaviour behaviour)
-    { //TODO: Better check for having a behaviour?
+    {
         return behaviours.stream().anyMatch(behaviour1 -> behaviour.getClass().equals(behaviour1.getClass()));
     }
 
@@ -67,10 +68,35 @@ public abstract class Enemy extends Actor
     }
 
     @Override
+    public boolean canAttack(Actor actor)
+    {
+        //Enemies will attack NPCs, the player, and dinosaurs
+        return (actor instanceof Player || actor instanceof NPC || actor instanceof Dinosaur) && !actor.getClass().isAssignableFrom(this.getClass());
+    }
+
+    @Override
+    public List<Behaviour> getBehaviours()
+    {
+        return Collections.unmodifiableList(behaviours);
+    }
+
+    @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map)
     {
         Actions actions = new Actions();
         actions.add(new AttackAction(this, map));
         return actions;
+    }
+
+    @Override
+    public int getFoodValue()
+    {
+        return 100;
+    }
+
+    @Override
+    public FoodType getFoodType()
+    {
+        return FoodType.MEAT; //enemies are also hunted by dinosaurs
     }
 }

@@ -13,6 +13,8 @@ public class ZaWarudo extends World
     private static final int DIO_RATE = 40;
     private int turnCounter = 0;
     private List<Enemy> enemies = new ArrayList<>();
+    private Actor timeStopActor; //Just something for fun - a way to have DIOs signature time-stop ability in the game.
+    private int timeStopTurns;
 
     /**
      * Constructor.
@@ -56,7 +58,7 @@ public class ZaWarudo extends World
                 playersMap.draw(display);
                 if (turnCounter % DIO_RATE == 0 && enemies.stream().noneMatch(x -> x instanceof DIO)) //spawns an enemy DIO after specified number of turns, so long as there isn't already one on the map.
                 {
-                    DIO dio = new DIO("DIO", player);
+                    DIO dio = new DIO("DIO", player, this);
                     playersMap.at(10, 10).addActor(dio);
                     enemies.add(dio);
                 }
@@ -64,9 +66,14 @@ public class ZaWarudo extends World
                 // Process all the actors.
                 for (Actor actor : actorLocations)
                 {
-                    if (stillRunning())
+                    if (stillRunning() && (timeStopTurns == 0 || timeStopActor.equals(actor))) //only processes turns when timestop is inactive, or this actor is controlling time-stop
                         processActorTurn(actor);
                 }
+                if (timeStopTurns > 0 && --timeStopTurns == 0)
+                {
+                    timeStopActor = null; //nulls time stop actor when the number of turns is up.
+                }
+
 
                 // Tick over all the maps. For the map stuff.
                 for (GameMap gameMap : gameMaps)
@@ -151,5 +158,17 @@ public class ZaWarudo extends World
                 }
             }
         }
+    }
+
+    void stopTime(Actor actor, int stopTurns)
+    {
+        this.timeStopActor = actor;
+        this.timeStopTurns = stopTurns;
+        display.println("Time has stopped! Only " + actor + " can move for " + timeStopTurns + " turns!");
+    }
+
+    public int getTimeStopTurns()
+    {
+        return timeStopTurns;
     }
 }

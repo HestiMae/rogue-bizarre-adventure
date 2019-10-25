@@ -28,7 +28,7 @@ public class RadialAttackAction extends Action
         StringBuilder outString = new StringBuilder();
         for (Exit exit : map.locationOf(actor).getExits())
         {
-            if (exit.getDestination().containsAnActor())
+            if (exit.getDestination().containsAnActor() && actor.canAttack(exit.getDestination().getActor()))
             {
                 //executes and appends the string result of an attack for each actor found
                 outString.append(new AttackAction(exit.getDestination().getActor(), weapon, map).execute(actor, map)).append("\n");
