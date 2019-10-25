@@ -13,7 +13,7 @@ import java.util.function.Function;
 /**
  * Just a place to put useful calculations and such that will get used in different places.
  */
-public class Util
+public abstract class Util
 {
 
     /**

@@ -36,11 +36,11 @@ public class Teleporter extends Ground
      * Gets all of the allowable teleport locations from the current teleporter
      * @param actor the Actor acting
      * @param location location of the actor
-     * @param Direction direction of the actor
+     * @param direction direction of the actor
      * @return the Teleport actions to all other teleporters on the map
      */
     @Override
-    public Actions allowableActions(Actor actor, Location location, String Direction)
+    public Actions allowableActions(Actor actor, Location location, String direction)
     {
         Actions actions = new Actions();
 
