@@ -45,6 +45,7 @@ public class Dirt extends Ground {
 		Actions actions = new Actions();
 		actions.add(new BuildAction(location, direction, new Wall())); //can build walls on Dirt
 		actions.add(new BuildAction(location, direction, new Floor())); //can build floors on Dirt
+		actions.add(new BuildAction(location, direction, new SelectiveWall<>(dinosaur -> dinosaur.diet.contains(FoodType.PLANT), false, Dinosaur.class, "Herbivore Fence")));
 		return actions;
 	}
 

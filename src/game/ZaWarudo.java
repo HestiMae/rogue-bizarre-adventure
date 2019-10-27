@@ -150,7 +150,6 @@ public class ZaWarudo extends World
     {
         for (Integer i : map1.getXRange())
         {
-
             if (map2.getXRange().contains(i))
             {   //you can always move up and down between the maps.
                 map1.at(i, map1.getYRange().min()).addExit(new Exit("North", map2.at(i, map2.getYRange().max()), "8"));

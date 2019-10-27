@@ -35,7 +35,6 @@ public class BuildAction extends Action
     {
         String oldGround = location.getGround().getName();
         location.setGround(ground);
-        // PERHAPS FIND A BETTER WAY TO ADD TELEPORTER LOCATIONS IF POSSIBLE
         if (ground instanceof Teleporter)
         {
             ((Teleporter) ground).addTeleporter(location);
