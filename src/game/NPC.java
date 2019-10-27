@@ -5,12 +5,14 @@ import edu.monash.fit2099.engine.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class NPC extends Actor
 {
     private List<Behaviour> behaviours = new ArrayList<>();
     private List<ActionQuestBehaviour> quests = new ArrayList<>();
     private boolean moveTwo;
+
     /**
      * Constructor.
      *
@@ -71,10 +73,11 @@ public class NPC extends Actor
     {
         return this.moveTwo;
     }
+
     @Override
     public boolean canAttack(Actor actor)
     {
-        return actor instanceof Enemy  && !actor.getClass().isAssignableFrom(this.getClass());
+        return actor instanceof Enemy && !actor.getClass().isAssignableFrom(this.getClass());
 
     }
 
@@ -90,8 +93,10 @@ public class NPC extends Actor
         Actions actions = new Actions();
         for (ActionQuestBehaviour aqb : quests)
         {
-            if (otherActor.getBehaviours().stream().filter(behaviour -> behaviour instanceof ActionQuestBehaviour)
-                .anyMatch(behaviour -> behaviour.getAction(otherActor, map).menuDescription(otherActor).equals(aqb.getAction(otherActor, map).menuDescription(otherActor))))
+            if (otherActor.getBehaviours().stream()
+                    .filter(behaviour -> behaviour instanceof ActionQuestBehaviour)
+                    .map(behaviour -> ((ActionQuestBehaviour) behaviour).getGoalAction())
+                    .noneMatch(action -> action.menuDescription(otherActor).equals(aqb.getGoalAction().menuDescription(otherActor))))
             {
                 actions.add(new AcceptQuest(aqb));
             }

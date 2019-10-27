@@ -124,7 +124,7 @@ public class Player extends Actor implements Edible
     @Override
     public boolean canAttack(Actor actor)
     {
-        return actor instanceof Enemy  && !actor.getClass().isAssignableFrom(this.getClass());
+        return (actor instanceof Enemy || actor instanceof Dinosaur)  && !actor.getClass().isAssignableFrom(this.getClass());
     }
 
 	@Override

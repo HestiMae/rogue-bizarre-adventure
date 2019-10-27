@@ -4,6 +4,9 @@ import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.Map.entry;
 
 /**
  * Modified version of World. The name is just a reference to the anime JoJos Bizarre Adventure.
@@ -15,6 +18,7 @@ public class ZaWarudo extends World
     private List<Enemy> enemies = new ArrayList<>();
     private Actor timeStopActor; //Just something for fun - a way to have DIOs signature time-stop ability in the game.
     private int timeStopTurns;
+    private Map<String, String> noNumpadMap; //for people who don't have numpads (tkl gang rise up) - now the moveActions are set to qweadzxc
 
     /**
      * Constructor.
@@ -24,6 +28,16 @@ public class ZaWarudo extends World
     public ZaWarudo(Display display)
     {
         super(display);
+        noNumpadMap = Map.ofEntries(
+                entry("1", "z"),
+                entry("2", "x"),
+                entry("3", "c"),
+                entry("4", "a"),
+                entry("6", "d"),
+                entry("7", "q"),
+                entry("8", "w"),
+                entry("9", "e")
+        );
     }
 
     /**
@@ -106,7 +120,7 @@ public class ZaWarudo extends World
             } else {
                 actions.add(destination.getGround().allowableActions(actor, destination, exit.getName()));
             }
-            actions.add(destination.getMoveAction(actor, exit.getName(), exit.getHotKey()));
+            actions.add(destination.getMoveAction(actor, exit.getName(), noNumpadMap.containsKey(exit.getHotKey()) ? noNumpadMap.get(exit.getHotKey()) : exit.getHotKey()));
         }
 
         for (Item item : actor.getInventory()) {
@@ -116,7 +130,7 @@ public class ZaWarudo extends World
         }
 
         for (Item item : here.getItems()) {
-            //actions.add(item.getAllowableActions());
+            actions.add(item.getAllowableActions());
             // Game rule. If it's on the ground you can pick it up.
             actions.add(item.getPickUpAction());
         }

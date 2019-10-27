@@ -20,6 +20,6 @@ public class RemoveActorAction extends Action
     @Override
     public String menuDescription(Actor actor)
     {
-        return "Remove " + actor;
+        return "Quit " + actor + "'s Game";
     }
 }

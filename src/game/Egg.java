@@ -43,8 +43,9 @@ public class Egg extends Item implements Edible, Sellable
         if (age == hatchTime / 2)
         {
             displayChar = 'O';
-        } else if (age >= hatchTime && !(currentLocation.map().isAnActorAt(currentLocation))) //ensures an actor isn't at the Egg's location
+        } else if (age >= hatchTime)
         {
+
             hatch(currentLocation);
         }
     }
@@ -66,19 +67,23 @@ public class Egg extends Item implements Edible, Sellable
     }
 
     /**
-     * Returns the Dinosaur object used as the type to allow it to be placed on the map
-     *
-     * @return a Dinosaur object
+     * Places the Dinosaur object type on the map
      */
-    private Dinosaur hatch(Location currentLocation)
+    private void hatch(Location hatchLocation)
     {
-        if (terrainTypes.stream().anyMatch(t -> currentLocation.getGround().hasSkill(t))
-                || currentLocation.getExits().stream().anyMatch(exit -> terrainTypes.stream()
+        if (!hatchLocation.containsAnActor() && terrainTypes.stream().anyMatch(t -> hatchLocation.getGround().hasSkill(t)))
+        {
+            hatchLocation.addActor(this.type);
+        }
+        else if (hatchLocation.getExits().stream().anyMatch(exit -> terrainTypes.stream()
                 .anyMatch(t -> exit.getDestination().getGround().hasSkill(t))))
         {
-            return this.type;
+            //if the currentlocation isn't of the right terrain, checks if the exits are, grabs the first one that lets us place an actor there.
+            hatchLocation
+                    .getExits().stream().map(Exit::getDestination)
+                    .filter(location -> !location.containsAnActor() && terrainTypes.stream().anyMatch(t -> location.getGround().hasSkill(t)))
+                    .findFirst().ifPresent(altLocation -> altLocation.addActor(this.type));
         }
-        return null;
     }
 
     @Override

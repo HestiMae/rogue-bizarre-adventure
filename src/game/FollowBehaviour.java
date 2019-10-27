@@ -58,7 +58,7 @@ public class FollowBehaviour<ActorType extends Actor> implements Behaviour
             if (targets.isEmpty())
             {
                 //Uses the searching algorithm to find target locations based on predicates given. Returns a move towards the first location found
-                return Util.singleSearchAlgorithm(this::returnAction, performingActor, map, this::hasTarget, map.getXRange().max(), true);
+                return Util.singleSearchAlgorithm(this::returnAction, performingActor, map, this::hasTarget, map.getXRange().max());
             } else
             {
                 return new ApproachAction(map.locationOf(

@@ -21,7 +21,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     private int lastTurnFoodLevel; //the Hunger on the previous turn. Used for output purposes.
     private int eggValue; //the cost of an egg for each dinosaur type
     private boolean moveTwo; //how many spaces the dinosaur can move per turn
-    private TextMap attackVerbs; //some flavour text for dinosaur weapons (so they aren't all punching each other)
+    private TextMap flavourText; //some flavour text for dinosaurs
     private int damage; //the damage this dino can deal
 
     /**
@@ -42,10 +42,12 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
         behaviours.add(new BreedBehaviour(this));
         this.moveTwo = moveTwo;
         this.damage = damage;
-        this.attackVerbs = new TextMap();
-        List<String> verbs = new ArrayList<>(Arrays.asList("bites", "gnaws", "claws", "lacerates", "eviscerates", "pierces", "rends", "charges",
-                "vibe checks", "mauls"));
-        attackVerbs.addEntries("verb", verbs);
+        this.flavourText = new TextMap();
+        List<String> verbs = new ArrayList<>(Arrays.asList("gnaws", "claws", "lacerates", "pierces","charges",
+                "vibe checks", "mauls", "yeets"));
+        flavourText.addEntries("verb", verbs);
+        List<String> hungryWords = new ArrayList<>(Arrays.asList("starving", "famished", "ravenous", "of keen appetite", "hungies uwu"));
+        flavourText.addEntries("hungry", hungryWords);
     }
 
     /**
@@ -143,7 +145,7 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     {
         if (foodLevel < hungryTime && lastTurnFoodLevel < hungryTime)
         {
-            display.println(this + " is getting hungry, current hunger level " + foodLevel);
+            display.println(this + " is " + flavourText.randomText("hungry") +", current hunger level " + foodLevel);
         }
     }
 
@@ -299,6 +301,6 @@ public abstract class Dinosaur extends Actor implements Sellable, Edible
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon()
     {
-        return new IntrinsicWeapon(damage, attackVerbs.randomText("verb"));
+        return new IntrinsicWeapon(damage, flavourText.randomText("verb"));
     }
 }

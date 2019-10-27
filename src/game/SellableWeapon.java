@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.WeaponItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public class SellableWeapon extends WeaponItem implements Sellable
     protected WeaponType type;
     private int value;
     private int range; //how far away a target can be: 1 for melee
+    private TextMap attackVerbs = new TextMap();
     /**
      * Constructor.
      *
@@ -30,6 +32,8 @@ public class SellableWeapon extends WeaponItem implements Sellable
         this.value = value;
         this.type = type;
         this.range = range;
+        this.attackVerbs = new TextMap();
+        attackVerbs.addEntries("attacks", Arrays.asList("slashes", "strikes", "maims", "vibe checks", "yeets"));
     }
 
     @Override
@@ -63,5 +67,11 @@ public class SellableWeapon extends WeaponItem implements Sellable
     public int getRange()
     {
         return range;
+    }
+
+    @Override
+    public String verb()
+    {
+        return attackVerbs.randomText("attacks");
     }
 }

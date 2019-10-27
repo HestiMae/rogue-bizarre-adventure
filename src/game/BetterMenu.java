@@ -3,85 +3,76 @@ package game;
 import edu.monash.fit2099.engine.*;
 import edu.monash.fit2099.engine.Menu;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * A simple improvement on the base menu class. Categorises actions for the player.
  */
 public class BetterMenu extends Menu
 {
-    //TODO: Back button
+    static class ActionCategory
+    {
+        Actor actor;
+        String name;
+        Predicate<Action> included;
+        List<Action> actions = new ArrayList<>();
+        ActionCategory(Actor actor, String name, Predicate<Action> included){this.actor = actor; this.name = name; this.included = included;}
+        String getName(){return actions.size() == 1 ? actions.get(0).menuDescription(actor) : name + "(" + actions.size() + ")";}
+    }
+
     @Override
     public Action showMenu(Actor actor, Actions actions, Display display)
     {
-        Actions shopActions = new Actions();
-        Actions attackActions = new Actions();
-        Actions moveActions = new Actions();
-        Actions miscActions = new Actions();
-        Actions questActions = new Actions();
-        Actions buildActions = new Actions();
+        List<ActionCategory> actionCategories = new ArrayList<>();
+
+        actionCategories.add(new ActionCategory(actor, "Quit Actions",
+                a -> a instanceof RemoveActorAction));
+        actionCategories.add(new ActionCategory(actor, "Move Actions",
+                a -> a instanceof MoveActorAction));
+        actionCategories.add(new ActionCategory(actor, "Attack Actions",
+                a -> a instanceof AttackAction || a instanceof RadialAttackAction));
+        actionCategories.add(new ActionCategory(actor, "Quest Actions",
+                a -> a instanceof AcceptQuest || a instanceof RewardAction || a instanceof EndGameBehaviour));
+        actionCategories.add(new ActionCategory(actor, "Shop Actions",
+                a -> a instanceof BuyAction || a instanceof SellAction));
+        actionCategories.add(new ActionCategory(actor, "Build Actions",
+                a -> a instanceof BuildAction));
+        actionCategories.add(new ActionCategory(actor, "Other Actions",
+                a -> true));
+
+        actions.add(new RemoveActorAction()); // Add quit action
 
         for (Action action : actions)
         {
-            if (action instanceof BuyAction || action instanceof SellAction)
+             for(ActionCategory cat : actionCategories)
             {
-                shopActions.add(action);
-            } else if (action instanceof AttackAction || action instanceof RadialAttackAction)
-            {
-                attackActions.add(action);
-            } else if (action instanceof MoveActorAction)
-            {
-                moveActions.add(action);
-            } else if (action instanceof AcceptQuest || action instanceof RewardAction || action instanceof EndGameBehaviour)
-            {
-                questActions.add(action);
-            }
-            else if (action instanceof BuildAction)
-            {
-                buildActions.add(action);
-            } else
-            {
-                miscActions.add(action);
+                if (cat.included.test(action))
+                {
+                    cat.actions.add(action);
+                    break; // Next Action
+                }
             }
         }
-        display.println("Select 0 to quit the game"
-                + "\nSelect 1 for Move Actions (" + moveActions.size() + ")"
-                + "\nSelect 2 for Attack Actions (" + attackActions.size() + ")"
-                + "\nSelect 3 for Quest Actions (" + questActions.size() + ")"
-                + "\nSelect 4 for Shop Actions (" + shopActions.size() + ")"
-                + "\nSelect 5 for Build Actions (" + shopActions.size() + ")"
-                + "\nSelect 6 for Misc Actions (" + miscActions.size() + ")");
 
-        switch (display.readChar())
+        Action outAction = null;
+        while (outAction == null)
         {
-            case '0':
-                display.println("Selected quit game");
-                return new RemoveActorAction();
-            case '1':
-                display.println("Selected Move Actions");
-                return sortActions(actor, moveActions, display);
-            case '2':
-                display.println("Selected Attack Actions");
-                return sortActions(actor, attackActions, display);
-            case '3':
-                display.println("Selected Quest Actions");
-                return sortActions(actor, questActions, display);
-            case '4':
-                display.println("Selected Shop Actions");
-                return sortActions(actor, shopActions, display);
-            case '5':
-                display.println("Selected Build Actions");
-                return sortActions(actor, buildActions, display);
-            case '6':
-                display.println("Selected Misc Actions");
-                return sortActions(actor, miscActions, display);
+            ActionCategory cat = Util.displayListPicker(display, actionCategories, ActionCategory::getName, ac -> "", actionCategory -> !actionCategory.actions.isEmpty(),  false);
+            if (cat.actions.size() == 1)
+            {
+                outAction = cat.actions.get(0);
+            }
+            else
+            {
+                outAction = Util.displayListPicker(display, cat.actions, a -> a.menuDescription(actor), Action::hotkey, action ->  true, true);
+            }
         }
-        return null;
+
+        return outAction;
     }
 
-    private Action sortActions(Actor actor, Actions actions, Display display)
+    /*private Action sortActions(Actor actor, Actions actions, Display display)
     {
         ArrayList<Character> freeChars = new ArrayList<>();
         HashMap<Character, Action> keyToActionMap = new HashMap<>();
@@ -117,19 +108,7 @@ public class BetterMenu extends Menu
         } while (!keyToActionMap.containsKey(key));
 
         return keyToActionMap.get(key);
-    }
+    }*/
 
-    static class SortHotkeysFirst implements Comparator<Action>
-    {
-        public int compare(Action a, Action b)
-        {
-            if (a.hotkey() != null && b.hotkey() == null)
-                return -1;
 
-            if (a.hotkey() == null && b.hotkey() != null)
-                return 1;
-
-            return 0;
-        }
-    }
 }

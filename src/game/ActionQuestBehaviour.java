@@ -51,11 +51,16 @@ public class ActionQuestBehaviour implements Behaviour
     @Override
     public String toString()
     {
-        return questName + " " + description;
+        return questName + " - " + description;
     }
 
-    public String getQuestName()
+    String getQuestName()
     {
         return questName;
+    }
+
+    Action getGoalAction()
+    {
+        return goalAction;
     }
 }

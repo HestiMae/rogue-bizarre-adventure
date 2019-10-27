@@ -13,7 +13,7 @@ public class EndGameBehaviour extends Action implements Behaviour
     @Override
     public Action getAction(Actor actor, GameMap map)
     {
-        if (Util.singleSearchAlgorithm(this::addTRex, actor, map, this::hasTRex, map.getXRange().max(), true) != null)
+        if (Util.singleSearchAlgorithm(this::addTRex, actor, map, this::hasTRex, map.getXRange().max()) != null)
         {
             return this;
         }
@@ -24,7 +24,7 @@ public class EndGameBehaviour extends Action implements Behaviour
     public Actions getAllActions(Actor actor, GameMap map)
     {
         Actions actions = new Actions();
-        if (Util.singleSearchAlgorithm(this::addTRex, actor, map, this::hasTRex, map.getXRange().max(), true) != null)
+        if (Util.singleSearchAlgorithm(this::addTRex, actor, map, this::hasTRex, map.getXRange().max()) != null)
         {
             actions.add(this);
         }
