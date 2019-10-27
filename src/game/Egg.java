@@ -74,6 +74,7 @@ public class Egg extends Item implements Edible, Sellable
         if (!hatchLocation.containsAnActor() && terrainTypes.stream().anyMatch(t -> hatchLocation.getGround().hasSkill(t)))
         {
             hatchLocation.addActor(this.type);
+            hatchLocation.removeItem(this);
         }
         else if (hatchLocation.getExits().stream().anyMatch(exit -> terrainTypes.stream()
                 .anyMatch(t -> exit.getDestination().getGround().hasSkill(t))))
@@ -82,7 +83,10 @@ public class Egg extends Item implements Edible, Sellable
             hatchLocation
                     .getExits().stream().map(Exit::getDestination)
                     .filter(location -> !location.containsAnActor() && terrainTypes.stream().anyMatch(t -> location.getGround().hasSkill(t)))
-                    .findFirst().ifPresent(altLocation -> altLocation.addActor(this.type));
+                    .findFirst().ifPresent(altLocation -> {
+                        altLocation.addActor(this.type);
+                        altLocation.removeItem(this);
+            });
         }
     }
 
