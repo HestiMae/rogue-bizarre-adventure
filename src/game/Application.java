@@ -103,6 +103,7 @@ public class Application
         gameMap.at(30, 5).addActor(new Velociraptor("Star the Velociraptor"));
         gameMap.at(30, 20).addActor(new Velociraptor("Red the Velociraptor"));
         gameMap2.at(6, 3).addActor(new Plesiosaur("Vanilla Ice"));
+        gameMap.at(30, 6).addActor(new Pteranodon("Pet Shop"));
 
         world.run();
     }

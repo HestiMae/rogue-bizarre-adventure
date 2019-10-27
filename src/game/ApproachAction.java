@@ -50,7 +50,7 @@ public class ApproachAction extends Action
                                 if (newDistance2 < currentDistance2)
                                 {
                                     map.moveActor(actor, destination2);
-                                    direction = exit1.getName();
+                                    direction += " then " + exit1.getName();
                                     return menuDescription(actor);
                                 }
                             }
