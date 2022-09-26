@@ -9,11 +9,17 @@ I made this for a unit in Object Oriented Design - It's a TUI/CLI game with a fe
 
 Needless to say, I ended up going a bit overboard. 
 
- - The original scope of the game was a dinosaur rancher, where you can feed, collect eggs from, and sell dinosaurs. However:
-   - The map is filled with AI dinosaurs (as well as NPC stand users) with a homemade pathfinding algorithm, 
+ - The original scope of the game was a dinosaur rancher, where you can feed, collect eggs from, and sell dinosaurs.
+ - The original end goal was to raise a T-Rex. 
+ - In spite of this, the game I made shows the following:
+   - A new menu/input system because the original system didn't have enough options to allow for targeted attacks and quests.
+   - There's a quest system.
+   - There are targeted attacks with a custom targeting system.
+   - The map is filled with AI dinosaurs (as well as NPC stand users)
+      - With a homemade pathfinding algorithm.
    - There's a shop where you can buy and sell weapons and dinosaurs/eggs. 
    - You can build fences in the world which prevent movement
-   - Different weapons have custom damage and attack range using a custom attack targetting system
+   - Weapons are all custom with varied ranges and damage.
     - These are even respected and can be used by the AI enemies in the game.
    - At a certain number of turns, a boss enemy appears with the ability to stop time.
-   - The overall objective of the game is to raise a T-Rex
+   - You can also stop time, if you try very hard.
