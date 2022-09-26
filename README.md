@@ -1,4 +1,4 @@
-# rogue-bizarre-adventure
+# Robyn's Bizarre Adventure
 A strange dinosaur game built in a rogue-esque CLI game engine.
 
 ![image](https://user-images.githubusercontent.com/62225435/192205829-06388e12-6899-448d-8e38-3358bf44bc16.png)
