@@ -3,7 +3,7 @@ A strange dinosaur game built in a rogue-esque CLI game engine.
 
 ![image](https://user-images.githubusercontent.com/62225435/192205829-06388e12-6899-448d-8e38-3358bf44bc16.png)
 
-I made this for a unit in Object Oriented Design - It's a TUI/CLI game with a few twists and turns (and many references to [*JoJo's Bizarre Adventure*](https://en.wikipedia.org/wiki/JoJo%27s_Bizarre_Adventure)
+I made this for a unit in Object Oriented Design - It's a TUI/CLI game with a few twists and turns (and many references to [*JoJo's Bizarre Adventure*](https://en.wikipedia.org/wiki/JoJo%27s_Bizarre_Adventure))
 
 ![image](https://user-images.githubusercontent.com/62225435/192206242-dcc414a0-ce28-4156-81af-149cc5c7467b.png)
 
